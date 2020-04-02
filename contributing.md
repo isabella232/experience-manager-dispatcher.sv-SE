@@ -1,5 +1,5 @@
 ---
-source-git-commit: 36c4ad10a9140d368fdbf3f0939e6756cc2bfbbf
+source-git-commit: a7f81343602253c16d7d3770b98b9a8e9fd32c8e
 translation-type: tm+mt
 
 ---
@@ -38,7 +38,7 @@ Med hjälp av olika problem kan du enkelt beskriva din idé om hur du kan förb�
 
 ### Skapa en pull-begäran {#create-a-pull-request}
 
-Om du ser ett problem och vet exakt hur du ska åtgärda det kan du skapa en pull-begäran. Dragningsbegäranden gör att du kan göra egna ändringar i dokumentationen, som sedan granskas för att inkluderas av en AEM Docs Team-medlem. Klicka bara på länken **Redigera den här sidan** högst upp i den högra navigeringspanelen på en sida för att göra de föreslagna ändringarna och skapa en pull-begäran.
+Om du ser ett problem och vet exakt hur du löser det kan du skapa en pull-begäran. Dragningsbegäranden gör att du kan göra egna ändringar i dokumentationen, som sedan granskas för att inkluderas av en AEM Docs Team-medlem. Klicka bara på länken **Redigera den här sidan** högst upp i den högra navigeringspanelen på en sida för att göra de föreslagna ändringarna och skapa en pull-begäran.
 
 Alla pull-begäranden måste åtföljas av ett signerat [bidragsgivarlicensavtal eller CLA.](https://opensource.adobe.com/cla.html)  Detta ger Adobe tillstånd att återdistribuera dina bidrag som en del av projektet. Du behöver bara skicka in ett Adobe CLA en gång, så om du har skickat ett tidigare är du redo att gå!
 
@@ -50,9 +50,9 @@ Titta på följande video för att få en snabb översikt över hur du skapar pr
 
 ### Bidrag från Adobes anställda
 
-Om du är Adobe-anställd och vill göra en pull-förfrågan, använd den privata databasen på `https://git.corp.adobe.com/AdobeDocs`.
+Om du är Adobe-anställd och har ett bidrag, använd `AdobeDocs` organisationen i företagsgruppen.
 
-Om du har problem kan du använda de offentliga databaserna.
+Vi är förstås glada över ditt bidrag och kommer att granska ditt bidrag om det görs i det offentliga arkivet, men förfrågningar från Adobe-anställda är enklare att behandla och kan godkännas snabbare i företagets rapport. Se till att all företagsinformation endast behandlas i företagets rapport.
 
 ## Ytterligare information
 
