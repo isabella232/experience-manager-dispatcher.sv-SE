@@ -10,7 +10,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: aeffee8e-bb34-42a7-9a5e-b7d0e848391a
 translation-type: tm+mt
-source-git-commit: 5b5ac8cdff27d6bc6664f1c18302c53649df7360
+source-git-commit: 183131dec51b67e152a8660c325ed980ae9ef458
 
 ---
 
@@ -165,7 +165,7 @@ Egenskapen är `/farms` en egenskap på den översta nivån i konfigurationsstru
 
 Egenskapen `/farmname` är flervärdesbaserad och innehåller andra egenskaper som definierar Dispatcher-beteendet:
 
-* URL:erna för de sidor som servergruppen gäller för.
+* URL:erna för sidorna som servergruppen gäller för.
 * En eller flera tjänst-URL:er (vanligtvis AEM-publiceringsinstanser) som används för att återge dokument.
 * Statistik som ska användas för belastningsutjämning av flera dokumentåtergivare.
 * Flera andra beteenden, till exempel vilka filer som ska cachelagras och var.
@@ -405,7 +405,7 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 | Begär URL | Löst virtuellt värdsystem |
 |---|---|
-| `https://www.mycompany.com/products/gloves.html` | `www.mycompany.com/products/*` |
+| `https://www.mycompany.com/products/gloves.html` | `www.mycompany.com/products/` |
 | `https://www.mycompany.com/about.html` | `www.mycompany.com` |
 
 ## Aktivera säkra sessioner - /sessionmanagement {#enabling-secure-sessions-sessionmanagement}
@@ -1793,7 +1793,7 @@ I så fall måste du se till att varje begäran endast går igenom en Dispatcher
 
 ## Felsökning {#debugging}
 
-När du lägger till rubriken `X-Dispatcher-Info` till en begäran, får Dispatcher svar på om målet har cache-lagrats, returnerats från cachelagrat eller inte alls. Svarshuvudet `X-Cache-Info` innehåller den här informationen i läsbar form. Du kan använda de här svarshuvuden för att felsöka problem med svar som cachas av Dispatcher.
+När du lägger till rubriken `X-Dispatcher-Info` till en begäran, får Dispatcher svar på om målet har cache-lagrats, returnerats från cache-lagrad eller inte alls är cachelagrat. Svarshuvudet `X-Cache-Info` innehåller den här informationen i läsbar form. Du kan använda de här svarshuvuden för att felsöka problem med svar som cachas av Dispatcher.
 
 Den här funktionen är inte aktiverad som standard, så för att svarsrubriken `X-Cache-Info` ska kunna inkluderas måste servergruppen innehålla följande post:
 
