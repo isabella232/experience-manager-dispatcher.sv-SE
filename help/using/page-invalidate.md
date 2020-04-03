@@ -13,7 +13,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 79cd94be-a6bc-4d34-bfe9-393b4107925c
 translation-type: tm+mt
-source-git-commit: 76cffbfb616cd5601aed36b7076f67a2faf3ed3b
+source-git-commit: 85497651ce29c8564da4b52c60819a48b776af7b
 
 ---
 
@@ -24,7 +24,7 @@ När du använder Dispatcher med AEM måste interaktionen konfigureras för att 
 
 ## Konfigurera AEM-användarkonton {#setting-up-aem-user-accounts}
 
-Standardanvändarkontot används `admin` för att autentisera de replikeringsagenter som är installerade som standard. Du bör skapa ett dedikerat användarkonto som kan användas med replikeringsagenter. [](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps)
+Standardanvändarkontot används `admin` för att autentisera de replikeringsagenter som är installerade som standard. Du bör skapa ett dedikerat användarkonto som kan användas med replikeringsagenter.
 
 Mer information finns i avsnittet [Konfigurera replikerings- och transportanvändare](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#VerificationSteps) i AEM Security Checklist.
 
