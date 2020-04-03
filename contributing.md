@@ -38,7 +38,7 @@ Med hjälp av olika problem kan du enkelt beskriva din idé om hur du kan förb�
 
 ### Skapa en pull-begäran {#create-a-pull-request}
 
-Om du ser ett problem och vet exakt hur du ska åtgärda det kan du skapa en pull-begäran. Dragningsbegäranden gör att du kan göra egna ändringar i dokumentationen, som sedan granskas för att inkluderas av en AEM Docs Team-medlem. Klicka bara på länken **Redigera den här sidan** högst upp i den högra navigeringspanelen på en sida för att göra de föreslagna ändringarna och skapa en pull-begäran.
+Om du ser ett problem och vet exakt hur du löser det kan du skapa en pull-begäran. Dragningsbegäranden gör att du kan göra egna ändringar i dokumentationen, som sedan granskas för att inkluderas av en AEM Docs Team-medlem. Klicka bara på länken **Redigera den här sidan** högst upp i den högra navigeringspanelen på en sida för att göra de föreslagna ändringarna och skapa en pull-begäran.
 
 Alla pull-begäranden måste åtföljas av ett signerat [bidragsgivarlicensavtal eller CLA.](https://opensource.adobe.com/cla.html)  Detta ger Adobe tillstånd att återdistribuera dina bidrag som en del av projektet. Du behöver bara skicka in ett Adobe CLA en gång, så om du har skickat ett tidigare är du redo att gå!
 
