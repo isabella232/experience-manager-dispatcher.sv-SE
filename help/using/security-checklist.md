@@ -1,6 +1,6 @@
 ---
-title: Checklistan för Dispatcher-säkerhet
-seo-title: Checklistan för Dispatcher-säkerhet
+title: Dispatcher Security Checklist
+seo-title: Dispatcher Security Checklist
 description: En checklista för säkerhet som ska slutföras innan produktionen påbörjas.
 seo-description: En checklista för säkerhet som ska slutföras innan produktionen påbörjas.
 uuid: 7bfa3202-03f6-48e9-8d2e-2a40e137ecbe
@@ -14,12 +14,15 @@ index: y
 internal: n
 snippet: y
 translation-type: tm+mt
-source-git-commit: 5b5ac8cdff27d6bc6664f1c18302c53649df7360
+source-git-commit: 9ffdc1d85d1a0da45f95e0780227ee6569cd4b3d
+workflow-type: tm+mt
+source-wordcount: '672'
+ht-degree: 0%
 
 ---
 
 
-# Checklistan för Dispatcher-säkerhet{#the-dispatcher-security-checklist}
+# Dispatcher Security Checklist{#the-dispatcher-security-checklist}
 
 <!-- 
 
@@ -40,7 +43,7 @@ Dispatchern som frontendsystem erbjuder ett extra säkerhetsskikt till din Adobe
 
 ## Använd den senaste versionen av Dispatcher {#use-the-latest-version-of-dispatcher}
 
-Du bör installera den senaste tillgängliga versionen för din plattform. Du bör uppgradera din Dispatcher-instans för att använda den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installera Dispatcher](dispatcher-install.md).
+Du bör installera den senaste tillgängliga versionen för din plattform. Du bör uppgradera din Dispatcher-instans så att du kan använda den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installera Dispatcher](dispatcher-install.md).
 
 >[!NOTE]
 >
@@ -85,9 +88,9 @@ Se till att du använder filter för att blockera extern åtkomst till administr
 
 En lista med URL:er som måste blockeras finns i [Testing Dispatcher Security](dispatcher-configuration.md#testing-dispatcher-security) .
 
-## Använd vitalister i stället för svartlistor {#use-whitelists-instead-of-blacklists}
+## Använd Tillåtna listor i stället för blockerade listor {#use-allowlists-instead-of-blocklists}
 
-Vitalister är ett bättre sätt att tillhandahålla åtkomstkontroll eftersom de till sin natur antar att alla åtkomstbegäranden ska nekas såvida de inte uttryckligen ingår i vitlistan. Den här modellen ger mer restriktiv kontroll över nya begäranden som kanske inte har granskats än eller beaktats under en viss konfigurationsfas.
+Tillåtna listor är ett bättre sätt att tillhandahålla åtkomstkontroll eftersom de till sin natur antar att alla åtkomstbegäranden ska nekas såvida de inte uttryckligen ingår i listan över tillåtna användare. Den här modellen ger mer restriktiv kontroll över nya begäranden som kanske inte har granskats än eller beaktats under en viss konfigurationsfas.
 
 ## Kör Dispatcher med en dedikerad systemanvändare {#run-dispatcher-with-a-dedicated-system-user}
 
@@ -149,10 +152,10 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller ett [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker med förfalskade förfrågningar mellan webbplatser. För att du ska kunna använda det här ramverket måste du vitlista stödet för CSRF-token i dispatchern. Du kan göra detta genom att:
+AEM tillhandahåller ett [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker med förfalskade förfrågningar mellan webbplatser. För att du ska kunna använda det här ramverket måste du tillåta stöd för CSRF-token i dispatchern. Du kan göra detta genom att:
 
 1. Skapa ett filter som tillåter `/libs/granite/csrf/token.json` banan.
-1. Lägg till `CSRF-Token` rubriken i avsnittet `clientheaders` i Dispatcher-konfigurationen.
+1. Lägg till sidhuvudet `CSRF-Token` i avsnittet `clientheaders` i Dispatcher-konfigurationen.
 
 ## Förhindra clickjacking {#prevent-clickjacking}
 
