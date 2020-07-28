@@ -1,25 +1,29 @@
 ---
 cloud: experience-cloud
 product: experience manager
-sub-product: experience manager dispatcher
+sub-product: Experience Manager-dispatcher
 archetype: Administrator
-user-guide-title: Experience Manager Dispatcher Help
+user-guide-title: Hjälp om Experience Manager Dispatcher
+user-guide-description: Learn to use Dispatcher for caching, load balancing, and improving security for your AEM server.
 translation-type: tm+mt
-source-git-commit: 5cd966c0e317949582084d3268c6914540b707b1
+source-git-commit: 02a082ec66e32f2c4c0b3a6135eacbb4c5e9de7b
+workflow-type: tm+mt
+source-wordcount: '70'
+ht-degree: 5%
 
 ---
 
 
-# Hjälp om AEM Dispatcher {#using}
+# Hjälp för AEM Dispatcher {#using}
 
 + [Översikt](dispatcher.md)
 + Komma igång {#getting-started}
-   + [Installerar Dispatcher](dispatcher-install.md)
-   + [Checklistan för Dispatcher-säkerhet](security-checklist.md)
+   + [Installera Dispatcher](dispatcher-install.md)
+   + [Dispatcher Security Checklist](security-checklist.md)
    + [Versionsinformation för AEM Dispatcher](release-notes.md)
 + Konfigurerar {#configuring}
    + [Konfigurera Dispatcher](dispatcher-configuration.md)
-   + [Cachelagrade sidor från AEM valideras](page-invalidate.md)
+   + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
    + [Optimera en webbplats för cacheprestanda](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/configuring-performance.html)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
    + [Använda Dispatcher med flera domäner ](dispatcher-domains.md)
@@ -27,4 +31,4 @@ source-git-commit: 5cd966c0e317949582084d3268c6914540b707b1
    + [Konfigurera Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
    + [Felsökning av Dispatcher-problem](dispatcher-troubleshooting.md)
-   + [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md)
+   + [Vanliga frågor om Dispatcher](dispatcher-faq.md)
