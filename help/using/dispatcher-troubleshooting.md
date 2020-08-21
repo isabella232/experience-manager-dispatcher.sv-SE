@@ -1,6 +1,6 @@
 ---
 title: Felsökning av Dispatcher-problem
-seo-title: Felsökning av AEM Dispatcher-problem
+seo-title: Felsökning AEM utskicksproblem
 description: Lär dig att felsöka Dispatcher-problem.
 seo-description: Lär dig att felsöka AEM Dispatcher-problem.
 uuid: 9c109a48-d921-4b6e-9626-1158cebc41e7
@@ -13,7 +13,10 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: a612e745-f1e6-43de-b25a-9adcaadab5cf
 translation-type: tm+mt
-source-git-commit: 76cffbfb616cd5601aed36b7076f67a2faf3ed3b
+source-git-commit: 5734e601379fda9a62eda46bded493b8dbd49a4c
+workflow-type: tm+mt
+source-wordcount: '553'
+ht-degree: 0%
 
 ---
 
@@ -22,7 +25,7 @@ source-git-commit: 76cffbfb616cd5601aed36b7076f67a2faf3ed3b
 
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM, men Dispatcher-dokumentationen är inbäddad i AEM-dokumentationen. Använd alltid Dispatcher-dokumentationen som är inbäddad i dokumentationen för den senaste versionen av AEM.
+>Dispatcher-versionerna är oberoende av AEM, men Dispatcher-dokumentationen är inbäddad i AEM. Använd alltid Dispatcher-dokumentationen som är inbäddad i dokumentationen för den senaste versionen av AEM.
 >
 >Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
 
@@ -60,7 +63,7 @@ Dessa kan hjälpa dig att övervaka aktiviteten.
 
 När du använder IIS kanske du får en `404 Not Found` returnerad version i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
 
-* [IIS 6/7: POST-metoden returnerar 404](https://helpx.adobe.com/dispatcher/kb/IIS6IsapiFilters.html)
+* [IIS 6/7: POSTEN returnerar 404](https://helpx.adobe.com/dispatcher/kb/IIS6IsapiFilters.html)
 * [IIS 6: Begäranden till URL:er som innehåller `/bin` bassökvägen `404 Not Found`](https://helpx.adobe.com/dispatcher/kb/RequestsToBinDirectoryFailInIIS6.html)
 
 Du bör också kontrollera att dispatcherns cacherot och IIS-dokumentroten är inställda på samma katalog.
@@ -69,7 +72,7 @@ Du bör också kontrollera att dispatcherns cacherot och IIS-dokumentroten är i
 
 **Symtom**
 
-Problem med att ta bort arbetsflödesmodeller vid åtkomst till en AEM-författarinstans via Dispatcher.
+Problem med att ta bort arbetsflödesmodeller när en AEM författarinstans öppnas via Dispatcher.
 
 **Steg som ska återskapas:**
 
@@ -89,14 +92,16 @@ Lägg till följande rubriker i `/clientheaders` avsnittet i `dispatcher.any` fi
 * `x-http-method-override`
 * `x-requested-with`
 
-`{  
+```
+{  
 {  
 /clientheaders  
 {  
 ...  
 "x-http-method-override"  
 "x-requested-with"  
-}`
+}
+```
 
 ## Interferens med mod_dir (Apache) {#interference-with-mod-dir-apache}
 
