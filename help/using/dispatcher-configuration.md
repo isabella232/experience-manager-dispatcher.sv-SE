@@ -10,9 +10,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: aeffee8e-bb34-42a7-9a5e-b7d0e848391a
 translation-type: tm+mt
-source-git-commit: 5734e601379fda9a62eda46bded493b8dbd49a4c
+source-git-commit: 31dc02adc1d16ec61d5191b86d0d1276c2e1da46
 workflow-type: tm+mt
-source-wordcount: '8802'
+source-wordcount: '8582'
 ht-degree: 0%
 
 ---
@@ -162,7 +162,7 @@ Använd egenskapen `/name` för att ange ett unikt namn som identifierar Dispatc
 Egenskapen definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är kopplad till olika webbplatser eller URL-adresser. `/farms` Egenskapen kan `/farms` innehålla en eller flera grupper:
 
 * Använd en enda servergrupp när du vill att Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
-* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteende.
+* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteenden.
 
 Egenskapen är `/farms` en egenskap på den översta nivån i konfigurationsstrukturen. Om du vill definiera en servergrupp lägger du till en underordnad egenskap i `/farms` egenskapen. Använd ett egenskapsnamn som unikt identifierar servergruppen i Dispatcher-instansen.
 
@@ -208,7 +208,7 @@ Varje servergruppsegenskap kan innehålla följande underordnade egenskaper:
 | [/renders](#defining-page-renderers-renders) | Servrarna som tillhandahåller återgivna sidor (vanligtvis AEM publiceringsinstanser). |
 | [/filter](#configuring-access-to-content-filter) | Definierar de URL:er som Dispatcher aktiverar åtkomst till. |
 | [/vanity_urls](#enabling-access-to-vanity-urls-vanity-urls) | Konfigurerar åtkomst till mål-URL:er. |
-| [/spridateSyndPost](#forwarding-syndication-requests-propagatesyndpost) | Stöd för vidarebefordran av syndikeringsbegäranden. |
+| [/propagateSyndPost](#forwarding-syndication-requests-propagatesyndpost) | Stöd för vidarebefordran av syndikeringsbegäranden. |
 | [/cache](#configuring-the-dispatcher-cache-cache) | Konfigurerar cachelagring. |
 | [/statistik](#configuring-load-balancing-statistics) | Definiera statistikkategorier för belastningsutjämningsberäkningar. |
 | [/stickyConnectionsFor](#identifying-a-sticky-connection-folder-stickyconnectionsfor) | Mappen som innehåller anteckningsdokument. |
@@ -664,7 +664,7 @@ I följande exempel visas ett filter som används för att neka extern åtkomst 
 }
 ```
 
-Om publiceringsinstansen använder en webbprogramkontext (till exempel publicera) kan den också läggas till i filterdefinitionen.
+Om publiceringsinstansen använder en webbprogramskontext (till exempel publicera) kan den också läggas till i filterdefinitionen.
 
 ```xml
 /0003   { /type "deny"  /url "/publish/libs/cq/workflow/content/console/archive*"  }
@@ -847,60 +847,60 @@ En enskild post kan ha antingen *glob* eller någon kombination av *metod*,*url*
 
 Dispatcher-filter ska blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
 
-Observera att du bör se normal sidåtergivning för /content/add_valid_page.html?debug=layout.
+Observera att du bör se normal sidåtergivning för `/content/add_valid_page.html?debug=layout`.
 
 
-* /admin
-* /system/console
-* /dav/crx.default
-* /crx
-* /bin/crxde/logs
-* /jcr:system/jcr:versionStorage.json
-* /_jcr_system/_jcr_versionStorage.json
-* /libs/wcm/core/content/siteadmin.html
-* /libs/collab/core/content/admin.html
-* /libs/cq/ui/content/dumplibs.html
-* /var/linkchecker.html
-* /etc/linkchecker.html
-* /home/users/a/admin/profile.json
-* /home/users/a/admin/profile.xml
-* /libs/cq/core/content/login.json
-* ../libs/foundation/components/text/text.jsp
-* /content/.{.} /libs/foundation/components/text/text.jsp
-* /apps/sling/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config/jcr%3acontent/jcr%3adata
-* /libs/foundation/components/primary/cq/workflow/components/participants/json.GET.servlet
-* /content.pages.json
-* /content.languages.json
-* /content.blueprint.json
-* /content.-1.json
-* /content.10.json
-* /content.infinity.json
-* /content.tidy.json
-* /content.tidy.-1.blubber.json
-* /content/dam.tidy.-100.json
-* /content/content/geometrixx.sitemap.txt
-* /content/add_valid_page.query.json?statement=//*
-* /content/add_valid_page.qu%65ry.js%6Fn?statement=//*
-* /content/add_valid_page.query.json?statement=//*[@transportPassword]/(@transportPassword%20|%20@transportUri%20|%20@transportUser)
-* /content/add_valid_path_to_a_page/_jcr_content.json
-* /content/add_valid_path_to_a_page/jcr:content.json
-* /content/add_valid_path_to_a_page/_jcr_content.feed
-* /content/add_valid_path_to_a_page/jcr:content.feed
-* /content/add_valid_path_to_a_page/pagename._jcr_content.feed
-* /content/add_valid_path_to_a_page/pagename.jcr:content.feed
-* /content/add_valid_path_to_a_page/pagename.docview.xml
-* /content/add_valid_path_to_a_page/pagename.docview.json
-* /content/add_valid_path_to_a_page/pagename.sysview.xml
-* /etc.xml
-* /content.feed.xml
-* /content.rss.xml
-* /content.feed.html
-* /content/add_valid_page.html?debug=layout
-* /projekt
-* /tagging
-* /etc/replication.html
-* /etc/cloudservices.html
-* /welcome
+* `/admin`
+* `/system/console`
+* `/dav/crx.default`
+* `/crx`
+* `/bin/crxde/logs`
+* `/jcr:system/jcr:versionStorage.json`
+* `/_jcr_system/_jcr_versionStorage.json`
+* `/libs/wcm/core/content/siteadmin.html`
+* `/libs/collab/core/content/admin.html`
+* `/libs/cq/ui/content/dumplibs.html`
+* `/var/linkchecker.html`
+* `/etc/linkchecker.html`
+* `/home/users/a/admin/profile.json`
+* `/home/users/a/admin/profile.xml`
+* `/libs/cq/core/content/login.json`
+* `/content/../libs/foundation/components/text/text.jsp`
+* `/content/.{.}/libs/foundation/components/text/text.jsp`
+* `/apps/sling/config/org.apache.felix.webconsole.internal.servlet.OsgiManager.config/jcr%3acontent/jcr%3adata`
+* `/libs/foundation/components/primary/cq/workflow/components/participants/json.GET.servlet`
+* `/content.pages.json`
+* `/content.languages.json`
+* `/content.blueprint.json`
+* `/content.-1.json`
+* `/content.10.json`
+* `/content.infinity.json`
+* `/content.tidy.json`
+* `/content.tidy.-1.blubber.json`
+* `/content/dam.tidy.-100.json`
+* `/content/content/geometrixx.sitemap.txt `
+* `/content/add_valid_page.query.json?statement=//*`
+* `/content/add_valid_page.qu%65ry.js%6Fn?statement=//*`
+* `/content/add_valid_page.query.json?statement=//*[@transportPassword]/(@transportPassword%20|%20@transportUri%20|%20@transportUser)`
+* `/content/add_valid_path_to_a_page/_jcr_content.json`
+* `/content/add_valid_path_to_a_page/jcr:content.json`
+* `/content/add_valid_path_to_a_page/_jcr_content.feed`
+* `/content/add_valid_path_to_a_page/jcr:content.feed`
+* `/content/add_valid_path_to_a_page/pagename._jcr_content.feed`
+* `/content/add_valid_path_to_a_page/pagename.jcr:content.feed`
+* `/content/add_valid_path_to_a_page/pagename.docview.xml`
+* `/content/add_valid_path_to_a_page/pagename.docview.json`
+* `/content/add_valid_path_to_a_page/pagename.sysview.xml`
+* `/etc.xml`
+* `/content.feed.xml`
+* `/content.rss.xml`
+* `/content.feed.html`
+* `/content/add_valid_page.html?debug=layout`
+* `/projects`
+* `/tagging`
+* `/etc/replication.html`
+* `/etc/cloudservices.html`
+* `/welcome`
 
 Skriv följande kommando i en terminal eller kommandotolk för att avgöra om anonym skrivåtkomst är aktiverat. Du bör inte kunna skriva data till noden.
 
@@ -1505,7 +1505,7 @@ Mer information om `httponly` flaggan finns på [den här sidan](https://www.owa
 
 ### säker {#secure}
 
-När snäva anslutningar är aktiverade ställer dispatcherns modul in `renderid` cookien. Den här cookien har inte den **säkra** flaggan, som bör läggas till för att öka säkerheten. Du kan göra detta genom att ange `secure` egenskapen i `/stickyConnections` noden för en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen 0 eller 1) definierar om cookien har det tillagda `renderid` `secure` -attributet. Standardvärdet är 0, vilket innebär att attributet läggs till **om** den inkommande begäran är säker. Om värdet är 1 läggs flaggan secure till oavsett om den inkommande begäran är säker eller inte.
+När snäva anslutningar är aktiverade ställer dispatcherns modul in `renderid` cookien. Denna cookie har inte den **säkra** flaggan, som bör läggas till för att öka säkerheten. Du kan göra detta genom att ange `secure` egenskapen i `/stickyConnections` noden för en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen 0 eller 1) definierar om cookien har det tillagda `renderid` `secure` -attributet. Standardvärdet är 0, vilket innebär att attributet läggs till **om** den inkommande begäran är säker. Om värdet är 1 läggs flaggan secure till oavsett om den inkommande begäran är säker eller inte.
 
 ## Hantera återgivningsanslutningsfel {#handling-render-connection-errors}
 
@@ -1799,7 +1799,7 @@ I så fall måste du se till att varje begäran endast går igenom en Dispatcher
 
 ## Felsökning {#debugging}
 
-När du lägger till rubriken `X-Dispatcher-Info` till en begäran, får Dispatcher svar på om målet har cache-lagrats, returnerats från cache-lagrad eller inte alls är cachelagrat. Svarshuvudet `X-Cache-Info` innehåller den här informationen i läsbar form. Du kan använda de här svarshuvuden för att felsöka problem med svar som cachas av Dispatcher.
+När du lägger till rubriken `X-Dispatcher-Info` till en begäran, får Dispatcher svar på om målet har cache-lagrats, returnerats från cachelagrat eller inte alls. Svarshuvudet `X-Cache-Info` innehåller den här informationen i läsbar form. Du kan använda de här svarshuvuden för att felsöka problem med svar som cachas av Dispatcher.
 
 Den här funktionen är inte aktiverad som standard, så för att svarsrubriken `X-Cache-Info` ska kunna inkluderas måste servergruppen innehålla följande post:
 
