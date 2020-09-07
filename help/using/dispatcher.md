@@ -9,10 +9,10 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 1d449ee2-4cdd-4b7a-8b4e-7e6fc0a1d7ee
 translation-type: tm+mt
-source-git-commit: 88ea38c9ad7fe67edbaf68c4882a01c3f9a475d9
+source-git-commit: 590a9a2b6005cd48676cf525b0e029e42d1b3ca6
 workflow-type: tm+mt
-source-wordcount: '3222'
-ht-degree: 2%
+source-wordcount: '3199'
+ht-degree: 0%
 
 ---
 
@@ -23,9 +23,9 @@ ht-degree: 2%
 >
 >Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
 
-Dispatcher är Adobe Experience Managers verktyg för cachelagring och/eller belastningsutjämning. AEM:s Dispatcher skyddar också AEM-servern mot angrepp. Därför kan du öka säkerheten för din AEM-instans genom att använda Dispatcher tillsammans med en företagswebbserver.
+Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som kan användas tillsammans med en webbserver i företagsklass.
 
-Processen för att distribuera en Dispatcher är oberoende av webbservern och den OS-plattform som valts:
+Processen för att distribuera dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
 1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om dispatcher](https://helpx.adobe.com/experience-manager/using/dispatcher-faq.html).
 1. Installera en [webbserver](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/technical-requirements.html) som stöds enligt webbserverns dokumentation.
