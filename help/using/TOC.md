@@ -4,9 +4,10 @@ product: experience manager
 sub-product: Experience Manager-dispatcher
 archetype: Administrator
 user-guide-title: Hjälp om Experience Manager Dispatcher
+breadcrumb-title: Dispatcher Guide
 user-guide-description: Learn to use Dispatcher for caching, load balancing, and improving security for your AEM server.
 translation-type: tm+mt
-source-git-commit: 02a082ec66e32f2c4c0b3a6135eacbb4c5e9de7b
+source-git-commit: 5765970c0335df084b5d49efae60997b3a021c47
 workflow-type: tm+mt
 source-wordcount: '70'
 ht-degree: 5%
@@ -18,9 +19,9 @@ ht-degree: 5%
 
 + [Översikt](dispatcher.md)
 + Komma igång {#getting-started}
-   + [Installera Dispatcher](dispatcher-install.md)
-   + [Dispatcher Security Checklist](security-checklist.md)
-   + [Versionsinformation för AEM Dispatcher](release-notes.md)
+   + [Installerar Dispatcher](dispatcher-install.md)
+   + [Checklistan för Dispatcher-säkerhet](security-checklist.md)
+   + [AEM Dispatcher Release Notes](release-notes.md)
 + Konfigurerar {#configuring}
    + [Konfigurera Dispatcher](dispatcher-configuration.md)
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
@@ -31,4 +32,4 @@ ht-degree: 5%
    + [Konfigurera Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
    + [Felsökning av Dispatcher-problem](dispatcher-troubleshooting.md)
-   + [Vanliga frågor om Dispatcher](dispatcher-faq.md)
+   + [Vanliga frågor och svar om Dispatcher](dispatcher-faq.md)
