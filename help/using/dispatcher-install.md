@@ -10,7 +10,10 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
 translation-type: tm+mt
-source-git-commit: eed7c3f77ec64f2e7c5cfff070ef96108886a059
+source-git-commit: ef0fc34cbf2f07090f39613811d6f015ba2305ab
+workflow-type: tm+mt
+source-wordcount: '3689'
+ht-degree: 0%
 
 ---
 
@@ -29,7 +32,7 @@ Comment Type: draft
 >
 >Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
 
-Använd sidan [Dispatcher Release Notes](release-notes.md) för att hämta den senaste Dispatcher-installationsfilen för ditt operativsystem och din webbserver. Dispatcher-releasenummer är oberoende av versionsnumren för Adobe Experience Manager och är kompatibla med Adobe Experience Manager 6.x-, 5.x- och Adobe CQ 5.x-versionerna.
+Använd sidan [Dispatcher Release Notes](release-notes.md) för att hämta den senaste Dispatcher-installationsfilen för ditt operativsystem och din webbserver. Dispatcher-releasenummer är oberoende av Adobe Experience Manager-releasenummer och är kompatibla med Adobe Experience Manager 6.x, 5.x och Adobe CQ 5.x.
 
 Följande namngivningskonvention används:
 
@@ -124,7 +127,7 @@ Använd följande procedur för att kopiera Dispatcher-filerna till rätt plats.
 
    * `disp_iis.dll`
    * `disp_iis.ini`
-   * En av följande filer beror på om Dispatcher arbetar med en AEM-författarinstans eller publiceringsinstans:
+   * En av följande filer beroende på om Dispatcher arbetar med en AEM författarinstans eller publiceringsinstans:
       * Författarinstans: `author_dispatcher.any`
       * Publiceringsinstans: `dispatcher.any`
 
@@ -146,9 +149,9 @@ I följande tabell beskrivs varje egenskap.
 |--- |--- |
 | configpath | Platsen `dispatcher.any` i det lokala filsystemet (absolut sökväg). |
 | loggfil | Platsen för `dispatcher.log` filen. Om detta inte är inställt går loggmeddelanden till Windows-händelseloggen. |
-| loggnivå | Definierar loggnivån som används för att skicka meddelanden till händelseloggen. Följande värden kan anges:Loggnivå för loggfilen: <br/>0 - endast felmeddelanden. <br/>1 - fel och varningar. <br/>2 - fel, varningar och informationsmeddelanden <br/>3 - fel, varningar, informations- och felsökningsmeddelanden. <br/>**Obs **: Vi rekommenderar att du ställer in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
+| loggnivå | Definierar loggnivån som används för att skicka meddelanden till händelseloggen. Följande värden kan anges:Loggnivå för loggfilen: <br/>0 - endast felmeddelanden. <br/>1 - fel och varningar. <br/>2 - fel, varningar och informationsmeddelanden <br/>3 - fel, varningar, informations- och felsökningsmeddelanden. <br/>**Obs**: Vi rekommenderar att du ställer in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
 | replaceauthorized | Anger hur auktoriseringshuvuden i HTTP-begäran hanteras. Följande värden är giltiga:<br/>0 - auktoriseringshuvuden ändras inte. <br/>1 - Ersätter alla rubriker med namnet &quot;Authorization&quot;, förutom &quot;Basic&quot;, med motsvarande `Basic <IIS:LOGON\_USER>` rubrik.<br/> |
-| servervariabler | Definierar hur servervariabler behandlas.<br/>0 - IIS-servervariabler skickas varken till Dispatcher eller AEM. <br/>1 - alla IIS-servervariabler (till exempel `LOGON\_USER, QUERY\_STRING, ...`) skickas till Dispatcher tillsammans med begäranderubrikerna (och även till AEM-instansen om de inte cache-lagras).  <br/>Servervariabler innehåller `AUTH\_USER, LOGON\_USER, HTTPS\_KEYSIZE` och många andra. I IIS-dokumentationen finns en fullständig lista med variabler, med information. |
+| servervariabler | Definierar hur servervariabler behandlas.<br/>0 - IIS-servervariabler skickas varken till Dispatcher eller AEM. <br/>1 - alla IIS-servervariabler (till exempel `LOGON\_USER, QUERY\_STRING, ...`) skickas till Dispatcher, tillsammans med begäranderubrikerna (och även till AEM om de inte cache-lagras).  <br/>Servervariabler innehåller `AUTH\_USER, LOGON\_USER, HTTPS\_KEYSIZE` och många andra. I IIS-dokumentationen finns en fullständig lista med variabler, med information. |
 | enable_chunked_transfer | Definierar om (1) eller inaktiverad (0) aktiverad överföring ska aktiveras för klientsvaret. Standardvärdet är 0. |
 
 En exempelkonfiguration:
@@ -306,7 +309,7 @@ Följ de här stegen för att lägga till Dispatcher på Apache-webbservern:
 
 1. Placera Dispatcher-filen i lämplig katalog för Apache-modulen:
 
-   * **Windows**: Montera `disp_apache<x.y>.dll``<APACHE_ROOT>/modules`
+   * **Windows**: Montera `disp_apache<x.y>.dll` `<APACHE_ROOT>/modules`
    * **Unix**: Leta reda på `<APACHE_ROOT>/libexec` eller `<APACHE_ROOT>/modules`katalogen efter installationen.\
       Kopiera `dispatcher-apache<options>.so` till den här katalogen.\
       För att förenkla långtidsunderhåll kan du också skapa en symbolisk länk med namnet `mod_dispatcher.so` till Dispatcher:\
@@ -401,13 +404,13 @@ De enskilda konfigurationsparametrarna:
 |--- |--- |
 | DispatcherConfig | Plats och namn för Dispatcher-konfigurationsfilen. <br/>När den här egenskapen finns i huvudserverkonfigurationen ärver alla virtuella värdar egenskapsvärdet. Virtuella värdar kan dock innehålla en DispatcherConfig-egenskap som åsidosätter huvudserverkonfigurationen. |
 | DispatcherLog | Loggfilens plats och namn. |
-| DispatcherLogLevel | Loggnivå för loggfilen: <br/>0 - Fel <br/>1 - Varningar <br/>2 - Information <br/>3 - <br/>**Felsökningsanteckning **: Vi rekommenderar att du ställer in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
-| DispatcherNoServerHeader | *Den här parametern är föråldrad och har ingen effekt längre.*<br/><br/>Definierar den serverrubrik som ska användas:<br/><ul><li>undefined eller 0 - HTTP-serverhuvudet innehåller AEM-versionen. </li><li>1 - Apache-serverhuvudet används.</li></ul> |
-| DispatcherDeclineRoot | Definierar om begäranden till roten &quot;/&quot; ska nekas: <br/>**0 **- acceptera begäranden till /<br/>**1** - begäranden till / hanteras inte av avsändaren; använd mod_alias för korrekt mappning. |
-| DispatcherUseProcsedURL | Definierar om förbearbetade URL:er ska användas för all vidare bearbetning av Dispatcher: <br/>**0 **- använd den ursprungliga URL-adressen som skickades till webbservern.<br/>**1** - dispatchern använder den URL som redan har bearbetats av de hanterare som föregår dispatchern (d.v.s. `mod_rewrite`) i stället för den ursprungliga URL-adress som skickades till webbservern.  Till exempel matchar antingen den ursprungliga eller den bearbetade URL:en med Dispatcher-filter. URL:en används också som bas för cachefilens struktur.   Information om mod_rewrite finns i dokumentationen för Apache-webbplatsen. till exempel Apache 2.4. När du använder mod_rewrite bör du använda flaggan &quot;passthrough&quot; | PT&#39; (pass through to next handler) för att tvinga omskrivningsmotorn att ställa in uri-fältet för den interna request_rec-strukturen till värdet för filnamnsfältet. |
-| DispatcherPassError | Definierar hur felkoder ska stödjas för ErrorDocument-hantering: <br/>**0 **- Dispatcher lagrar alla felsvar till klienten.<br/>**1** - Dispatcher buffrar inte ett felsvar till klienten (där statuskoden är större än eller lika med 400), men skickar statuskoden till Apache, som t.ex. tillåter ett ErrorDocument-direktiv att bearbeta en sådan statuskod. <br/>**Kodintervall **- Ange ett intervall med felkoder som svaret skickas till Apache för. Andra felkoder skickas till klienten. Följande konfiguration skickar till exempel svar för fel 412 till klienten och alla andra fel skickas till Apache: DispatcherPassError 400-411,413-417 |
+| DispatcherLogLevel | Loggnivå för loggfilen: <br/>0 - Fel <br/>1 - Varningar <br/>2 - Information <br/>3 - Felsökningsmeddelande <br/>****: Vi rekommenderar att du ställer in loggnivån på 3 under installation och testning och sedan på 0 när du kör i en produktionsmiljö. |
+| DispatcherNoServerHeader | *Den här parametern är föråldrad och har ingen effekt längre.*<br/><br/> Definierar den serverrubrik som ska användas: <br/><ul><li>undefined eller 0 - HTTP-serverhuvudet innehåller den AEM versionen. </li><li>1 - Apache-serverhuvudet används.</li></ul> |
+| DispatcherDeclineRoot | Definierar om begäranden till roten &quot;/&quot; ska nekas: <br/>**0** - acceptera begäranden till / <br/>**1** - begäranden till / hanteras inte av avsändaren, använd mod_alias för korrekt mappning. |
+| DispatcherUseProcsedURL | Definierar om förbearbetade URL:er ska användas för all vidare bearbetning av Dispatcher: <br/>**0** - använd den ursprungliga URL-adressen som skickades till webbservern. <br/>**1** - dispatchern använder den URL som redan har bearbetats av de hanterare som föregår dispatchern (d.v.s. `mod_rewrite`) i stället för den ursprungliga URL-adress som skickades till webbservern.  Till exempel matchar antingen den ursprungliga eller den bearbetade URL:en med Dispatcher-filter. URL:en används också som bas för cachefilens struktur.   Information om mod_rewrite finns i dokumentationen för Apache-webbplatsen. till exempel Apache 2.4. När du använder mod_rewrite bör du använda flaggan &quot;passthrough&quot; | PT&#39; (pass through to next handler) för att tvinga omskrivningsmotorn att ställa in uri-fältet för den interna request_rec-strukturen till värdet för filnamnsfältet. |
+| DispatcherPassError | Definierar hur felkoder ska stödjas för ErrorDocument-hantering: <br/>**0** - Dispatcher lagrar alla felsvar till klienten. <br/>**1** - Dispatcher buffrar inte ett felsvar till klienten (där statuskoden är större än eller lika med 400), men skickar statuskoden till Apache, som t.ex. tillåter ett ErrorDocument-direktiv att bearbeta en sådan statuskod. <br/>**Kodintervall** - Ange ett intervall med felkoder som svaret skickas till Apache för. Andra felkoder skickas till klienten. Följande konfiguration skickar till exempel svar för fel 412 till klienten och alla andra fel skickas till Apache: DispatcherPassError 400-411,413-417 |
 | DispatcherKeepAliveTimeout | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
-| DispatcherNoCanonURL | Om den här parametern anges till På skickas den obearbetade URL:en till serverdelen i stället för till den kanoniserade URL:en och inställningarna för DispatcherUseProcsedURL åsidosätts. Standardvärdet är Av. <br/>**Obs **: Filterreglerna i Dispatcher-konfigurationen utvärderas alltid mot den sanerade URL:en, inte mot den obearbetade URL:en. |
+| DispatcherNoCanonURL | Om den här parametern anges till På skickas den obearbetade URL:en till serverdelen i stället för till den kanoniserade URL:en och inställningarna för DispatcherUseProcsedURL åsidosätts. Standardvärdet är Av. <br/>**Obs**: Filterreglerna i Dispatcher-konfigurationen utvärderas alltid mot den sanerade URL:en, inte mot den obearbetade URL:en. |
 
 
 
@@ -421,7 +424,7 @@ De enskilda konfigurationsparametrarna:
 >Standardinställningarna för Serverhuvud är: `  
 ServerTokens Full` `  
 DispatcherNoServerHeader 0`\
-Här visas AEM-versionen (för statistiska ändamål). Om du vill inaktivera sådan information i sidhuvudet kan du ange: `  
+Visar AEM version (för statistiska ändamål). Om du vill inaktivera sådan information i sidhuvudet kan du ange: `  
 ServerTokens Prod`\
 Mer information finns i dokumentationen om [Apache om ServerTokens-direktivet (till exempel för Apache 2.4)](https://httpd.apache.org/docs/2.4/mod/core.html) .
 
@@ -490,7 +493,7 @@ Efter **SetHandler** -satsen ska du även lägga till definitionen **ModMimeUseP
 
 >[!NOTE]
 Parametern bör bara användas och konfigureras om du använder Dispatcher version 4.0.9 eller senare. `ModMimeUsePathInfo`
-(Observera att Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senaste Dispatcher-version).
+(Observera att Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senare Dispatcher-version).
 
 Parametern **ModMimeUsePathInfo** ska anges `On` för alla Apache-konfigurationer:
 
@@ -624,7 +627,7 @@ där:
 |--- |--- |
 | config | Konfigurationsfilens plats och namn `dispatcher.any.` |
 | loggfil | Loggfilens plats och namn. |
-| loggnivå | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0 **Fel<br/>**1** Varningar <br/>**2 **Information<br/>**3** Felsökning <br/>**Obs!**Vi rekommenderar att du ställer in loggnivån till 3 under installation och testning och till 0 när du kör i en produktionsmiljö. |
+| loggnivå | Loggnivå för när meddelanden skrivs till loggfilen: <br/>**0** Fel <br/>**1** Varningar <br/>**2** Information <br/>**3** Felsök <br/>**Obs!** Vi rekommenderar att du ställer in loggnivån till 3 under installation och testning och till 0 när du kör i en produktionsmiljö. |
 | keepalivetimeout | Anger tidsgränsen för keep-alive i sekunder. Från och med Dispatcher version 4.2.0 är standardvärdet 60. Värdet 0 inaktiverar keep-alive. |
 
 Beroende på dina behov kan du definiera Dispatcher som en tjänst för dina objekt. Så här konfigurerar du Dispatcher för hela webbplatsen:
