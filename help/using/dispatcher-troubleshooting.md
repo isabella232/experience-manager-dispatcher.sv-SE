@@ -13,7 +13,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: a612e745-f1e6-43de-b25a-9adcaadab5cf
 translation-type: tm+mt
-source-git-commit: 5734e601379fda9a62eda46bded493b8dbd49a4c
+source-git-commit: 9af0dc22d32f1176b84c28a70b1a4701414d434e
 workflow-type: tm+mt
 source-wordcount: '553'
 ht-degree: 0%
@@ -37,14 +37,14 @@ ht-degree: 0%
 
 Som alltid är de första stegen att kontrollera grunderna:
 
-* [Bekräfta grundläggande åtgärd](#ConfirmBasicOperation)
-* Kontrollera alla loggfiler för webbservern och dispatchern. Om det behövs kan du öka `loglevel` antalet som används för [loggning](#Logging)av avsändare.
+* [Bekräfta grundläggande åtgärd](/help/using/dispatcher-configuration.md#confirming-basic-operation)
+* Kontrollera alla loggfiler för webbservern och dispatchern. Om det behövs kan du öka det `loglevel` som används för [loggning](/help/using/dispatcher-configuration.md#logging)av avsändare.
 
-* [Kontrollera konfigurationen](#ConfiguringtheDispatcher):
+* [Kontrollera konfigurationen](/help/using/dispatcher-configuration.md):
 
    * Har du flera utskickare?
 
-      * Har du fastställt vilken Dispatcher som hanterar den webbplats/sida som du undersöker?
+      * Har du fastställt vilken Dispatcher som hanterar webbplatsen/sidan som du undersöker?
    * Har du implementerat filter?
 
       * Påverkar detta ditt ärende?
