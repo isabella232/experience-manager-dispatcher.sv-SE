@@ -13,7 +13,10 @@ index: y
 internal: n
 snippet: y
 translation-type: tm+mt
-source-git-commit: eed7c3f77ec64f2e7c5cfff070ef96108886a059
+source-git-commit: f9fb0e94dbd1c67bf87463570e8b5eddaca11bf3
+workflow-type: tm+mt
+source-wordcount: '1375'
+ht-degree: 0%
 
 ---
 
@@ -22,22 +25,22 @@ source-git-commit: eed7c3f77ec64f2e7c5cfff070ef96108886a059
 
 Använd SSL-anslutningar mellan Dispatcher och återgivningsdatorn:
 
-* [Envägs SSL](dispatcher-ssl.md#main-pars-title-1)
-* [Ömsesidig SSL](dispatcher-ssl.md#main-pars-title-2)
+* [Envägs SSL](#use-ssl-when-dispatcher-connects-to-aem)
+* [Ömsesidig SSL](#configuring-mutual-ssl-between-dispatcher-and-aem)
 
 >[!NOTE]
 >
 >Åtgärder som rör SSL-certifikat är bundna till produkter från tredje part. De omfattas inte av Adobe Platinum Maintenance and Support-avtalet.
 
-## Använd SSL när Dispatcher ansluter till AEM {#use-ssl-when-dispatcher-connects-to-aem}
+## Använd SSL när Dispatcher ansluts till AEM {#use-ssl-when-dispatcher-connects-to-aem}
 
-Konfigurera Dispatcher för att kommunicera med AEM- eller CQ-återgivningsinstansen med SSL-anslutningar.
+Konfigurera Dispatcher för att kommunicera med AEM eller CQ-återgivningsinstansen med SSL-anslutningar.
 
-Konfigurera AEM eller CQ att använda SSL innan du konfigurerar Dispatcher:
+Innan du konfigurerar Dispatcher måste du konfigurera AEM eller CQ så att SSL används:
 
 * AEM 6.2: [Aktivera HTTP över SSL](https://helpx.adobe.com/experience-manager/6-2/sites/deploying/using/config-ssl.html)
 * AEM 6.1: [Aktivera HTTP över SSL](https://docs.adobe.com/content/docs/en/aem/6-1/deploy/configuring/config-ssl.html)
-* Äldre AEM-versioner: se [den här sidan](https://helpx.adobe.com/experience-manager/aem-previous-versions.html).
+* Äldre AEM: se [den här sidan](https://helpx.adobe.com/experience-manager/aem-previous-versions.html).
 
 ### SSL-relaterade begärandehuvuden {#ssl-related-request-headers}
 
@@ -58,7 +61,7 @@ X-Forwarded-SSL-Session-ID: 814825E8CD055B4C166C2EF6D75E1D0FE786FFB29DEB6DE1E239
 
 ### Konfigurera Dispatcher att använda SSL {#configuring-dispatcher-to-use-ssl}
 
-Om du vill konfigurera Dispatcher så att den ansluter till AEM eller CQ via SSL måste du ha följande egenskaper [för Dispatcher.alla](dispatcher-configuration.md) filer:
+Om du vill konfigurera Dispatcher att ansluta till AEM eller CQ via SSL måste du ha följande egenskaper för [dispatcher.any](dispatcher-configuration.md) -filen:
 
 * En virtuell värd som hanterar HTTPS-begäranden.
 * Avsnittet `renders` i det virtuella värdsystemet innehåller ett objekt som identifierar värdnamnet och porten för CQ- eller AEM-instansen som använder HTTPS.
@@ -116,7 +119,7 @@ Följande exempel skickar.alla filer visar egenskapsvärden för anslutning med 
 
 ## Konfigurera ömsesidig SSL mellan Dispatcher och AEM {#configuring-mutual-ssl-between-dispatcher-and-aem}
 
-Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM- eller CQ-publiceringsinstans) för att använda ömsesidig SSL:
+Konfigurera anslutningarna mellan Dispatcher och återgivningsdatorn (vanligtvis en AEM- eller CQ-publiceringsinstans) så att de använder ömsesidig SSL:
 
 * Dispatcher ansluter till återgivningsinstansen via SSL.
 * Återgivningsinstansen verifierar giltigheten för Dispatcher-certifikatet.
@@ -249,11 +252,11 @@ Last Modified Date: 2014-08-12T13:11:21.401-0400
 
 #### Konfigurera återgivningsinstansen {#configuring-the-render-instance}
 
-Använd återgivningscertifikatet med instruktionerna i *Aktivera SSL i avsnittet Publiceringsinstans* för att konfigurera HTTP-tjänsten för återgivningsinstansen så att den använder SSL:
+Använd återgivningscertifikatet med instruktionerna i *Aktivera SSL i avsnittet Publiceringsinstans* för att konfigurera HTTP-tjänsten för återgivningsinstansen så att SSL används:
 
 * AEM 6.2: [Aktivera HTTP över SSL](https://helpx.adobe.com/experience-manager/6-2/sites/deploying/using/config-ssl.html)
 * AEM 6.1: [Aktivera HTTP över SSL](https://docs.adobe.com/content/docs/en/aem/6-1/deploy/configuring/config-ssl.html)
-* Äldre AEM-versioner: se [den här sidan.](https://helpx.adobe.com/experience-manager/aem-previous-versions.html)
+* Äldre AEM: se [den här sidan.](https://helpx.adobe.com/experience-manager/aem-previous-versions.html)
 
 ### Konfigurera SSL för Dispatcher Module {#configuring-ssl-for-the-dispatcher-module}
 
