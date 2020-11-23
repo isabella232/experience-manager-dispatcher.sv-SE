@@ -10,9 +10,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
 translation-type: tm+mt
-source-git-commit: ef0fc34cbf2f07090f39613811d6f015ba2305ab
+source-git-commit: 024348672c2a9a4f8a01429572eba27ea8b8a490
 workflow-type: tm+mt
-source-wordcount: '3689'
+source-wordcount: '3684'
 ht-degree: 0%
 
 ---
@@ -28,11 +28,11 @@ Comment Type: draft
 
  -->
 
+Använd sidan [Dispatcher Release Notes](release-notes.md) för att hämta den senaste Dispatcher-installationsfilen för ditt operativsystem och din webbserver. Dispatcher-releasenummer är oberoende av Adobe Experience Manager-releasenummer och är kompatibla med Adobe Experience Manager 6.x, 5.x och Adobe CQ 5.x.
+
 >[!NOTE]
 >
->Dispatcher-versionerna är oberoende av AEM. Du kan ha omdirigerats till den här sidan om du har följt en länk till Dispatcher-dokumentationen som är inbäddad i dokumentationen för en tidigare version av AEM.
-
-Använd sidan [Dispatcher Release Notes](release-notes.md) för att hämta den senaste Dispatcher-installationsfilen för ditt operativsystem och din webbserver. Dispatcher-releasenummer är oberoende av Adobe Experience Manager-releasenummer och är kompatibla med Adobe Experience Manager 6.x, 5.x och Adobe CQ 5.x.
+>Observera att Adobe Experience Manager 6.5 kräver Dispatcher version 4.3.2 eller senare. Dispatcher-versionerna är dock oberoende av AEM, till exempel är Dispatcher version 4.3.2 också kompatibel med Adobe Experience Manager 6.4.
 
 Följande namngivningskonvention används:
 
@@ -48,7 +48,7 @@ I följande tabell visas webbserveridentifieraren som används i filnamn för va
 | Microsoft Internet Information Server 7.5, 8, 8.5 | dispatcher-**iis**-&lt;andra parametrar> |
 | Sun Java Web Server iPlanet | dispatcher-**ns**-&lt;andra parametrar> |
 
->[!NOTE]
+>[!CAUTION]
 >
 >Du bör installera den senaste versionen av Dispatcher som är tillgänglig för din plattform. Du bör uppgradera din Dispatcher-instans varje år för att använda den senaste versionen och dra nytta av produktförbättringarna.
 
