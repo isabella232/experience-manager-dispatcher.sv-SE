@@ -21,7 +21,7 @@ ht-degree: 0%
 ---
 
 
-# Felsökning av Dispatcher-problem {#troubleshooting-dispatcher-problems}
+# Felsökning av Dispatcher Problems {#troubleshooting-dispatcher-problems}
 
 >[!NOTE]
 >
@@ -31,14 +31,14 @@ ht-degree: 0%
 
 >[!NOTE]
 >
->Mer information finns även i [Dispatcher Knowledge Base](https://helpx.adobe.com/cq/kb/index/dispatcher.html), [Troubleshooting Dispatcher Dispatcher Flushing Issues](https://helpx.adobe.com/adobe-cq/kb/troubleshooting-dispatcher-flushing-issues.html) och i Vanliga frågor [om](dispatcher-faq.md) Dispatcher.
+>Läs även [Dispatcher Knowledge Base](https://helpx.adobe.com/cq/kb/index/dispatcher.html), [Troubleshooting Dispatcher Flushing Issues](https://helpx.adobe.com/adobe-cq/kb/troubleshooting-dispatcher-flushing-issues.html) och [Dispatcher Top Issues FAQ](dispatcher-faq.md) för mer information.
 
 ## Kontrollera den grundläggande konfigurationen {#check-the-basic-configuration}
 
 Som alltid är de första stegen att kontrollera grunderna:
 
 * [Bekräfta grundläggande åtgärd](/help/using/dispatcher-configuration.md#confirming-basic-operation)
-* Kontrollera alla loggfiler för webbservern och dispatchern. Om det behövs kan du öka det `loglevel` som används för [loggning](/help/using/dispatcher-configuration.md#logging)av avsändare.
+* Kontrollera alla loggfiler för webbservern och dispatchern. Om det behövs ökar du `loglevel` som används för dispatchern [loggning](/help/using/dispatcher-configuration.md#logging).
 
 * [Kontrollera konfigurationen](/help/using/dispatcher-configuration.md):
 
@@ -61,10 +61,10 @@ Dessa kan hjälpa dig att övervaka aktiviteten.
 
 ## IIS och 404 hittades inte {#iis-and-not-found}
 
-När du använder IIS kanske du får en `404 Not Found` returnerad version i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
+När du använder IIS kanske `404 Not Found` returneras i olika scenarier. Om så är fallet, se följande artiklar i kunskapsbasen.
 
 * [IIS 6/7: POSTEN returnerar 404](https://helpx.adobe.com/dispatcher/kb/IIS6IsapiFilters.html)
-* [IIS 6: Begäranden till URL:er som innehåller `/bin` bassökvägen `404 Not Found`](https://helpx.adobe.com/dispatcher/kb/RequestsToBinDirectoryFailInIIS6.html)
+* [IIS 6: Begäranden till URL:er som innehåller  `/bin` bassökvägen  `404 Not Found`](https://helpx.adobe.com/dispatcher/kb/RequestsToBinDirectoryFailInIIS6.html)
 
 Du bör också kontrollera att dispatcherns cacherot och IIS-dokumentroten är inställda på samma katalog.
 
@@ -81,13 +81,13 @@ Problem med att ta bort arbetsflödesmodeller när en AEM författarinstans öpp
 1. Bekräfta att arbetsflödet har skapats.
 1. Högerklicka på arbetsflödet och klicka sedan på **Ta bort**.
 
-1. Bekräfta genom att klicka på **Ja** .
+1. Bekräfta genom att klicka på **Ja**.
 1. Ett felmeddelande visas:\
    &quot; `ERROR 'Could not delete workflow model!!`&quot;.
 
 **Upplösning**
 
-Lägg till följande rubriker i `/clientheaders` avsnittet i `dispatcher.any` filen:
+Lägg till följande rubriker i `/clientheaders`-avsnittet i din `dispatcher.any`-fil:
 
 * `x-http-method-override`
 * `x-requested-with`
@@ -105,27 +105,27 @@ Lägg till följande rubriker i `/clientheaders` avsnittet i `dispatcher.any` fi
 
 ## Interferens med mod_dir (Apache) {#interference-with-mod-dir-apache}
 
-Detta beskriver hur dispatchern interagerar med `mod_dir` inuti webbservern Apache, eftersom detta kan leda till olika, potentiellt oväntade effekter:
+Detta beskriver hur dispatchern interagerar med `mod_dir` inuti Apache-webbservern, eftersom detta kan leda till olika, potentiellt oväntade effekter:
 
 ### Apache 1.3 {#apache}
 
-I Apache 1.3 `mod_dir` hanteras varje begäran där URL:en mappas till en katalog i filsystemet.
+I Apache 1.3 `mod_dir` hanteras alla begäranden där URL:en mappar till en katalog i filsystemet.
 
 Den kommer antingen att
 
-* omdirigera begäran till en befintlig `index.html` fil
+* omdirigera begäran till en befintlig `index.html`-fil
 * generera en kataloglista
 
 När dispatchern är aktiverad bearbetar den sådana förfrågningar genom att registrera sig själv som en hanterare för innehållstypen `httpd/unix-directory`.
 
 ### Apache 2.x {#apache-x}
 
-I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, till exempel URL-korrigering. `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med ett `/` tillägg.
+I Apache 2.x är det annorlunda. En modul kan hantera olika faser av begäran, till exempel URL-korrigering. `mod_dir` hanterar det här steget genom att dirigera om en begäran (när URL:en mappar till en katalog) till URL:en med ett  `/` tillägg.
 
-Dispatcher fångar inte upp `mod_dir` korrigeringen, men hanterar begäran fullständigt till den omdirigerade URL:en (d.v.s. med `/` tillägg). Detta kan utgöra ett problem om fjärrservern (t.ex. AEM) hanterar begäranden som `/a_path` skiljer sig från begäranden till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
+Dispatcher fångar inte `mod_dir`-korrigeringen, men hanterar begäran fullständigt till den omdirigerade URL:en (d.v.s. när `/` har lagts till). Detta kan utgöra ett problem om fjärrservern (t.ex. AEM) hanterar begäranden till `/a_path` på ett annat sätt än begäranden till `/a_path/` (när `/a_path` mappar till en befintlig katalog).
 
 Om detta händer måste du antingen:
 
-* inaktivera `mod_dir` för det `Directory` eller `Location` underträd som hanteras av dispatchern
+* inaktivera `mod_dir` för underträdet `Directory` eller `Location` som hanteras av dispatchern
 
 * använd `DirectorySlash Off` för att konfigurera `mod_dir` att inte lägga till `/`
