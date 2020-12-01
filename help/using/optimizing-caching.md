@@ -15,6 +15,9 @@ internal: n
 snippet: y
 translation-type: tm+mt
 source-git-commit: 2ca816ac0776d72be651b76ff4f45e0c3ed1450f
+workflow-type: tm+mt
+source-wordcount: '1167'
+ht-degree: 0%
 
 ---
 
@@ -43,6 +46,7 @@ Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optime
 >
 >* kan cachelagra allt som du kan lagra som en sida och begära med en URL
 >* kan inte lagra andra saker, t.ex. HTTP-huvuden, cookies, sessionsdata och formulärdata.
+
 >
 >
 I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och inte förlita sig på dessa ytterligare data.
@@ -51,8 +55,8 @@ I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och
 
 Rubriker för HTTP-begäran cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher visar en sida från cachen. Det finns två sätt att undvika det här problemet:
 
-* Om du bara använder en kodning kontrollerar du att kodningen som används på webbservern är densamma som standardkodningen på AEM-webbplatsen.
-* Använd en `<META>` -tagg i HTML- `head` avsnittet för att ställa in kodningen, som i följande exempel:
+* Om du bara använder en kodning kontrollerar du att den kodning som används på webbservern är densamma som standardkodningen för den AEM webbplatsen.
+* Använd en `<META>`-tagg i avsnittet HTML `head` för att ställa in kodningen, som i följande exempel:
 
 ```xml
         <META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
@@ -60,7 +64,7 @@ Rubriker för HTTP-begäran cachelagras inte, vilket innebär att problem kan up
 
 ## Undvik URL-parametrar {#avoid-url-parameters}
 
-Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher har [konfigurerats korrekt](dispatcher-configuration.md#main-pars_title_24)):
+Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher är [konfigurerad därefter](dispatcher-configuration.md#main-pars_title_24)):
 
 ```xml
 www.myCompany.com/pictures/gallery.html?event=christmas&amp;page=1
@@ -98,7 +102,7 @@ www.myCompany.com/news/main.large.html
 >
 >Med hjälp av skriptordlistan för malldefinitionen kan du ange ett separat skript som återger utskriftssidorna.
 
-## Invaliderar bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
+## Ogiltiga bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
 
 Om du återger sidrubriker, eller annan text, som bilder bör du lagra filerna så att de tas bort vid en innehållsuppdatering på sidan:
 
@@ -111,7 +115,7 @@ Du kan till exempel lagra titeln för sidan myPage.html i filen myPage.title.gif
 
 >[!NOTE]
 >
->Bildfilen finns inte nödvändigtvis fysiskt på AEM-instansen. Du kan använda ett skript som skapar bildfilen dynamiskt. Dispatcher lagrar sedan filen på webbservern.
+>Bildfilen finns inte nödvändigtvis fysiskt på AEM. Du kan använda ett skript som skapar bildfilen dynamiskt. Dispatcher lagrar sedan filen på webbservern.
 
 ## Ogiltiga bildfiler som används för navigering {#invalidating-image-files-used-for-navigation}
 
@@ -140,13 +144,14 @@ Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begr�
 >
 >* Använd iFrames för att dela upp sidan i en del som är densamma för alla användare och en del som är densamma för alla sidor i användaren. Du kan sedan cachelagra båda dessa delar.
 >* använda JavaScript på klientsidan för att visa personlig information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
+
 >
 
 
 
-## Fästiga anslutningar {#sticky-connections}
+## Sticky Connections {#sticky-connections}
 
-[Antikiga anslutningar](dispatcher.md#TheBenefitsofLoadBalancing) säkerställer att dokumenten för en användare finns på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp för alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
+[Anteckningar ](dispatcher.md#TheBenefitsofLoadBalancing) gör att dokumenten för en användare kan sammanställas på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp för alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
 
 ## MIME-typer {#mime-types}
 
@@ -155,14 +160,14 @@ Det finns två sätt som en webbläsare kan använda för att avgöra vilken typ
 1. Genom filtillägg (t.ex. .html, .gif, .jpg osv.)
 1. Med MIME-typen som servern skickar med filen.
 
-För de flesta filer används MIME-typen i filtillägget. dvs.:
+För de flesta filer används MIME-typen i filtillägget. i.e.:
 
 1. Genom filtillägg (t.ex. .html, .gif, .jpg osv.)
 1. Med MIME-typen som servern skickar med filen.
 
 Om filnamnet inte har något filtillägg visas det som oformaterad text.
 
-MIME-typen är en del av HTTP-huvudet och Dispatcher cachelagrar den därför inte. Om ditt AEM-program returnerar filer som inte har ett känt filslut, men som i stället använder MIME-typen, kan dessa filer visas felaktigt.
+MIME-typen är en del av HTTP-huvudet och Dispatcher cachelagrar den därför inte. Om AEM returnerar filer som inte har ett känt filslut, men som i stället använder MIME-typen, kan dessa filer visas felaktigt.
 
 Följ dessa riktlinjer för att vara säker på att filerna cachelagras korrekt:
 
