@@ -22,7 +22,7 @@ ht-degree: 0%
 ---
 
 
-# Checklistan för Dispatcher-säkerhet{#the-dispatcher-security-checklist}
+# Dispatcher Security Checklist{#the-dispatcher-security-checklist}
 
 <!-- 
 
@@ -80,13 +80,13 @@ Last Modified Date: 2015-06-26T04:41:28.841-0400
 
 ## Begränsa åtkomst {#restrict-access}
 
-När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Se [Exempel/filteravsnitt](dispatcher-configuration.md#main-pars_184_1_title) i Dispatcher-dokumentationen.
+När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Se [Exempel /filter Avsnitt](dispatcher-configuration.md#main-pars_184_1_title) i Dispatcher-dokumentationen.
 
-## Kontrollera att åtkomst till administrativa URL:er nekas {#make-sure-access-to-administrative-urls-is-denied}
+## Kontrollera att åtkomst till administrativa URL:er är nekad {#make-sure-access-to-administrative-urls-is-denied}
 
 Se till att du använder filter för att blockera extern åtkomst till administrativa URL:er, t.ex. webbkonsolen.
 
-En lista med URL:er som måste blockeras finns i [Testing Dispatcher Security](dispatcher-configuration.md#testing-dispatcher-security) .
+En lista över URL:er som måste blockeras finns i [Testa Dispatcher Security](dispatcher-configuration.md#testing-dispatcher-security).
 
 ## Använd Tillåtelselista i stället för Blockeringslista {#use-allowlists-instead-of-blocklists}
 
@@ -109,7 +109,7 @@ På dispatchernivå finns det två metoder för att konfigurera för att förhin
 
 * Använd modulen mod_rewrite (till exempel [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
 
-* Förhindra att avsändaren cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-conten-tfilter).\
+* Förhindra att dispatchern cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-conten-tfilter).\
    Ändra till exempel cachningsreglerna för att begränsa cachning till de förväntade MIME-typerna, som:
 
    * `.html`
@@ -121,7 +121,7 @@ På dispatchernivå finns det två metoder för att konfigurera för att förhin
    * `.pdf`
    * `.ppt`
 
-   Ett exempel på en konfigurationsfil kan visas för att [begränsa extern åtkomst](#restrict-access), vilket inkluderar begränsningar för MIME-typer.
+   Ett exempel på en konfigurationsfil kan visas för [att begränsa extern åtkomst](#restrict-access), vilket inkluderar begränsningar för MIME-typer.
 
 Om du vill aktivera alla funktioner för publiceringsinstanserna på ett säkert sätt konfigurerar du filter så att de inte får åtkomst till följande noder:
 
@@ -153,16 +153,16 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller ett [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker med förfalskade begäranden på olika webbplatser. För att du ska kunna använda det här ramverket måste du tillåtslista CSRF-tokenstöd i dispatchern. Du kan göra detta genom att:
+AEM tillhandahåller ett [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. För att du ska kunna använda det här ramverket måste du tillåtslista CSRF-tokenstöd i dispatchern. Du kan göra detta genom att:
 
-1. Skapa ett filter som tillåter `/libs/granite/csrf/token.json` banan.
-1. Lägg till `CSRF-Token` rubriken i avsnittet `clientheaders` i Dispatcher-konfigurationen.
+1. Skapa ett filter som tillåter sökvägen `/libs/granite/csrf/token.json`;
+1. Lägg till rubriken `CSRF-Token` i avsnittet `clientheaders` i Dispatcher-konfigurationen.
 
 ## Förhindra clickjacking {#prevent-clickjacking}
 
-För att förhindra clickjacking rekommenderar vi att du konfigurerar webbservern så att den tillhandahåller den `X-FRAME-OPTIONS` HTTP-rubrik som är inställd på `SAMEORIGIN`.
+För att förhindra clickjacking rekommenderar vi att du konfigurerar webbservern så att HTTP-huvudet `X-FRAME-OPTIONS` är inställt på `SAMEORIGIN`.
 
-Mer [information om clickjacking finns på OWASP-webbplatsen](https://www.owasp.org/index.php/Clickjacking).
+Mer [information om clickjacking finns på OWASP-platsen](https://www.owasp.org/index.php/Clickjacking).
 
 ## Utför ett penetrationstest {#perform-a-penetration-test}
 
