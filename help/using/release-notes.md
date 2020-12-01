@@ -1,6 +1,6 @@
 ---
-title: Versionsinformation för AEM Dispatcher
-seo-title: Versionsinformation för AEM Dispatcher
+title: AEM Dispatcher Release Notes
+seo-title: AEM Dispatcher Release Notes
 description: Versionsinformation om Adobe Experience Manager Dispatcher
 seo-description: Versionsinformation om Adobe Experience Manager Dispatcher
 uuid: ae3ccf62-0514-4c03-a3b9-71799a482cbd
@@ -10,11 +10,14 @@ products: SG_EXPERIENCEMANAGER/6.4
 discoiquuid: ff3d38e0-71c9-4b41-85f9-fa896393aac5
 translation-type: tm+mt
 source-git-commit: 328bc82673783b4a2df2d68481fa7eec88b74b01
+workflow-type: tm+mt
+source-wordcount: '805'
+ht-degree: 2%
 
 ---
 
 
-# Versionsinformation för AEM Dispatcher{#aem-dispatcher-release-notes}
+# AEM Dispatcher Release Notes{#aem-dispatcher-release-notes}
 
 ## Versionsinformation {#release-information}
 
@@ -29,13 +32,13 @@ source-git-commit: 328bc82673783b4a2df2d68481fa7eec88b74b01
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Mer information om krav och krav finns på sidan [Plattformar](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html) som stöds.
+På sidan [Plattformar som stöds](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html) finns mer information om krav och krav.
 
 Adobe rekommenderar starkt att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
 ## Installationsanvisningar {#installation-instructions}
 
-Detaljerade anvisningar finns i [Installera Dispatcher](dispatcher-install.md).
+Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 ## Versionshistorik {#release-history}
 
@@ -43,7 +46,7 @@ Detaljerade anvisningar finns i [Installera Dispatcher](dispatcher-install.md).
 
 **Felkorrigeringar**:
 
-* DISP-739 - LogLevel-dispatcher: **nivån** fungerar inte
+* DISP-739 - LogLevel-dispatcher: **level** fungerar inte
 * DISP-749 - Alpine Linux-dispatchern kraschar med spårloggsnivå
 
 **Förbättringar**:
@@ -114,7 +117,7 @@ Detaljerade anvisningar finns i [Installera Dispatcher](dispatcher-install.md).
 
 * DISP-682 - Numerisk loggnivå används felaktigt
 * DISP-685 - 32-bitars Solaris SPARC-binärfiler har en odefinierad referens till __divdi3
-* DISP-688 - Dispatcher returnerar inte X-Cache-Info-huvudet på 404-svar
+* DISP-688 - Dispatcher returnerar inte &quot;X-Cache-Info&quot;-huvudet på 404-svar
 * DISP-690 - Rubriken Senast ändrad är inte tillgänglig
 * DISP-691 - åtkomstfel i w3wp.exe
 * DISP-693 - Behöver uppdatera arkitekturinformation för solarisservrar på hämtningssidan för dispatcher
@@ -133,9 +136,9 @@ Detaljerade anvisningar finns i [Installera Dispatcher](dispatcher-install.md).
 
 ## Användbara resurser {#helpful-resources}
 
-* [Översikt över AEM Dispatcher](dispatcher.md)
+* [AEM Dispatcher - översikt](dispatcher.md)
 
-## Nedladdningar {#downloads}
+## Hämtar {#downloads}
 
 ### Apache 2.4 {#apache}
 
