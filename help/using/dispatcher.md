@@ -17,7 +17,7 @@ ht-degree: 0%
 ---
 
 
-# Dispatcher - översikt {#dispatcher-overview}
+# Dispatcher-översikt {#dispatcher-overview}
 
 >[!NOTE]
 >
@@ -27,17 +27,17 @@ Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller 
 
 Processen för att distribuera dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
-1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om dispatcher](https://helpx.adobe.com/experience-manager/using/dispatcher-faq.html).
-1. Installera en [webbserver](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/technical-requirements.html) som stöds enligt webbserverns dokumentation.
-1. [Installera modulen](dispatcher-install.md) Dispatcher på webbservern och konfigurera webbservern därefter.
-1. [Konfigurera Dispatcher](dispatcher-configuration.md) (filen dispatcher.any).
-1. [Konfigurera AEM](page-invalidate.md) så att innehållsuppdateringar gör cachen ogiltig.
+1. Läs mer om Dispatcher (den här sidan). Se även [Vanliga frågor om dispatcher](https://helpx.adobe.com/experience-manager/using/dispatcher-faq.html).
+1. Installera en [webbserver](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/technical-requirements.html) som stöds enligt webbserverdokumentationen.
+1. [Installera Dispatcher-](dispatcher-install.md) modulen på webbservern och konfigurera webbservern därefter.
+1. [Konfigurera Dispatcher](dispatcher-configuration.md)  (filen dispatcher.any).
+1. [Konfigurera ](page-invalidate.md) AEM så att innehållsuppdateringar gör cachen ogiltig.
 
 >[!NOTE]
 >
 >Så här får du en bättre förståelse för hur Dispatcher fungerar med AEM:
 >
->* Se [Fråga AEM community-experter i juli 2017](https://bit.ly/ATACE0717).
+>* Se [Fråga de AEM experterna i communityn i juli 2017](https://bit.ly/ATACE0717).
 >* Åtkomst till [den här databasen](https://github.com/adobe/aem-dispatcher-experiments). Den innehåller en samling experiment i ett&quot;start-home&quot;-laboratorieformat.
 
 
@@ -57,7 +57,7 @@ Använd följande information efter behov:
 >
 >******Det vanligaste användningsområdet för Dispatcher är att cachelagra svar från en AEM-publiceringsinstans** för att minska svarstiden och öka säkerheten för den externt adresserade publicerade webbplatsen. Det mesta av diskussionen fokuserar på detta fall.
 >
->Men Dispatcher kan också användas för att öka svarstiden för **författarinstansen**, särskilt om du har ett stort antal användare som redigerar och uppdaterar webbplatsen. Mer information om detta fall finns i [Använda en Dispatcher med en författarserver](#using-a-dispatcher-with-an-author-server)nedan.
+>Men Dispatcher kan också användas för att öka svarstiden för **författarinstansen**, särskilt om du har ett stort antal användare som redigerar och uppdaterar webbplatsen. Mer information om detta fall finns i [Använda en Dispatcher med en Author Server](#using-a-dispatcher-with-an-author-server) nedan.
 
 ## Varför ska jag använda Dispatcher för att implementera Caching? {#why-use-dispatcher-to-implement-caching}
 
@@ -73,9 +73,9 @@ Dispatcher hjälper till att förverkliga en miljö som är både snabb och dyna
 
 Detta innebär att
 
-* **statiskt innehåll** hanteras med exakt samma hastighet och enkelhet som på en statisk webbserver.*Dessutom kan du använda de administrations- och säkerhetsverktyg som är tillgängliga för statiska webbservrar*.
+* **statiskt** innehåll som hanteras med exakt samma hastighet och enkelhet som på en statisk webbserver. *Dessutom kan du använda de administrations- och säkerhetsverktyg som är tillgängliga för statiska webbservrar*.
 
-* **dynamiskt innehåll** genereras efter behov, utan att systemet blir långsammare än vad som är absolut nödvändigt.
+* **dynamiskt** innehåll genereras efter behov, utan att systemet blir långsammare än vad som är absolut nödvändigt.
 
 Dispatcher innehåller mekanismer för att generera och uppdatera statisk HTML baserat på innehållet på den dynamiska platsen. Du kan ange i detalj vilka dokument som lagras som statiska filer och som alltid genereras dynamiskt.
 
@@ -101,11 +101,11 @@ På så sätt kan du skapa mer omfattande, dynamiskt innehåll, vilket ökar fle
 
 ![](assets/chlimage_1-5.png)
 
-**Cachekatalogen** för cachelagring använder modulen Dispatcher webbserverns möjlighet att hantera statiskt innehåll. Dispatcher placerar de cachelagrade dokumenten i dokumentroten på webbservern.
+**Cachekatalogen** För cachning använder modulen Dispatcher webbserverns förmåga att hantera statiskt innehåll. Dispatcher placerar de cachelagrade dokumenten i dokumentroten på webbservern.
 
 >[!NOTE]
 >
->Om konfigurationen för HTTP Header Caching saknas lagrar Dispatcher bara sidans HTML-kod - den lagrar inte HTTP-rubrikerna. Detta kan vara ett problem om du använder olika kodningar på webbplatsen, eftersom dessa kan gå förlorade. Information om hur du aktiverar cachelagring av HTTP-huvud finns i [Konfigurera Dispatcher-cachen.](https://helpx.adobe.com/experience-manager/dispatcher/using/dispatcher-configuration.html)
+>Om konfigurationen för HTTP Header Caching saknas lagrar Dispatcher bara sidans HTML-kod - den lagrar inte HTTP-rubrikerna. Detta kan vara ett problem om du använder olika kodningar på webbplatsen, eftersom dessa kan gå förlorade. Information om hur du aktiverar cachelagring av HTTP-huvuden finns i [Konfigurera Dispatcher-cachen.](https://helpx.adobe.com/experience-manager/dispatcher/using/dispatcher-configuration.html)
 
 >[!NOTE]
 >
@@ -122,7 +122,7 @@ På så sätt kan du skapa mer omfattande, dynamiskt innehåll, vilket ökar fle
 Dispatcher har två primära metoder för att uppdatera cacheinnehållet när ändringar görs på webbplatsen.
 
 * **Innehållsuppdateringar** tar bort sidor som har ändrats samt filer som är direkt kopplade till dem.
-* **Automatisk invalidering** gör automatiskt de delar av cachen som kan vara inaktuella efter en uppdatering blir ogiltiga. Det innebär att relevanta sidor flaggas som inaktuella, utan att något tas bort.
+* **Automatisk** invalidering gör automatiskt de delar av cachen som kan vara inaktuella efter en uppdatering ogiltiga. Det innebär att relevanta sidor flaggas som inaktuella, utan att något tas bort.
 
 ### Innehållsuppdateringar
 
@@ -130,14 +130,14 @@ I en innehållsuppdatering ändras ett eller flera AEM dokument. AEM skickar en 
 
 1. Den tar bort de ändrade filerna från cachen.
 1. Den tar bort alla filer som börjar med samma referens från cachen. Om till exempel filen /en/index.html uppdateras, kommer alla filer som börjar med /en/index. tas bort. Med den här funktionen kan du utforma cacheeffektiva webbplatser, särskilt när det gäller bildnavigering.
-1. Den *rör* den så kallade **statfile**. Detta uppdaterar tidsstämpeln för statusfilen för att ange datumet för den senaste ändringen.
+1. Den *rör* den så kallade **statfile**; Detta uppdaterar tidsstämpeln för statusfilen för att ange datumet för den senaste ändringen.
 
 Följande punkter bör noteras:
 
 * Innehållsuppdateringar används vanligtvis tillsammans med ett redigeringssystem som&quot;vet&quot; vad som måste ersättas.
 * Filer som påverkas av en innehållsuppdatering tas bort, men ersätts inte omedelbart. Nästa gång en sådan fil begärs hämtar Dispatcher den nya filen från AEM och placerar den i cachen, vilket skriver över det gamla innehållet.
 * Vanligtvis lagras automatiskt genererade bilder som innehåller text från en sida i bildfiler som börjar med samma handtag, vilket säkerställer att kopplingen finns för borttagning. Du kan till exempel lagra titeltexten för sidan mypage.html som bilden mypage.titlePicture.gif i samma mapp. På så sätt tas bilden automatiskt bort från cacheminnet varje gång sidan uppdateras, så att du kan vara säker på att bilden alltid återspeglar den aktuella versionen av sidan.
-* Du kan ha flera statusfiler, till exempel en per språkmapp. Om en sida uppdateras söker AEM efter nästa överordnade mapp som innehåller en statusfil och *vidrör* den filen.
+* Du kan ha flera statusfiler, till exempel en per språkmapp. Om en sida uppdateras söker AEM efter nästa överordnade mapp som innehåller en statusfil och *söker efter den filen.*
 
 ### Automatisk ogiltigförklaring
 
@@ -161,7 +161,7 @@ Dispatcher har en lista över filer som kan ogiltigförklaras automatiskt. När 
 
 Du kan [definiera vilka dokument som Dispatcher cachelagrar i konfigurationsfilen](https://helpx.adobe.com/experience-manager/dispatcher/using/dispatcher-configuration.html). Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i den här listan begär Dispatcher dokumentet från AEM.
 
-Dispatcher begär *alltid* dokumentet direkt från AEM i följande fall:
+Dispatcher *always* begär alltid dokumentet direkt från AEM i följande fall:
 
 * Om URI:n för begäran innehåller frågetecknet &quot;?&quot;. Detta indikerar vanligtvis en dynamisk sida, till exempel ett sökresultat, som inte behöver cachas.
 * Filtillägget saknas. Webbservern behöver tillägget för att kunna avgöra dokumenttypen (MIME-typen).
@@ -169,7 +169,7 @@ Dispatcher begär *alltid* dokumentet direkt från AEM i följande fall:
 
 >[!NOTE]
 >
->Metoderna GET eller HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Cachelagra HTTP-svarshuvuden](https://helpx.adobe.com/experience-manager/dispatcher/using/dispatcher-configuration.html) .
+>Metoderna GET eller HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](https://helpx.adobe.com/experience-manager/dispatcher/using/dispatcher-configuration.html).
 
 ### Bestämma om ett dokument cache-lagras
 
@@ -187,7 +187,7 @@ För att ta reda på om ett dokument är uppdaterat utför Dispatcher två steg:
 
 >[!NOTE]
 >
->Dokument utan **automatisk ogiltigförklaring** finns kvar i cacheminnet tills de tas bort fysiskt. t.ex. genom en innehållsuppdatering på webbplatsen.
+>Dokument utan **automatisk ogiltigförklaring** finns kvar i cachen tills de tas bort fysiskt. t.ex. genom en innehållsuppdatering på webbplatsen.
 
 ## Fördelarna med belastningsutjämning {#the-benefits-of-load-balancing}
 
@@ -197,9 +197,11 @@ Belastningsutjämning innebär att distribuera webbplatsens beräknade belastnin
 
 Du vinner:
 
-* **ökad bearbetningskraft** I praktiken innebär detta att Dispatcher delar dokumentförfrågningar mellan flera instanser av AEM. Eftersom varje instans nu har färre dokument att behandla har du snabbare svarstider. Dispatcher sparar intern statistik för varje dokumentkategori så att den kan beräkna inläsningen och distribuera frågorna effektivt.
+* **ökad**
+bearbetningskraftI praktiken innebär detta att Dispatcher delar dokumentbegäranden mellan flera instanser av AEM. Eftersom varje instans nu har färre dokument att behandla har du snabbare svarstider. Dispatcher sparar intern statistik för varje dokumentkategori så att den kan beräkna inläsningen och distribuera frågorna effektivt.
 
-* **ökad felsäker täckning** Om Dispatcher inte tar emot svar från en instans vidarebefordrar den automatiskt begäranden till en av de andra instanserna. Om en instans blir otillgänglig är den enda effekten en nedgång av webbplatsen, som står i proportion till den förlorade datorkraften. Alla tjänster kommer dock att fortsätta.
+* **ökad felsäker**
+täckningOm Dispatcher inte får svar från en instans vidarebefordrar den automatiskt begäranden till en av de andra instanserna. Om en instans blir otillgänglig är den enda effekten en nedgång av webbplatsen, som står i proportion till den förlorade datorkraften. Alla tjänster kommer dock att fortsätta.
 
 * du kan också hantera olika webbplatser på samma statiska webbserver.
 
@@ -231,7 +233,7 @@ Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera fö
 >
 >För de flesta sidor som använder klisterlappande anslutningar måste du stänga av cachelagring, annars ser sidan likadan ut för alla användare, oavsett sessionsinnehåll.
 >
->För ett *fåtal* tillämpningar kan man använda både klibbiga anslutningar och cache-lagring. Om du till exempel visar ett formulär som skriver data till sessionen.
+>För ett *fåtal*-program kan du använda både klibbiga anslutningar och cachelagring. Om du till exempel visar ett formulär som skriver data till sessionen.
 
 ## Använda flera utskickare {#using-multiple-dispatchers}
 
@@ -262,7 +264,7 @@ Nästa närmaste server beror på din konfiguration. I en Akamai-konfiguration k
 
 I de flesta fall är Dispatcher nästa server som kan hantera dokumentet från en cache och påverka de svarshuvuden som returneras till CDN-servern.
 
-## Styra ett CDN-cache {#controlling-a-cdn-cache}
+## Kontrollera ett CDN-cacheminne {#controlling-a-cdn-cache}
 
 Det finns ett antal sätt att styra hur länge ett CDN ska cachelagra en resurs innan den hämtas igen från Dispatcher.
 
@@ -270,7 +272,7 @@ Det finns ett antal sätt att styra hur länge ett CDN ska cachelagra en resurs 
    Konfigurera, hur länge särskilda resurser ska hållas i CDN:ens cache, beroende på MIME-typ, tillägg, typ av begäran osv.
 
 1. Rubriker för förfallodatum och cachekontroll\
-   De flesta CDN:er respekterar `Expires:` och `Cache-Control:` HTTP-huvuden om de skickas av den överordnade servern. Detta kan t.ex. uppnås med [mod_expirres](https://httpd.apache.org/docs/2.4/mod/mod_expires.html) Apache Module.
+   De flesta CDN:er respekterar `Expires:` och `Cache-Control:` HTTP-huvuden om de skickas av den överordnade servern. Detta kan uppnås t.ex. genom att använda modulen [mod_expirres](https://httpd.apache.org/docs/2.4/mod/mod_expires.html) Apache.
 
 1. Manuell ogiltigförklaring\
    Med CDN:er kan resurser tas bort från cachen via webbgränssnitt.
@@ -281,17 +283,17 @@ I en typisk AEM ger konfiguration via tillägg och/eller sökväg, som kan uppn�
 
 Om den här metoden används för att cachelagra hanterat innehåll innebär det att innehållsändringar endast är synliga för slutanvändarna när den konfigurerade cachelagringsperioden har gått ut och dokumentet hämtas från Dispatcher igen.
 
-Om du vill ha mer detaljerad kontroll kan du med API-baserad ogiltigförklaring ogiltigförklara ett CDN-cacheminne när Dispatcher-cachen ogiltigförklaras. Baserat på CDN:er-API:t kan du implementera din egen [ContentBuilder](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/reference-materials/javadoc/com/day/cq/replication/ContentBuilder.html) och [TransportHandler](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/reference-materials/javadoc/com/day/cq/replication/TransportHandler.html) (om API:t inte är REST-baserad) och konfigurera en replikeringsagent som använder dessa för att göra CDN:ns cache ogiltig.
+Om du vill ha mer detaljerad kontroll kan du med API-baserad ogiltigförklaring ogiltigförklara ett CDN-cacheminne när Dispatcher-cachen ogiltigförklaras. Baserat på CDN:er-API:t kan du implementera en egen [ContentBuilder](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/reference-materials/javadoc/com/day/cq/replication/ContentBuilder.html) och [TransportHandler](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/reference-materials/javadoc/com/day/cq/replication/TransportHandler.html) (om API:t inte är REST-baserad) och konfigurera en replikeringsagent som använder dessa för att göra CDN:ns cache ogiltig.
 
 >[!NOTE]
 >
->Se även [AEM (CQ) Dispatcher Security och CDN+Browser Caching](https://www.slideshare.net/andrewmkhoury/dispatcher-caching-aemgemspart2jan2015) och inspelad presentation vid [Dispatcher Caching](https://docs.adobe.com/content/ddc/en/gems/dispatcher-caching---new-features-and-optimizations.html).
+>Se även [AEM (CQ) Dispatcher Security och CDN+Browser Caching](https://www.slideshare.net/andrewmkhoury/dispatcher-caching-aemgemspart2jan2015) och inspelad presentation [Dispatcher Caching](https://docs.adobe.com/content/ddc/en/gems/dispatcher-caching---new-features-and-optimizations.html).
 
 ## Använda en Dispatcher med en författarserver {#using-a-dispatcher-with-an-author-server}
 
 >[!CAUTION]
 >
->Om du använder [AEM med Touch UI](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/touch-ui-concepts.html) ska du **inte** cachelagra författarinstansinnehåll. Om cachelagring aktiverades för författarinstansen måste du inaktivera den och ta bort innehållet i cachekatalogen. Om du vill inaktivera cachelagring bör du redigera `author_dispatcher.any` filen och ändra `/rule` egenskapen för `/cache` avsnittet enligt följande:
+>om du använder [AEM med Touch UI](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/touch-ui-concepts.html) ska du **inte** cachelagra författarinstansinnehåll. Om cachelagring aktiverades för författarinstansen måste du inaktivera den och ta bort innehållet i cachekatalogen. Om du vill inaktivera cachelagring bör du redigera filen `author_dispatcher.any` och ändra egenskapen `/rule` i `/cache`-avsnittet enligt följande:
 
 ```xml
 /rules
@@ -306,11 +308,11 @@ En Dispatcher kan användas framför en författarinstans för att förbättra r
 1. Installera en Dispatcher på en webbserver (detta kan vara Apache eller IIS-webbserver, se [Installera Dispatcher](dispatcher-install.md)).
 1. Du kanske vill testa den nyligen installerade Dispatcher mot en fungerande AEM-publiceringsinstans för att se till att rätt installation har nåtts.
 1. Kontrollera nu att Dispatcher kan ansluta via TCP/IP till din författarinstans.
-1. Ersätt exempeldispatchern.alla filer med author_dispatcher.alla filer som medföljer [Dispatcher-nedladdningen](release-notes.md#downloads).
-1. Öppna filen `author_dispatcher.any` i en textredigerare och gör följande ändringar:
+1. Ersätt exempelfilen dispatcher.any med filen author_dispatcher.any som finns i [Dispatcher Download](release-notes.md#downloads).
+1. Öppna `author_dispatcher.any` i en textredigerare och gör följande ändringar:
 
-   1. Ändra `/hostname` och `/port` för `/renders` avsnittet så att det pekar på författarinstansen.
-   1. Ändra `/docroot` avsnittets `/cache` namn så att det pekar på en cachekatalog. Om du använder [AEM med Touch UI](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/touch-ui-concepts.html)ska du läsa varningen ovan.
+   1. Ändra `/hostname` och `/port` för `/renders`-avsnittet så att det pekar på författarinstansen.
+   1. Ändra `/docroot` för `/cache`-avsnittet så att det pekar på en cachekatalog. Om du använder [AEM med Touch UI](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/touch-ui-concepts.html) ska du läsa varningen ovan.
    1. Spara ändringarna.
 
 1. Ta bort alla befintliga filer i katalogen `/cache` > `/docroot` som du konfigurerade ovan.
@@ -318,13 +320,13 @@ En Dispatcher kan användas framför en författarinstans för att förbättra r
 
 >[!NOTE]
 >
->Observera att när du med den angivna `author_dispatcher.any` konfigurationen installerar ett CQ5-funktionspaket, snabbkorrigering eller programkodpaket som påverkar innehåll under `/libs` eller `/apps` så måste du ta bort de cachelagrade filerna under dessa kataloger i din dispatchercache för att säkerställa att de nyligen uppgraderade filerna hämtas nästa gång de begärs, och inte de gamla cachelagrade filerna.
+>Observera att när du installerar ett CQ5-funktionspaket, snabbkorrigering eller programkodpaket som påverkar innehåll under `/libs` eller `/apps` med den angivna `author_dispatcher.any`-konfigurationen måste du ta bort de cachelagrade filerna under dessa kataloger i din dispatcher-cache för att säkerställa att de nyuppgraderade filerna hämtas nästa gång de begärs, och inte de gamla cachelagrade filerna.
 
 >[!CAUTION]
 >
->Om du har använt den tidigare konfigurerade författardispatchern och aktiverat en *dispatchertömningsagent* gör du följande:
+>Om du har använt den tidigare konfigurerade författardispatchern och aktiverat en *dispatcher flushing Agent* gör du följande:
 
-1. Ta bort eller inaktivera **författarens** rensningsagent på AEM författarinstans.
+1. Ta bort eller inaktivera **författardispatcherens** flushagent på AEM författarinstans.
 1. Gör om konfigurationen av författardispatchern genom att följa de nya instruktionerna ovan.
 
 <!--
