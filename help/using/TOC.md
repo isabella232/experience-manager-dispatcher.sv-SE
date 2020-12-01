@@ -27,7 +27,7 @@ ht-degree: 4%
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
    + [Optimera en webbplats för cacheprestanda](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/configuring-performance.html)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
-   + [Använda Dispatcher med flera domäner ](dispatcher-domains.md)
+   + [Använda Dispatcher med flera domäner  ](dispatcher-domains.md)
    + [Använda SSL med Dispatcher](dispatcher-ssl.md)
    + [Konfigurera Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
