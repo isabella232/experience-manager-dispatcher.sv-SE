@@ -51,7 +51,7 @@ När Dispatcher tar emot en HTTPS-begäran inkluderar Dispatcher följande huvud
 * `X-Forwarded-SSL-Keysize`
 * `X-Forwarded-SSL-Session-ID`
 
-En begäran via Apache-2.4 med `mod_ssl` rubriker som liknar följande exempel:
+En begäran via Apache-2.4 med `mod_ssl` innehåller rubriker som liknar följande exempel:
 
 ```shell
 X-Forwarded-SSL: on
@@ -61,15 +61,15 @@ X-Forwarded-SSL-Session-ID: 814825E8CD055B4C166C2EF6D75E1D0FE786FFB29DEB6DE1E239
 
 ### Konfigurera Dispatcher att använda SSL {#configuring-dispatcher-to-use-ssl}
 
-Om du vill konfigurera Dispatcher att ansluta till AEM eller CQ via SSL måste du ha följande egenskaper för [dispatcher.any](dispatcher-configuration.md) -filen:
+Om du vill konfigurera Dispatcher att ansluta till AEM eller CQ via SSL måste du ha följande egenskaper i [dispatcher.any](dispatcher-configuration.md)-filen:
 
 * En virtuell värd som hanterar HTTPS-begäranden.
-* Avsnittet `renders` i det virtuella värdsystemet innehåller ett objekt som identifierar värdnamnet och porten för CQ- eller AEM-instansen som använder HTTPS.
-* Objektet `renders` innehåller en egenskap med namnet `secure` på värdet `1`.
+* Avsnittet `renders` i den virtuella värden innehåller ett objekt som identifierar värdnamnet och porten för CQ- eller AEM-instansen som använder HTTPS.
+* `renders`-objektet innehåller egenskapen `secure` för värdet `1`.
 
 Obs! Skapa en annan virtuell värd för att hantera HTTP-begäranden om det behövs.
 
-Följande exempel skickar.alla filer visar egenskapsvärden för anslutning med HTTPS till en CQ-instans som körs på värd `localhost` och port `8443`:
+I följande exempel dispatcher.any-fil visas egenskapsvärden för anslutning med HTTPS till en CQ-instans som körs på värden `localhost` och port `8443`:
 
 ```
 /farms
@@ -134,18 +134,18 @@ Om du vill konfigurera gemensam SSL måste du ha certifikat som är signerade av
 
 Utför följande steg för att konfigurera gemensam SSL:
 
-1. [Installera](dispatcher-install.md) den senaste versionen av Dispatcher för din plattform. Använd en Dispatcher-binär som stöder SSL (SSL finns i filnamnet, till exempel dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar).
-1. [Skapa eller hämta CA-signerat certifikat](dispatcher-ssl.md#main-pars-title-3) för Dispatcher och återgivningsinstansen.
-1. [Skapa en nyckelbehållare som innehåller återgivningscertifikat](dispatcher-ssl.md#main-pars-title-6) och konfigurera återgivningens HTTP-tjänst så att den kan använda den.
-1. [Konfigurera webbservermodulen](dispatcher-ssl.md#main-pars-title-4) Dispatcher för gemensam SSL.
+1. [](dispatcher-install.md) Installera den senaste versionen av Dispatcher för din plattform. Använd en Dispatcher-binär som stöder SSL (SSL finns i filnamnet, till exempel dispatcher-apache2.4-linux-x86-64-ssl10-4.1.7.tar).
+1. [Skapa eller hämta CA-signerat ](dispatcher-ssl.md#main-pars-title-3) certifikat för Dispatcher och återgivningsinstansen.
+1. [Skapa en nyckelbehållare som innehåller ](dispatcher-ssl.md#main-pars-title-6) återgivningscertifikat och konfigurera återgivningens HTTP-tjänst så att den kan använda den.
+1. [Konfigurera Dispatcher-webbservermodulen ](dispatcher-ssl.md#main-pars-title-4) för gemensam SSL.
 
-### Skapa eller hämta CA-signerade certifikat {#creating-or-obtaining-ca-signed-certificates}
+### Skapar eller hämtar CA-signerade certifikat {#creating-or-obtaining-ca-signed-certificates}
 
 Skapa eller hämta de CA-signerade certifikat som autentiserar publiceringsinstansen och Dispatcher.
 
 #### Skapar din certifikatutfärdare {#creating-your-ca}
 
-Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.openssl.org/) för att skapa certifikatutfärdaren som signerar servern och klientcertifikaten. (Du måste ha OpenSSL-biblioteken installerade.) Utför inte den här proceduren om du använder en tredjeparts certifikatutfärdare.
+Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.openssl.org/) för att skapa certifikatutfärdaren som signerar server- och klientcertifikaten. (Du måste ha OpenSSL-biblioteken installerade.) Utför inte den här proceduren om du använder en tredjeparts certifikatutfärdare.
 
 1. Öppna en terminal och ändra den aktuella katalogen till katalogen som innehåller filen CA.sh, till exempel `/usr/local/ssl/misc`.
 1. Om du vill skapa certifikatutfärdaren anger du följande kommando och anger sedan värden när du uppmanas till det:
@@ -158,11 +158,11 @@ Om du fungerar som certifikatutfärdare använder du [OpenSSL](https://www.opens
    >
    >Flera egenskaper i filen openssl.cnf styr beteendet för skriptet CA.sh. Du bör ändra den här filen efter behov innan du skapar certifikatutfärdaren.
 
-#### Skapa certifikat {#creating-the-certificates}
+#### Skapar certifikat {#creating-the-certificates}
 
 Använd OpenSSL för att skapa de certifikatbegäranden som ska skickas till certifikatutfärdaren från tredje part eller för att signera med din certifikatutfärdare.
 
-När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet endast om det matchar värdnamnet för Publish-instansen. (See the [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11) property.)
+När du skapar ett certifikat använder OpenSSL egenskapen Gemensamt namn för att identifiera certifikatinnehavaren. För återgivningsinstansens certifikat använder du instansdatorns värdnamn som gemensamt namn om du konfigurerar Dispatcher att acceptera certifikatet endast om det matchar värdnamnet för Publish-instansen. (Se egenskapen [DispatcherCheckPeerCN](dispatcher-ssl.md#main-pars-title-11).)
 
 1. Öppna en terminal och ändra den aktuella katalogen till den katalog som innehåller CH.sh-filen för dina OpenSSL-bibliotek.
 1. Ange följande kommando och ange värden när du uppmanas till det. Om det behövs använder du värdnamnet för publiceringsinstansen som Gemensamt namn. Värdnamnet är DNS-matchningsbart namn för återgivningens IP-adress:
@@ -212,7 +212,7 @@ Använd följande kommando för att konvertera återgivningscertifikatet, som ä
    keytool -changealias -alias 1 -destalias jettyhttp -keystore render.keystore
    ```
 
-#### Lägga till certifikatutfärdarcertifikatet i återgivningens förtroendelager {#adding-the-ca-cert-to-the-render-s-truststore}
+#### Lägger till CA-certifikatet i återgivningens förtroenderager {#adding-the-ca-cert-to-the-render-s-truststore}
 
 Om du fungerar som certifikatutfärdare importerar du ditt certifikatutfärdarcertifikat till en nyckelbehållare. Konfigurera sedan den JVM som kör återgivningsinstansen så att nyckelbehållaren är tillförlitlig.
 
@@ -262,7 +262,7 @@ Använd återgivningscertifikatet med instruktionerna i *Aktivera SSL i avsnitte
 
 Om du vill konfigurera Dispatcher så att ömsesidig SSL används, förbereder du Dispatcher-certifikatet och konfigurerar sedan webbservermodulen.
 
-### Skapa ett enhetligt utskickscertifikat {#creating-a-unified-dispatcher-certificate}
+### Skapar ett enhetligt utskickscertifikat {#creating-a-unified-dispatcher-certificate}
 
 Kombinera dispatchercertifikatet och den okrypterade privata nyckeln till en enda PEM-fil. Använd en textredigerare eller kommandot `cat` för att skapa en fil som liknar följande exempel:
 
@@ -286,13 +286,13 @@ Kombinera dispatchercertifikatet och den okrypterade privata nyckeln till en end
    -----END CERTIFICATE-----
    ```
 
-### Ange vilket certifikat som ska användas för Dispatcher {#specifying-the-certificate-to-use-for-dispatcher}
+### Ange det certifikat som ska användas för Dispatcher {#specifying-the-certificate-to-use-for-dispatcher}
 
 Lägg till följande egenskaper i [Dispatcher-modulens konfiguration](dispatcher-install.md#main-pars-55-35-1022) (i `httpd.conf`):
 
 * `DispatcherCertificateFile`: Sökvägen till den enhetliga certifikatfilen för Dispatcher, som innehåller det offentliga certifikatet och den okrypterade privata nyckeln. Den här filen används när SSL-servern begär Dispatcher-klientcertifikatet.
 * `DispatcherCACertificateFile`: Sökvägen till certifikatutfärdarens certifikatfil, som används om SSL-servern visar en certifikatutfärdare som inte är betrodd av en rotutfärdare.
-* `DispatcherCheckPeerCN`: Om värdnamnskontroll ska aktiveras ( `On`) eller inaktiveras ( `Off`) för fjärrservercertifikat.
+* `DispatcherCheckPeerCN`: Om värdnamnskontroll ska aktiveras (  `On`) eller inaktiveras (  `Off`) för fjärrservercertifikat.
 
 Följande kod är en exempelkonfiguration:
 
