@@ -1,7 +1,7 @@
 ---
 cloud: Experience Cloud
 solution: Experience Manager
-type: Dokumentation
+type: Documentation
 git-repo: https://git.corp.adobe.com/AdobeDocs/experience-manager-dispatcher.sv-SE
 index: y
 translation-type: tm+mt

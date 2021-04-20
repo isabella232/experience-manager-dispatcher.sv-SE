@@ -9,7 +9,7 @@ user-guide-description: Lär dig använda Dispatcher för cachning, belastningsu
 feature-set: Experience Manager
 feature: Dispatcher
 topic: Administration
-role: Administratör
+role: Administrator
 translation-type: tm+mt
 source-git-commit: da6af93fa3dec8e3b2f146e9c8c6183a3185199b
 workflow-type: tm+mt
