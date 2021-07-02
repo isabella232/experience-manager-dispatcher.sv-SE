@@ -9,14 +9,13 @@ converted: true
 topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
-translation-type: tm+mt
-source-git-commit: 024348672c2a9a4f8a01429572eba27ea8b8a490
+exl-id: 9375d1c0-8d9e-46cb-9810-fa4162a8c1ba
+source-git-commit: 35739785aa835a0b995fab4710a0e37bd0ff62b4
 workflow-type: tm+mt
 source-wordcount: '3684'
 ht-degree: 0%
 
 ---
-
 
 # Installerar Dispatcher {#installing-dispatcher}
 
@@ -235,7 +234,7 @@ Använd följande procedur för att ta bort det dolda `bin`-segmentet. Webbplats
 1. I IIS Manager markerar du din webbplats och dubbelklickar på Begär filtrering med hjälp av funktionsvyn.
 1. Markera `bin`-segmentet, klicka på Ta bort och klicka på Ja i bekräftelsedialogrutan.
 
-### Loggar IIS-meddelanden till en fil - IIS 8.5 och 10 {#logging-iis-messages-to-a-file-iis-and}
+### Logga IIS-meddelanden till en fil - IIS 8.5 och 10 {#logging-iis-messages-to-a-file-iis-and}
 
 Använd följande procedur för att skriva Dispatcher-loggmeddelanden till en loggfil i stället för till Windows-händelseloggen. Du måste konfigurera Dispatcher för att kunna använda loggfilen och ge IIS skrivåtkomst till filen.
 
@@ -286,7 +285,7 @@ Information om hur du installerar en Apache Web Server finns i installationsmanu
 
 Se även Apache HTTP Server [Säkerhetstips](https://httpd.apache.org/docs/2.4/misc/security_tips.html) och [Säkerhetsrapporter](https://httpd.apache.org/security_report.html).
 
-### Apache Web Server - Lägg till Dispatcher Module {#apache-web-server-add-the-dispatcher-module}
+### Apache Web Server - Lägg till Dispatcher-modulen {#apache-web-server-add-the-dispatcher-module}
 
 Dispatcher finns som:
 
@@ -421,12 +420,17 @@ De enskilda konfigurationsparametrarna:
 
 >[!NOTE]
 >
->Standardinställningarna för Serverhuvud är: `  
-ServerTokens Full` `  
-DispatcherNoServerHeader 0`\
-Visar AEM version (för statistiska ändamål). Om du vill inaktivera sådan information i sidhuvudet kan du ange: `  
-ServerTokens Prod`\
-Mer information finns i [Apache Documentation om ServerTokens-direktivet (till exempel för Apache 2.4)](https://httpd.apache.org/docs/2.4/mod/core.html).
+>Standardinställningarna för Serverhuvud är:
+>
+>`ServerTokens Full`
+>
+>`DispatcherNoServerHeader 0`
+>
+>Visar AEM version (för statistiska ändamål). Om du vill inaktivera sådan information i sidhuvudet kan du ange:
+>
+>`ServerTokens Prod`
+>
+>Mer information finns i [Apache Documentation om ServerTokens-direktivet (till exempel för Apache 2.4)](https://httpd.apache.org/docs/2.4/mod/core.html).
 
 **SetHandler**
 
@@ -484,16 +488,20 @@ AllowOverride None
 ```
 
 >[!NOTE]
-Parametern för **SetHandler**-satsen måste skrivas *exakt som i ovanstående exempel*, eftersom det är namnet på hanteraren som definierats i modulen.
-Se exempelkonfigurationsfilerna och dokumentationen för Apache Web Server för mer information om det här kommandot.
+>
+>Parametern för **SetHandler**-satsen måste skrivas *exakt som i ovanstående exempel*, eftersom det är namnet på hanteraren som definierats i modulen.
+>
+>Se exempelkonfigurationsfilerna och dokumentationen för Apache Web Server för mer information om det här kommandot.
 
 **ModMimeUsePathInfo**
 
 Efter **SetHandler**-satsen ska du även lägga till definitionen **ModMimeUsePathInfo**.
 
 >[!NOTE]
-Parametern `ModMimeUsePathInfo` bör bara användas och konfigureras om du använder Dispatcher version 4.0.9 eller senare.
-(Observera att Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senare Dispatcher-version).
+>
+>Parametern `ModMimeUsePathInfo` bör bara användas och konfigureras om du använder Dispatcher version 4.0.9 eller senare.
+>
+>(Observera att Dispatcher version 4.0.9 släpptes 2011. Om du använder en äldre version bör du uppgradera till en senare Dispatcher-version).
 
 Parametern **ModMimeUsePathInfo** måste anges `On` för alla Apache-konfigurationer:
 
@@ -539,7 +547,8 @@ Dispatcher använder OpenSSL för att implementera säker kommunikation via HTTP
    ```
 
 >[!NOTE]
-Om du använder en anpassad version av Apache måste du se till att Apache och Dispatcher kompileras med samma version av [OpenSSL](https://www.openssl.org/source/).
+>
+>Om du använder en anpassad version av Apache måste du se till att Apache och Dispatcher kompileras med samma version av [OpenSSL](https://www.openssl.org/source/).
 
 ### Nästa steg {#next-steps-1}
 
@@ -551,8 +560,10 @@ Innan du kan börja använda Dispatcher måste du nu:
 ## Sun Java System Web Server / iPlanet {#sun-java-system-web-server-iplanet}
 
 >[!NOTE]
-Instruktioner för både Windows- och Unix-miljöer beskrivs här.
-Var försiktig när du väljer vilket program som ska köras.
+>
+>Instruktioner för både Windows- och Unix-miljöer beskrivs här.
+>
+>Var försiktig när du väljer vilket program som ska köras.
 
 ### Sun Java System Web Server / iPlanet - Installerar webbservern {#sun-java-system-web-server-iplanet-installing-your-web-server}
 
@@ -605,7 +616,8 @@ Webbservern måste konfigureras med `obj.conf`. I Dispatcher-installationspakete
 1. Spara ändringarna.
 
 >[!NOTE]
-Följande konfigurationer ska vara på en rad och `$(SERVER_ROOT)` och `$(PRODUCT_SUBDIR)` måste ersättas med respektive värden.
+>
+>Följande konfigurationer ska vara på en rad och `$(SERVER_ROOT)` och `$(PRODUCT_SUBDIR)` måste ersättas med respektive värden.
 
 **Init**
 
