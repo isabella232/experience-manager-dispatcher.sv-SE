@@ -1,16 +1,15 @@
 ---
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher.
-translation-type: tm+mt
-source-git-commit: 6177dafa64d7c22f72ccb64e343b85f4ee133d73
+exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
+source-git-commit: 35739785aa835a0b995fab4710a0e37bd0ff62b4
 workflow-type: tm+mt
-source-wordcount: '8513'
+source-wordcount: '8512'
 ht-degree: 0%
 
 ---
 
-
-# Konfigurerar Dispatcher {#configuring-dispatcher}
+# Konfigurera Dispatcher {#configuring-dispatcher}
 
 >[!NOTE]
 >
@@ -151,7 +150,7 @@ Använd egenskapen `/name` för att ange ett unikt namn som identifierar Dispatc
 
 ## Definiera grupper {#defining-farms-farms}
 
-Egenskapen `/farms` definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är kopplad till olika webbplatser eller URL-adresser. Egenskapen `/farms` kan innehålla en eller flera grupper:
+Egenskapen `/farms` definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är associerad med olika webbplatser eller URL-adresser. Egenskapen `/farms` kan innehålla en eller flera grupper:
 
 * Använd en enda servergrupp när du vill att Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
 * Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteenden.
@@ -256,7 +255,7 @@ Comment Type: draft
 
  -->
 
-## Ange vilka HTTP-huvuden som ska passera genom {#specifying-the-http-headers-to-pass-through-clientheaders}
+## Ange vilka HTTP-huvuden som ska passera igenom {#specifying-the-http-headers-to-pass-through-clientheaders}
 
 Egenskapen `/clientheaders` definierar en lista med HTTP-rubriker som Dispatcher skickar från klientens HTTP-begäran till återgivaren (AEM).
 
@@ -315,7 +314,7 @@ Följande kod är en exempelkonfiguration för `/clientheaders`:
   }
 ```
 
-## Identifierar virtuella värdar {#identifying-virtual-hosts-virtualhosts}
+## Identifiera virtuella värdar {#identifying-virtual-hosts-virtualhosts}
 
 Egenskapen `/virtualhosts` definierar en lista över alla värdnamns-/URI-kombinationer som Dispatcher accepterar för den här servergruppen. Du kan använda asterisken (`*`) som jokertecken. Värden för egenskapen / `virtualhosts` har följande format:
 
@@ -552,7 +551,7 @@ Den här egenskapen kan även användas om du stöter på problem med dynamisk I
   }
 ```
 
-## Konfigurerar åtkomst till innehåll {#configuring-access-to-content-filter}
+## Konfigurera åtkomst till innehåll {#configuring-access-to-content-filter}
 
 Använd avsnittet `/filter` för att ange de HTTP-begäranden som Dispatcher accepterar. Alla andra begäranden skickas tillbaka till webbservern med felkoden 404 (sidan hittades inte). Om det inte finns något `/filter`-avsnitt accepteras alla begäranden.
 
@@ -694,7 +693,7 @@ Nedan visas ett regelexempel som blockerar innehåll som hämtas från `/content
         }
 ```
 
-### Exempel /filter section {#example-filter-section}
+### Exempel/filteravsnitt {#example-filter-section}
 
 När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Följande exempel ger minimal åtkomst för externa besökare:
 
@@ -781,7 +780,7 @@ Last Modified Date: 2015-06-26T04:32:37.986-0400
 
 >[!NOTE]
 >
->Filtren `0030` och `0031` för Dynamic Media gäller för AEM 6.0 och senare.
+>Filter `0030` och `0031` för Dynamic Media gäller för AEM 6.0 och senare.
 
 Tänk på följande om du väljer att utöka åtkomsten:
 
@@ -941,7 +940,7 @@ Avsnittet `/vanity_urls` innehåller följande egenskaper:
 
 Använd följande procedur för att aktivera åtkomst till mål-URL:er.
 
-1. Om din renderingstjänst är en AEM instans installerar du paketet&quot;com.adobe.granite.dispatcher.vanityurl.content&quot; på publiceringsinstansen (se anteckningen ovan).
+1. Om din renderingstjänst är en AEM instans installerar du `com.adobe.granite.dispatcher.vanityurl.content`-paketet på publiceringsinstansen (se anmärkning ovan).
 1. För varje mål-URL som du har konfigurerat för en AEM- eller CQ-sida måste du se till att konfigurationen [`/filter`](#configuring-access-to-content-filter) inte tillåter URL:en. Om det behövs lägger du till ett filter som nekar URL-adressen.
 1. Lägg till avsnittet `/vanity_urls` nedanför `/farms`.
 1. Starta om Apache-webbservern.
@@ -1145,7 +1144,7 @@ Last Modified Date: 2017-11-13T09:23:24.326-0500
 
  -->
 
-### Ogiltiga filer efter mappnivå {#invalidating-files-by-folder-level}
+### Ogiltiga filer per mappnivå {#invalidating-files-by-folder-level}
 
 Använd egenskapen `/statfileslevel` för att göra cachelagrade filer ogiltiga enligt deras sökväg:
 
@@ -1173,7 +1172,7 @@ När en fil i `/content/myWebsite/xx` blir ogiltig ändras alla `.stat`-filer fr
 >
 >Om du anger ett värde för egenskapen `/statfileslevel` ignoreras egenskapen `/statfile`.
 
-### Invaliderar cachelagrade filer automatiskt {#automatically-invalidating-cached-files}
+### Automatisk invalidering av cachelagrade filer {#automatically-invalidating-cached-files}
 
 Egenskapen `/invalidate` definierar de dokument som automatiskt görs ogiltiga när innehållet uppdateras.
 
@@ -1306,7 +1305,7 @@ GET /mypage.html?q=5&p=4
 
 Mer information om globegenskaper finns i [Designa mönster för globegenskaper](#designing-patterns-for-glob-properties).
 
-### Cachelagrar HTTP-svarshuvuden {#caching-http-response-headers}
+### Cachelagra HTTP-svarshuvuden {#caching-http-response-headers}
 
 >[!NOTE]
 >
@@ -1446,7 +1445,7 @@ I följande exempel finns även en kategori för söksidor:
   }
 ```
 
-### Servern är inte tillgänglig i utskicksstatistik {#reflecting-server-unavailability-in-dispatcher-statistics}
+### Speglar serverns otillgänglighet i Dispatcher-statistik {#reflecting-server-unavailability-in-dispatcher-statistics}
 
 Egenskapen `/unavailablePenalty` anger den tid (i tiondelar av en sekund) som används för återgivningsstatistiken när en anslutning till återgivningen misslyckas. Dispatcher lägger till tiden i statistikkategorin som matchar den begärda URI:n.
 
@@ -1518,7 +1517,7 @@ Dispatcher använder värdet `"1"` om `/retryDelay` inte uttryckligen har defini
 /retryDelay "1"
 ```
 
-### Konfigurerar antalet försök {#configuring-the-number-of-retries}
+### Konfigurera antalet återförsök {#configuring-the-number-of-retries}
 
 Egenskapen `/numberOfRetries` anger det maximala antalet anslutningsförsök som Dispatcher utför med återgivningarna. Om Dispatcher inte kan ansluta till en återgivning efter detta antal försök returnerar Dispatcher ett misslyckat svar.
 
@@ -1687,14 +1686,14 @@ The following table describes the wildcard characters.
 </table>
 -->
 
-## Loggar {#logging}
+## Loggning {#logging}
 
 I webbserverkonfigurationen kan du ange:
 
 * Platsen för Dispatcher-loggfilen.
 * Loggnivån.
 
-Mer information finns i webbserverns dokumentation och i filen Viktigt för Dispatcher-instansen.
+Mer information finns i webbserverns dokumentation och filen Viktigt för Dispatcher-instansen.
 
 **Apache-roterade/Pipe-loggar**
 
