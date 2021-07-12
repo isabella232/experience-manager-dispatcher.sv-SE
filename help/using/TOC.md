@@ -9,11 +9,10 @@ user-guide-description: Lär dig använda Dispatcher för cachning, belastningsu
 feature-set: Experience Manager
 feature: Dispatcher
 topic: Administration
-role: Administrator
-translation-type: tm+mt
-source-git-commit: da6af93fa3dec8e3b2f146e9c8c6183a3185199b
+role: Admin
+source-git-commit: 4439a4f0adfb8e2e0d08636225d2399638d27af3
 workflow-type: tm+mt
-source-wordcount: '90'
+source-wordcount: '89'
 ht-degree: 4%
 
 ---
@@ -31,7 +30,7 @@ ht-degree: 4%
    + [Invaliderar cachelagrade sidor från AEM](page-invalidate.md)
    + [Optimera en webbplats för cacheprestanda](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/configuring-performance.html)
    + [Cachelagra skyddat innehåll](permissions-cache.md)
-   + [Använda Dispatcher med flera domäner  ](dispatcher-domains.md)
+   + [Använda Dispatcher med flera domäner ](dispatcher-domains.md)
    + [Använda SSL med Dispatcher](dispatcher-ssl.md)
    + [Konfigurera Dispatcher för att förhindra CSRF-attacker](configuring-dispatcher-to-prevent-csrf.md)
 + Felsökning {#troubleshooting}
