@@ -2,20 +2,19 @@
 title: AEM Dispatcher Release Notes
 seo-title: AEM Dispatcher Release Notes
 description: Versionsinformation om Adobe Experience Manager Dispatcher
-seo-description: Versionsinformation om Adobe Experience Manager Dispatcher
+seo-description: Release notes specific to Adobe Experience Manager Dispatcher
 uuid: ae3ccf62-0514-4c03-a3b9-71799a482cbd
 topic-tags: release-notes
 content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 discoiquuid: ff3d38e0-71c9-4b41-85f9-fa896393aac5
-translation-type: tm+mt
-source-git-commit: 328bc82673783b4a2df2d68481fa7eec88b74b01
+exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
+source-git-commit: 4f37bc2571c3272beeb1764ca0bf0347e086cc07
 workflow-type: tm+mt
-source-wordcount: '805'
+source-wordcount: '852'
 ht-degree: 2%
 
 ---
-
 
 # AEM Dispatcher Release Notes{#aem-dispatcher-release-notes}
 
@@ -24,29 +23,44 @@ ht-degree: 2%
 |  |  |
 |--- |--- |
 | Produkter | Adobe Experience Manager (AEM) Dispatcher |
-| Version | 4.3.3 |
+| Version | 4.3.4 |
 | Typ | Mindre release |
-| Date | 18 oktober 2019 |
+| Date | 29 november 2021 |
 | Hämta URL | <ul><li>[Apache 2.4](release-notes.md#apache)</li><li>[Microsoft Internet Information Services (IIS)](release-notes.md#iis)</li></ul> |
 | Kompatibilitet | AEM 6.1 eller senare |
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-På sidan [Plattformar som stöds](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html) finns mer information om krav och krav.
+Se [Plattformar som stöds](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html) för mer information om krav och krav.
 
 Adobe rekommenderar starkt att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
 ## Installationsanvisningar {#installation-instructions}
 
-Mer information finns i [Installera Dispatcher](dispatcher-install.md).
+Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 
 ## Versionshistorik {#release-history}
+
+### Version 4.3.4 (2021-Nov-29) {#nov}
+
+**Felkorrigeringar**:
+
+* DISP-833 - X-Forwarded-Host headers kan innehålla en lista med kommaavgränsade värdnamn
+* DISP-835 - DispatcherUseForwardedHost-värdhuvud om det kommer sist
+
+
+**Förbättringar**:
+
+* DISP-841 - Dispatcher respekterar inte /serverStaleOnError för 504-svarskod
+* DISP-874 - Skapa en dispatcherkonfiguration som aktiverar eller inaktiverar implementeringen av DISP-818
+* DISP-883 - Spåra som visar URL-begäran, disposition i Dispatcher
+* DISP-944 - anvä-url före inläsning
 
 ### Version 4.3.3 (2019-Oct-18) {#october}
 
 **Felkorrigeringar**:
 
-* DISP-739 - LogLevel-dispatcher: **level** fungerar inte
+* DISP-739 - LogLevel-dispatcher: **nivå** fungerar inte
 * DISP-749 - Alpine Linux-dispatchern kraschar med spårloggsnivå
 
 **Förbättringar**:
@@ -117,7 +131,7 @@ Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 * DISP-682 - Numerisk loggnivå används felaktigt
 * DISP-685 - 32-bitars Solaris SPARC-binärfiler har en odefinierad referens till __divdi3
-* DISP-688 - Dispatcher returnerar inte &quot;X-Cache-Info&quot;-huvudet på 404-svar
+* DISP-688 - Dispatcher returnerar inte X-Cache-Info-huvudet på 404-svar
 * DISP-690 - Rubriken Senast ändrad är inte tillgänglig
 * DISP-691 - åtkomstfel i w3wp.exe
 * DISP-693 - Behöver uppdatera arkitekturinformation för solarisservrar på hämtningssidan för dispatcher
@@ -138,27 +152,27 @@ Mer information finns i [Installera Dispatcher](dispatcher-install.md).
 
 * [AEM Dispatcher - översikt](dispatcher.md)
 
-## Hämtar {#downloads}
+## Nedladdningar {#downloads}
 
 ### Apache 2.4 {#apache}
 
 | Plattform | Arkitektur | Stöd för OpenSSL | Hämta |
 |---|---|---|---|
-| Linux | i686 (32-bitars) | Inget | [dispatcher-apache2.4-linux-i686-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-4.3.3.tar.gz) |
-| Linux | i686 (32-bitars) | 1.0 | [dispatcher-apache2.4-linux-i686-ssl1.0-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-ssl1.0-4.3.3.tar.gz) |
-| Linux | i686 (32-bitars) | 1.1 | [dispatcher-apache2.4-linux-i686-ssl1.1-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-ssl1.1-4.3.3.tar.gz) |
-| Linux | x86_64 (64-bitars) | Inget | [dispatcher-apache2.4-linux-x86_64-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-4.3.3.tar.gz) |
-| Linux | x86_64 (64-bitars) | 1.0 | [dispatcher-apache2.4-linux-x86_64-ssl1.0-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-ssl1.0-4.3.3.tar.gz) |
-| Linux | x86_64 (64-bitars) | 1.1 | [dispatcher-apache2.4-linux-x86_64-ssl1.1-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-ssl1.1-4.3.3.tar.gz) |
-| macOS | x86_64 (64-bitars) | Inget | [dispatcher-apache2.4-darwin-x86_64-4.3.3.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-darwin-x86_64-4.3.3.tar.gz) |
+| Linux | i686 (32-bitars) | Inget | [dispatcher-apache2.4-linux-i686-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-4.3.4.tar.gz) |
+| Linux | i686 (32-bitars) | 1.0 | [dispatcher-apache2.4-linux-i686-ssl1.0-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-ssl1.0-4.3.4.tar.gz) |
+| Linux | i686 (32-bitars) | 1.1 | [dispatcher-apache2.4-linux-i686-ssl1.1-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-i686-ssl1.1-4.3.4.tar.gz) |
+| Linux | x86_64 (64-bitars) | Inget | [dispatcher-apache2.4-linux-x86_64-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-4.3.4.tar.gz) |
+| Linux | x86_64 (64-bitars) | 1.0 | [dispatcher-apache2.4-linux-x86_64-ssl1.0-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-ssl1.0-4.3.4.tar.gz) |
+| Linux | x86_64 (64-bitars) | 1.1 | [dispatcher-apache2.4-linux-x86_64-ssl1.1-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-linux-x86_64-ssl1.1-4.3.4.tar.gz) |
+| macOS | x86_64 (64-bitars) | Inget | [dispatcher-apache2.4-darwin-x86_64-4.3.4.tar.gz](https://download.macromedia.com/dispatcher/download/dispatcher-apache2.4-darwin-x86_64-4.3.4.tar.gz) |
 
 ### IIS {#iis}
 
 | Plattform | Arkitektur | Stöd för OpenSSL | Hämta |
 |---|---|---|---|
-| Windows | x86 (32-bitars) | Inget | [dispatcher-iis-windows-x86-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-4.3.3.zip) |
-| Windows | x86 (32-bitars) | 1.0 | [dispatcher-iis-windows-x86-ssl1.0-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-ssl1.0-4.3.3.zip) |
-| Windows | x86 (32-bitars) | 1.1 | [dispatcher-iis-windows-x86-ssl1.1-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-ssl1.1-4.3.3.zip) |
-| Windows | x64 (64-bitars) | Inget | [dispatcher-iis-windows-x64-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-4.3.3.zip) |
-| Windows | x64 (64-bitars) | 1.0 | [dispatcher-iis-windows-x64-ssl1.0-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-ssl1.0-4.3.3.zip) |
-| Windows | x64 (64-bitars) | 1.1 | [dispatcher-iis-windows-x64-ssl1.1-4.3.3.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-ssl1.1-4.3.3.zip) |
+| Windows | x86 (32-bitars) | Inget | [dispatcher-iis-windows-x86-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-4.3.4.zip) |
+| Windows | x86 (32-bitars) | 1.0 | [dispatcher-iis-windows-x86-ssl1.0-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-ssl1.0-4.3.4.zip) |
+| Windows | x86 (32-bitars) | 1.1 | [dispatcher-iis-windows-x86-ssl1.1-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x86-ssl1.1-4.3.4.zip) |
+| Windows | x64 (64-bitars) | Inget | [dispatcher-iis-windows-x64-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-4.3.4.zip) |
+| Windows | x64 (64-bitars) | 1.0 | [dispatcher-iis-windows-x64-ssl1.0-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-ssl1.0-4.3.4.zip) |
+| Windows | x64 (64-bitars) | 1.1 | [dispatcher-iis-windows-x64-ssl1.1-4.3.4.zip](https://download.macromedia.com/dispatcher/download/dispatcher-iis-windows-x64-ssl1.1-4.3.4.zip) |
