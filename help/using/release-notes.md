@@ -9,9 +9,9 @@ content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 discoiquuid: ff3d38e0-71c9-4b41-85f9-fa896393aac5
 exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
-source-git-commit: 4f37bc2571c3272beeb1764ca0bf0347e086cc07
+source-git-commit: bd03499fae4096fe5642735eb466276f1a179dec
 workflow-type: tm+mt
-source-wordcount: '852'
+source-wordcount: '941'
 ht-degree: 2%
 
 ---
@@ -48,9 +48,9 @@ Detaljerade anvisningar finns i [Installerar Dispatcher](dispatcher-install.md).
 * DISP-833 - X-Forwarded-Host headers kan innehålla en lista med kommaavgränsade värdnamn
 * DISP-835 - DispatcherUseForwardedHost-värdhuvud om det kommer sist
 
-
 **Förbättringar**:
 
+* DISP-874 - Skapar en dispatcherkonfiguration som aktiverar eller inaktiverar implementering av DISP-818 via en flagga `DispatcherRestrictUncacheableContent`. Standardvärdet är Av. När det är inaktiverat tas alla cachelagringshuvuden som anges med mod ut bort för innehåll som inte kan cachelagras. Detta skiljer sig från beteendet i version 4.3.3 (men det är samma som i tidigare versioner än 4.3.3). Keeping `DispatcherRestrictUncacheableContent`Vi rekommenderar att webbläsarens cacheminne är avstängt som standard, vilket ger större flexibilitet. Om du vid uppgradering från version 4.3.3 till 4.3.4 vill behålla samma beteende som i version 4.3.3 måste du uttryckligen ange `DispatcherRestrictUncacheableContent` till På.
 * DISP-841 - Dispatcher respekterar inte /serverStaleOnError för 504-svarskod
 * DISP-874 - Skapa en dispatcherkonfiguration som aktiverar eller inaktiverar implementeringen av DISP-818
 * DISP-883 - Spåra som visar URL-begäran, disposition i Dispatcher
