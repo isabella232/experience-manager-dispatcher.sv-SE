@@ -1,8 +1,8 @@
 ---
 title: Optimera en webbplats för cacheprestanda
-seo-title: Optimera en webbplats för cacheprestanda
+seo-title: Optimizing a Website for Cache Performance
 description: Lär dig hur du utformar din webbplats för att maximera fördelarna med cachning.
-seo-description: Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optimera prestanda. Lär dig hur du utformar din webbplats för att maximera fördelarna med cachning.
+seo-description: Dispatcher offers a number of built-in mechanisms that you can use to optimize performance. Learn how to design your web site to maximize the benefits of caching.
 uuid: 2d4114d1-f464-4e10-b25c-a1b9a9c715d1
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
@@ -13,10 +13,9 @@ redirecttarget: https://helpx.adobe.com/experience-manager/6-4/sites/deploying/u
 index: y
 internal: n
 snippet: y
-translation-type: tm+mt
-source-git-commit: 2ca816ac0776d72be651b76ff4f45e0c3ed1450f
+source-git-commit: 762f575a58f53d25565fb9f67537e372c760674f
 workflow-type: tm+mt
-source-wordcount: '1167'
+source-wordcount: '1134'
 ht-degree: 0%
 
 ---
@@ -48,15 +47,14 @@ Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optime
 >* kan inte lagra andra saker, t.ex. HTTP-huvuden, cookies, sessionsdata och formulärdata.
 
 >
->
-I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och inte förlita sig på dessa ytterligare data.
+>I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och inte förlita sig på dessa ytterligare data.
 
 ## Använda konsekvent sidkodning {#using-consistent-page-encoding}
 
 Rubriker för HTTP-begäran cachelagras inte, vilket innebär att problem kan uppstå om du lagrar sidkodningsinformation i sidhuvudet. I det här fallet används webbserverns standardkodning för sidan när Dispatcher visar en sida från cachen. Det finns två sätt att undvika det här problemet:
 
 * Om du bara använder en kodning kontrollerar du att den kodning som används på webbservern är densamma som standardkodningen för den AEM webbplatsen.
-* Använd en `<META>`-tagg i avsnittet HTML `head` för att ställa in kodningen, som i följande exempel:
+* Använd en `<META>` -taggen i HTML `head` -sektion för att ställa in kodningen, som i följande exempel:
 
 ```xml
         <META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
@@ -64,7 +62,7 @@ Rubriker för HTTP-begäran cachelagras inte, vilket innebär att problem kan up
 
 ## Undvik URL-parametrar {#avoid-url-parameters}
 
-Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher är [konfigurerad därefter](dispatcher-configuration.md#main-pars_title_24)):
+Undvik om möjligt URL-parametrar för sidor som du vill cachelagra. Om du till exempel har ett bildgalleri cachelagras aldrig följande URL (såvida inte Dispatcher är [konfigurerad](dispatcher-configuration.md#main-pars_title_24)):
 
 ```xml
 www.myCompany.com/pictures/gallery.html?event=christmas&amp;page=1
@@ -94,15 +92,15 @@ www.myCompany.com/news/main.large.html
 
 >[!NOTE]
 >
->I de flesta layoutaspekter går det även att använda formatmallar och/eller skript på klientsidan. Dessa fungerar vanligtvis mycket bra med cachning.
+>I de flesta layoutaspekter går det även att använda formatmallar och/eller skript på klientsidan. De fungerar vanligtvis mycket bra med cachning.
 >
->Detta är också användbart för en utskriftsversion där du kan använda en URL-adress som: &quot;
+>Detta är också användbart för en utskriftsversion där du kan använda en URL-adress som:
 >
 >`www.myCompany.com/news/main.print.html`
 >
 >Med hjälp av skriptordlistan för malldefinitionen kan du ange ett separat skript som återger utskriftssidorna.
 
-## Ogiltiga bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
+## Invaliderar bildfiler som används som titlar {#invalidating-image-files-used-as-titles}
 
 Om du återger sidrubriker, eller annan text, som bilder bör du lagra filerna så att de tas bort vid en innehållsuppdatering på sidan:
 
@@ -148,10 +146,9 @@ Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begr�
 >
 
 
+## Fästiga anslutningar {#sticky-connections}
 
-## Sticky Connections {#sticky-connections}
-
-[Anteckningar ](dispatcher.md#TheBenefitsofLoadBalancing) gör att dokumenten för en användare kan sammanställas på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp för alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
+[Fästanslutningar](dispatcher.md#TheBenefitsofLoadBalancing) se till att dokumenten för en användare är sammansatta på samma server. Om en användare lämnar den här mappen och senare återgår till den, stannar anslutningen fortfarande kvar. Definiera en mapp för alla dokument som kräver klisterlappar för webbplatsen. Försök att inte ha med andra dokument i den. Detta påverkar belastningsutjämningen om du använder personaliserade sidor och sessionsdata.
 
 ## MIME-typer {#mime-types}
 
