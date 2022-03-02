@@ -10,7 +10,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
 exl-id: 9375d1c0-8d9e-46cb-9810-fa4162a8c1ba
-source-git-commit: bd03499fae4096fe5642735eb466276f1a179dec
+source-git-commit: d19a27256c44ec00fd440b2f8a2fe408a4a4b7c8
 workflow-type: tm+mt
 source-wordcount: '3693'
 ht-degree: 0%
@@ -390,7 +390,7 @@ Dispatcher-specifika konfigurationsposter placeras efter LoadModule-posten. I f√
 
 ```
 ...
-<fModule disp_apache2.c>
+<IfModule disp_apache2.c>
 DispatcherConfig conf/dispatcher.any
 DispatcherLog logs/dispatcher.log DispatcherLogLevel 3
 DispatcherNoServerHeader 0 DispatcherDeclineRoot 0
