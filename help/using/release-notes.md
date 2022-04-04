@@ -9,9 +9,9 @@ content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 discoiquuid: ff3d38e0-71c9-4b41-85f9-fa896393aac5
 exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
-source-git-commit: 4e17217d32e2d5d9e2435ec4d70e0d05d3905e1c
+source-git-commit: 69aa52221e997e0b68c89bf383d36fdb7093ac4d
 workflow-type: tm+mt
-source-wordcount: '976'
+source-wordcount: '977'
 ht-degree: 2%
 
 ---
@@ -31,9 +31,9 @@ ht-degree: 2%
 
 ## Systemkrav och krav {#system-requirements-and-prerequisites}
 
-Se [Plattformar som stöds](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html) för mer information om krav och krav.
+Se [Plattformar som stöds](https://helpx.adobe.com/experience-manager/6-4/sites/deploying/using/technical-requirements.html)för mer information om krav och krav.
 
-Adobe rekommenderar starkt att du använder den senaste versionen av AEM Dispatcher för att få tillgång till de senaste funktionerna, de senaste felkorrigeringarna och bästa möjliga prestanda.
+Adobe rekommenderar starkt att du använder den senaste versionen av AEM Dispatcher för att få tillgång till den senaste funktionen, de senaste felkorrigeringarna och bästa möjliga prestanda.
 
 ## Installationsanvisningar {#installation-instructions}
 
