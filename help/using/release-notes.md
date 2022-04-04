@@ -9,7 +9,7 @@ content-type: reference
 products: SG_EXPERIENCEMANAGER/6.4
 discoiquuid: ff3d38e0-71c9-4b41-85f9-fa896393aac5
 exl-id: b55c7a34-d57b-4d45-bd83-29890f1524de
-source-git-commit: 4661a71aa4e5fc99a0e4de26d5740a1dc0258bb0
+source-git-commit: 3f040a4150bc398d25ffa2426f9dd9de99a0b8fc
 workflow-type: tm+mt
 source-wordcount: '977'
 ht-degree: 2%
@@ -20,6 +20,7 @@ ht-degree: 2%
 
 ## Versionsinformation {#release-information}
 
+|  |  |
 |--- |--- |
 | Produkter | Adobe Experience Manager (AEM) Dispatcher |
 | Version | 4.3.5 |
