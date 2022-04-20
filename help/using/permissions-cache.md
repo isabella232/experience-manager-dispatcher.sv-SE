@@ -10,7 +10,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 4f9b2bc8-a309-47bc-b70d-a1c0da78d464
 exl-id: 3d8d8204-7e0d-44ad-b41b-6fec2689c6a6
-source-git-commit: 11c3d7d627c96bb6ef647b5a067d3926eca347fc
+source-git-commit: 18fa55f4be3a93b5484c3a0fa408031a43944f27
 workflow-type: tm+mt
 source-wordcount: '829'
 ht-degree: 0%
@@ -157,7 +157,7 @@ När Dispatcher startas innehåller Dispatcher-loggfilen följande felsökningsn
 
 `AuthChecker: initialized with URL 'configured_url'.`
 
-I följande exempel konfigureras Dispatcher i avsnittet auth_checker så att serverpaketet för föregående ämne används. I filteravsnittet utförs behörighetskontroller endast på säkra HTML-resurser.
+I följande exempel konfigureras Dispatcher av avsnittet auth_checker så att serverpaketet för föregående ämne används. I filteravsnittet utförs behörighetskontroller endast på säkra HTML-resurser.
 
 ### Exempelkonfiguration {#example-configuration}
 
