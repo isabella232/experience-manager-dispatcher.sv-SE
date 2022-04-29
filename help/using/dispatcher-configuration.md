@@ -2,7 +2,7 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 9ad35121bde90916a0376b33853e190b382ce5cd
+source-git-commit: deb232be3c4c5e3d11d13cbccb282409d90b93bb
 workflow-type: tm+mt
 source-wordcount: '8528'
 ht-degree: 0%
@@ -840,7 +840,7 @@ En enskild post kan ha antingen `glob` eller en kombination av `method`, `url`, 
 
 ### Testar Dispatcher Security {#testing-dispatcher-security}
 
-Dispatcher-filter ska blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
+Dispatcher-filter ska blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 403 returneras. Justera filtren om du får andra resultat.
 
 Observera att du bör se normal sidåtergivning för `/content/add_valid_page.html?debug=layout`.
 
@@ -1343,7 +1343,6 @@ Nedan visas ett exempel från standardkonfigurationen:
 >
 >* Lägg till rubriknamnet i `/cache/headers`-avsnitt.
 >* Lägg till följande [Apache-direktiv](https://httpd.apache.org/docs/2.4/mod/core.html#fileetag) i Dispatcher-relaterat avsnitt:
-
 >
 >```xml
 >FileETag none
