@@ -1,8 +1,8 @@
 ---
 title: 'Använda Dispatcher med flera domäner '
-seo-title: 'Använda Dispatcher med flera domäner '
+seo-title: Using Dispatcher with Multiple Domains
 description: Lär dig hur du använder Dispatcher för att bearbeta sidförfrågningar i flera webbdomäner.
-seo-description: Lär dig hur du använder Dispatcher för att bearbeta sidförfrågningar i flera webbdomäner.
+seo-description: Learn how to use Dispatcher to process page requests in multiple web domains.
 uuid: 7342a1c2-fe61-49be-a240-b487d53c7ec1
 contentOwner: User
 cq-exporttemplate: /etc/contentsync/templates/geometrixx/page/rewrite
@@ -10,14 +10,13 @@ products: SG_EXPERIENCEMANAGER/DISPATCHER
 topic-tags: dispatcher
 content-type: reference
 discoiquuid: 40d91d66-c99b-422d-8e61-c0ced23272ef
-translation-type: tm+mt
-source-git-commit: 64d26d802dbc9bb0b6815011a16e24c63a7672aa
+exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
+source-git-commit: 9d168ab7139e46b0c768fc3bab37245459eca002
 workflow-type: tm+mt
-source-wordcount: '2983'
+source-wordcount: '2965'
 ht-degree: 0%
 
 ---
-
 
 # Använda Dispatcher med flera domäner {#using-dispatcher-with-multiple-domains}
 
@@ -41,7 +40,7 @@ Ett företag publicerar till exempel webbplatser för två av sina varumärken: 
        | - content nodes
 ```
 
-Sidor för `BrandA.com` lagras under `/content/sitea`. Klientförfrågningar för URL:en `https://BrandA.com/en.html` returneras den återgivna sidan för noden `/content/sitea/en`. På samma sätt lagras sidor för `BrandB.com` under `/content/siteb`.
+Sidor för `BrandA.com` lagras nedan `/content/sitea`. Klientförfrågningar för URL `https://BrandA.com/en.html` returneras den återgivna sidan för `/content/sitea/en` nod. På samma sätt för sidor för `BrandB.com` lagras nedan `/content/siteb`.
 
 När du använder Dispatcher för att cachelagra innehåll måste associationer göras mellan sidans URL i klientens HTTP-begäran, sökvägen till motsvarande fil i cachen och sökvägen till motsvarande fil i databasen.
 
@@ -73,17 +72,17 @@ Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dis
 
 Om du vill att domän-URL:er och innehållssökvägar ska kunna matcha till cachelagrade filer, måste en filsökväg eller en sidadress översättas vid något tillfälle under processen. Beskrivningar av följande gemensamma strategier tillhandahålls, där översättning av sökväg eller URL sker vid olika tidpunkter i processen:
 
-* (Rekommenderas) AEM publiceringsinstans använder Sling-mappning för resursupplösning för att implementera interna regler för URL-omskrivning. Domän-URL:er översätts till sökvägar i innehållsdatabasen. Se [AEM Skriver om inkommande URL:er](#aem-rewrites-incoming-urls).
-* Webbservern använder interna URL-omskrivningsregler som översätter domän-URL:er till cachelagrade sökvägar. Se [Webbservern skriver om inkommande URL:er](#the-web-server-rewrites-incoming-urls).
+* (Rekommenderas) AEM publiceringsinstans använder Sling-mappning för resursupplösning för att implementera interna regler för URL-omskrivning. Domän-URL:er översätts till sökvägar i innehållsdatabasen. Se [AEM skriver om inkommande URL:er](#aem-rewrites-incoming-urls).
+* Webbservern använder interna URL-omskrivningsregler som översätter domän-URL:er till cachelagrade sökvägar. Se [Inkommande URL:er skrivs om på webbservern](#the-web-server-rewrites-incoming-urls).
 
-Det är vanligtvis önskvärt att använda korta URL-adresser för webbsidor. Vanligtvis speglar sid-URL:er strukturen för databasmapparna som innehåller webbinnehållet. URL-adresserna visar dock inte de översta databasnoderna, till exempel `/content`. Klienten är inte nödvändigtvis medveten om strukturen i AEM.
+Det är vanligtvis önskvärt att använda korta URL-adresser för webbsidor. Vanligtvis speglar sidans URL-adresser strukturen för databasmapparna som innehåller webbinnehållet. URL-adresserna visar dock inte de översta databasnoderna, till exempel `/content`. Klienten är inte nödvändigtvis medveten om strukturen i AEM.
 
 ## Allmänna krav {#general-requirements}
 
 Din miljö måste implementera följande konfigurationer för att ge stöd åt Dispatcher som arbetar med flera domäner:
 
 * Innehåll för varje domän finns i olika grenar av databasen (se exempelmiljön nedan).
-* Replikeringsagenten Dispatcher Flush har konfigurerats på AEM publiceringsinstans. (Se [Invaliderar Dispatcher Cache från en Publishing Instance](page-invalidate.md).)
+* Replikeringsagenten Dispatcher Flush har konfigurerats på AEM publiceringsinstans. (Se [Invaliderar Dispatcher Cache från en publiceringsinstans](page-invalidate.md).)
 * Domännamnssystemet tolkar domännamnen med webbserverns IP-adress.
 * Dispatcher-cachen speglar katalogstrukturen i AEM. Filsökvägarna under webbserverns dokumentrot är samma som sökvägarna till filerna i databasen.
 
@@ -93,7 +92,7 @@ De exempellösningar som finns gäller för en miljö med följande egenskaper:
 
 * AEM författare och publiceringsinstanser distribueras på Linux-system.
 * Apache HTTPD är webbservern som körs på ett Linux-system.
-* I AEM och dokumentroten på webbservern används följande filstrukturer (dokumentroten för Apache-webbservern är /`usr/lib/apache/httpd-2.4.3/htdocs)`:
+* I AEM och dokumentroten på webbservern används följande filstrukturer (dokumentroten på Apache-webbservern är /`usr/lib/apache/httpd-2.4.3/htdocs)`:
 
    **Databas**
 
@@ -124,7 +123,7 @@ De exempellösningar som finns gäller för en miljö med följande egenskaper:
 
 Genom att avbilda resursmatchningar kan du koppla inkommande URL:er till AEM innehållssökvägar. Skapa mappningar på den AEM publiceringsinstansen så att återgivningsbegäranden från Dispatcher tolkas till rätt innehåll i databasen.
 
-Skickarbegäranden om sidåtergivning identifierar sidan med den URL som den skickas från webbservern. När URL:en innehåller ett domännamn tolkas URL:en till innehållet med Sling-mappningar. Följande bild visar en mappning av URL:en `branda.com/en.html` till noden `/content/sitea/en`.
+Skickarbegäranden om sidåtergivning identifierar sidan med den URL som den skickas från webbservern. När URL:en innehåller ett domännamn tolkas URL:en till innehållet med Sling-mappningar. Följande bild visar en mappning av `branda.com/en.html` URL till `/content/sitea/en` nod.
 
 ![](assets/chlimage_1-10.png)
 
@@ -138,16 +137,16 @@ Definiera virtuella värdar på webbservern så att olika dokumentrotvärden kan
 
 * Webbservern måste definiera en virtuell domän för var och en av dina webbdomäner.
 * För varje domän konfigurerar du dokumentroten så att den sammanfaller med mappen i databasen som innehåller domänens webbinnehåll.
-* Varje virtuell domän måste även innehålla Dispatcher-relaterade konfigurationer, enligt beskrivningen på sidan [Installera Dispatcher](dispatcher-install.md).
+* Varje virtuell domän måste även innehålla Dispatcher-relaterade konfigurationer, enligt beskrivningen på [Installerar Dispatcher](dispatcher-install.md) sida.
 
-I följande exempel konfigureras två virtuella domäner för en Apache-webbserver:`httpd.conf`
+Följande exempel `httpd.conf` filen konfigurerar två virtuella domäner för en Apache-webbserver:
 
 * Servernamnen (som sammanfaller med domännamnen) är branda.com (rad 16) och brandb.com (rad 30).
 * Dokumentroten för varje virtuell domän är den katalog i Dispatcher-cachen som innehåller platsens sidor. (raderna 17 och 31)
 
-Med den här konfigurationen utför webbservern följande åtgärder när den tar emot en begäran för `https://branda.com/en/products.html`:
+Med den här konfigurationen utför webbservern följande åtgärder när den tar emot en begäran om `https://branda.com/en/products.html`:
 
-* Associerar URL:en med det virtuella värdsystemet som har `ServerName` `branda.com.`
+* Associerar URL:en med det virtuella värdsystemet som har en `ServerName` av `branda.com.`
 
 * Vidarebefordrar URL:en till Dispatcher.
 
@@ -199,7 +198,7 @@ LoadModule dispatcher_module modules/mod_dispatcher.so
 DocumentRoot "/usr/lib/apache/httpd-2.4.3/htdocs"
 ```
 
-Observera att virtuella värdar ärver [DispatcherConfig](dispatcher-install.md#main-pars-67-table-7)-egenskapsvärdet som är konfigurerat i huvudserveravsnittet. Virtuella värdar kan inkludera sin egen DispatcherConfig-egenskap för att åsidosätta huvudserverkonfigurationen.
+Observera att virtuella värdar ärver [DispatcherConfig](dispatcher-install.md#main-pars-67-table-7) egenskapsvärde som är konfigurerat i huvudserveravsnittet. Virtuella värdar kan inkludera sin egen DispatcherConfig-egenskap för att åsidosätta huvudserverkonfigurationen.
 
 ### Konfigurera Dispatcher för att hantera flera domäner {#configure-dispatcher-to-handle-multiple-domains}
 
@@ -212,10 +211,10 @@ Om du vill ha stöd för URL:er som innehåller domännamn och motsvarande virtu
 
 Servergrupper för virtuella värdar måste ha följande konfigurationer så att URL:erna i klientens HTTP-begäranden tolkas till rätt filer i Dispatcher-cachen:
 
-* Egenskapen `/virtualhosts` är inställd på domännamnet. Med den här egenskapen kan Dispatcher associera servergruppen med domänen.
-* Egenskapen `/filter` ger åtkomst till sökvägen till begärande-URL:en som trunkerats efter domännamnsdelen. För URL:en `https://branda.com/en.html` tolkas sökvägen som `/en.html`, så filtret måste tillåta åtkomst till den här sökvägen.
+* The `/virtualhosts` egenskapen är inställd på domännamnet. Med den här egenskapen kan Dispatcher associera servergruppen med domänen.
+* The `/filter` -egenskapen tillåter åtkomst till sökvägen för begärans URL trunkerad efter domännamnsdelen. För `https://branda.com/en.html` URL, sökvägen tolkas som `/en.html`så filtret måste ge åtkomst till den här sökvägen.
 
-* Egenskapen `/docroot` är inställd på sökvägen till rotkatalogen för domänens platsinnehåll i Dispatcher-cachen. Den här sökvägen används som prefix för den sammanfogade URL:en från den ursprungliga begäran. Dokumentet `/usr/lib/apache/httpd-2.4.3/htdocs/sitea` orsakar till exempel att begäran för `https://branda.com/en.html` tolkas till filen `/usr/lib/apache/httpd-2.4.3/htdocs/sitea/en.html`.
+* The `/docroot` egenskapen ställs in på sökvägen till rotkatalogen för domänens platsinnehåll i Dispatcher-cachen. Den här sökvägen används som prefix för den sammanfogade URL:en från den ursprungliga begäran. Dokumentet för `/usr/lib/apache/httpd-2.4.3/htdocs/sitea` orsakar begäran för `https://branda.com/en.html` för att `/usr/lib/apache/httpd-2.4.3/htdocs/sitea/en.html` -fil.
 
 Dessutom måste den AEM publiceringsinstansen anges som rendering för det virtuella värdsystemet. Konfigurera andra gruppegenskaper efter behov. Följande kod är en förkortad servergruppskonfiguration för domänen branda.com:
 
@@ -245,10 +244,10 @@ En Dispatcher-servergrupp krävs för att hantera begäranden om att göra cache
 
 Följande egenskapskonfigurationer gör att Dispatcher kan matcha filer i AEM innehållsdatabas från filer i cachen:
 
-* Egenskapen `/docroot` är inställd på webbserverns standarddokument. Det här är vanligtvis den katalog där mappen `/content` skapas. Ett exempelvärde för Apache i Linux är `/usr/lib/apache/httpd-2.4.3/htdocs`.
-* Egenskapen `/filter` ger åtkomst till filer under katalogen `/content`.
+* The `/docroot` -egenskapen ställs in på webbserverns standarddokument. Vanligtvis är det här katalogen där `/content` mappen skapas. Ett exempelvärde för Apache i Linux är `/usr/lib/apache/httpd-2.4.3/htdocs`.
+* The `/filter` -egenskapen tillåter åtkomst till filer under `/content` katalog.
 
-Egenskapen `/statfileslevel`måste vara tillräckligt hög för att .stat-filer ska skapas i rotkatalogen för varje virtuellt värdsystem. Den här egenskapen gör att cacheminnet för varje domän kan ogiltigförklaras separat. I exempelkonfigurationen skapar ett `/statfileslevel`-värde på `2` .stat-filer i katalogen `*docroot*/content/sitea` och katalogen `*docroot*/content/siteb`.
+The `/statfileslevel`-egenskapen måste vara tillräckligt hög så att .stat-filer skapas i rotkatalogen för varje virtuellt värdsystem. Den här egenskapen gör att cacheminnet för varje domän kan ogiltigförklaras separat. Exempel på konfiguration: `/statfileslevel` värde för `2` skapar .stat-filer i `*docroot*/content/sitea` och `*docroot*/content/siteb` katalog.
 
 Dessutom måste publiceringsinstansen anges som rendering för det virtuella värdsystemet. Konfigurera andra gruppegenskaper efter behov. Följande kod är en förkortad konfiguration för servergruppen som används för att göra cacheminnet ogiltigt:
 
@@ -291,11 +290,11 @@ Mer information om Sling-resursmappning finns i [Mappningar för resursupplösni
 
 Vanligtvis krävs mappningar för följande resurser, men ytterligare mappningar kan behövas:
 
-* Innehållssidans rotnod (under `/content`)
-* Den designnod som sidorna använder (under `/etc/designs`)
-* Mappen `/libs`
+* Innehållssidans rotnod (nedan `/content`)
+* Designnoden som sidorna använder (nedan `/etc/designs`)
+* The `/libs` mapp
 
-När du har skapat mappningen för innehållssidan kan du använda en webbläsare för att öppna en sida på webbservern om du vill identifiera ytterligare obligatoriska mappningar. Leta reda på meddelanden om resurser som inte hittas i filen error.log för publiceringsinstansen. I följande exempelmeddelande anges att en mappning för `/etc/clientlibs` krävs:
+När du har skapat mappningen för innehållssidan kan du använda en webbläsare för att öppna en sida på webbservern om du vill identifiera ytterligare obligatoriska mappningar. Leta reda på meddelanden om resurser som inte hittas i filen error.log för publiceringsinstansen. I följande exempelmeddelande visas att en mappning för `/etc/clientlibs` krävs:
 
 ```shell
 01.11.2012 15:59:24.601 *INFO* [10.36.34.243 [1351799964599] GET /etc/clientlibs/foundation/jquery.js HTTP/1.1] org.apache.sling.engine.impl.SlingRequestProcessorImpl service: Resource /content/sitea/etc/clientlibs/foundation/jquery.js not found
@@ -303,11 +302,11 @@ När du har skapat mappningen för innehållssidan kan du använda en webbläsar
 
 >[!NOTE]
 >
->Länkkontrolleraromformaren för standardskrivaren för Apache Sling ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkomskrivning utförs dock bara när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformatorkomponent och lägger till den i en pipeline för HTML-omskrivning.
+>Länkkontrolleraromformaren för standardskrivaren för Apache Sling ändrar automatiskt hyperlänkar på sidan för att förhindra brutna länkar. Länkskrivningen utförs dock endast när länkmålet är en HTML- eller HTML-fil. Om du vill uppdatera länkar till andra filtyper skapar du en transformatorkomponent och lägger till den i en pipeline för omskrivning från HTML.
 
 ### Exempel på resursmappningsnoder
 
-I följande tabell visas de noder som implementerar resursmappning för domänen branda.com. Liknande noder skapas för domänen `brandb.com`, till exempel `/etc/map/http/brandb.com`. I samtliga fall krävs mappningar när referenser i sidans HTML inte tolkas korrekt i Sling-sammanhanget.
+I följande tabell visas de noder som implementerar resursmappning för domänen branda.com. Liknande noder skapas för `brandb.com` domän, som `/etc/map/http/brandb.com`. I samtliga fall krävs mappningar när referenser på sidan HTML inte löses korrekt i Sling-sammanhanget.
 
 | Nodsökväg | Typ | Egenskap |
 |--- |--- |--- |
@@ -317,19 +316,19 @@ I följande tabell visas de noder som implementerar resursmappning för domänen
 | `/etc/map/http/branda.com/etc/designs` | sling:mappning | Namn: sling:internalRedirect <br/>VType: Sträng <br/>Värde: /etc/designs |
 | `/etc/map/http/branda.com/etc/clientlibs` | sling:mappning | Namn: sling:internalRedirect <br/>VType: Sträng <br/>Värde: /etc/clientlibs |
 
-## Konfigurerar replikeringsagenten {#configuring-the-dispatcher-flush-replication-agent} för utskickstömning
+## Konfigurera replikeringsagenten för utskickstömning {#configuring-the-dispatcher-flush-replication-agent}
 
-Replikeringsagenten för utskickstömning på den AEM publiceringsinstansen måste skicka invalideringsbegäranden till rätt Dispatcher-servergrupp. Om du vill använda en servergrupp som mål använder du egenskapen URI för replikeringsagenten för borttagning av dubbletter (på fliken Transport). Inkludera värdet för egenskapen `/virtualhost` för Dispatcher-gruppen som har konfigurerats för att göra cachen ogiltig:
+Replikeringsagenten för utskickstömning på den AEM publiceringsinstansen måste skicka invalideringsbegäranden till rätt Dispatcher-servergrupp. Om du vill använda en servergrupp som mål använder du egenskapen URI för replikeringsagenten för borttagning av dubbletter (på fliken Transport). Inkludera värdet för `/virtualhost` egenskapen för Dispatcher-servergruppen som har konfigurerats för att göra cachen ogiltig:
 
 `https://*webserver_name*:*port*/*virtual_host*/dispatcher/invalidate.cache`
 
-Om du till exempel vill använda gruppen `farm_flush` i föregående exempel är URI:n `https://localhost:80/invalidation_only/dispatcher/invalidate.cache`.
+Om du till exempel vill använda `farm_flush` servergrupp i föregående exempel, URI:n är `https://localhost:80/invalidation_only/dispatcher/invalidate.cache`.
 
 ![](assets/chlimage_1-12.png)
 
-## Inkommande URL:er skrivs om {#the-web-server-rewrites-incoming-urls}
+## Inkommande URL:er skrivs om på webbservern {#the-web-server-rewrites-incoming-urls}
 
-Använd den interna funktionen för URL-omskrivning på webbservern för att översätta domänbaserade URL:er till filsökvägar i Dispatcher-cachen. Klientbegäranden för sidan `https://brandA.com/en.html` översätts till exempel till filen `content/sitea/en.html`i dokumentroten på webbservern.
+Använd den interna funktionen för URL-omskrivning på webbservern för att översätta domänbaserade URL:er till filsökvägar i Dispatcher-cachen. Klienten begär till exempel `https://brandA.com/en.html` sidan översätts till `content/sitea/en.html`-filen i webbserverns dokumentrot.
 
 ![](assets/chlimage_1-13.png)
 
@@ -344,8 +343,8 @@ Konfigurera följande aspekter på webbservern:
 * Definiera ett virtuellt värdsystem för var och en av dina webbdomäner.
 * För varje domän konfigurerar du dokumentroten så att den sammanfaller med mappen i databasen som innehåller domänens webbinnehåll.
 * För varje virtuell domän skapar du en regel för URL-namnändring som översätter den inkommande URL:en till sökvägen till den cachelagrade filen.
-* Varje virtuell domän måste även innehålla Dispatcher-relaterade konfigurationer, enligt beskrivningen på sidan [Installera Dispatcher](dispatcher-install.md).
-* Dispatcher-modulen måste vara konfigurerad att använda den URL som webbservern har skrivit om. (Se egenskapen `DispatcherUseProcessedURL` i [Installera Dispatcher](dispatcher-install.md).)
+* Varje virtuell domän måste även innehålla Dispatcher-relaterade konfigurationer, enligt beskrivningen på [Installerar Dispatcher](dispatcher-install.md) sida.
+* Dispatcher-modulen måste vara konfigurerad att använda den URL som webbservern har skrivit om. (Se `DispatcherUseProcessedURL` egenskap i [Installerar Dispatcher](dispatcher-install.md).)
 
 I följande exempel konfigureras två virtuella värdar för en Apache-webbserver med filen httpd.conf:
 
@@ -353,12 +352,12 @@ I följande exempel konfigureras två virtuella värdar för en Apache-webbserve
 
 * Dokumentroten för varje virtuell domän är den katalog i Dispatcher-cachen som innehåller platsens sidor. (raderna 20 och 33)
 * Regeln för URL-omskrivning för varje virtuell domän är ett reguljärt uttryck som prefixerar sökvägen till den begärda sidan med sökvägen till sidorna i cachen. (raderna 19 och 35)
-* Egenskapen `DispatherUseProcessedURL` är `1`. (rad 10)
+* The `DispatherUseProcessedURL` egenskapen är inställd på `1`. (rad 10)
 
-Webbservern utför till exempel följande åtgärder när den tar emot en begäran med URL:en `https://brandA.com/en/products.html`:
+Webbservern utför till exempel följande åtgärder när den tar emot en begäran med `https://brandA.com/en/products.html` URL:
 
-* Associerar URL:en med det virtuella värdsystemet som har `ServerName` `brandA.com.`
-* Skriver om URL:en till `/content/sitea/en/products.html.`
+* Associerar URL:en med det virtuella värdsystemet som har en `ServerName` av `brandA.com.`
+* Skriver om den URL som ska `/content/sitea/en/products.html.`
 * Vidarebefordrar URL:en till Dispatcher.
 
 ### httpd.conf {#httpd-conf-1}
@@ -413,17 +412,17 @@ LoadModule dispatcher_module modules/mod_dispatcher.so
 DocumentRoot "/usr/lib/apache/httpd-2.4.3/htdocs"
 ```
 
-### Konfigurera en Dispatcher-grupp {#configure-a-dispatcher-farm}
+### Konfigurera en utskicksgrupp {#configure-a-dispatcher-farm}
 
 När webbservern skriver om URL:er kräver Dispatcher en enda servergrupp som definierats enligt [Konfigurera Dispatcher](dispatcher-configuration.md). Följande konfigurationer krävs för stöd av virtuella värddatorer på webbservern och regler för namnbyte av URL:
 
-* Egenskapen `/virtualhosts` måste innehålla ServerName-värden för alla VirtualHost-definitioner.
-* Egenskapen `/statfileslevel` måste vara tillräckligt hög för att .stat-filer ska kunna skapas i katalogerna som innehåller innehållsfilerna för varje domän.
+* The `/virtualhosts` egenskapen måste innehålla ServerName-värden för alla VirtualHost-definitioner.
+* The `/statfileslevel` -egenskapen måste vara tillräckligt hög för att .stat-filer ska kunna skapas i katalogerna som innehåller innehållsfilerna för varje domän.
 
-Följande exempelkonfigurationsfil baseras på exemplet `dispatcher.any`-fil som installeras med Dispatcher. Följande ändringar krävs för att ge stöd åt webbserverkonfigurationerna för den tidigare `httpd.conf`-filen:
+Följande exempelkonfigurationsfil baseras på exemplet `dispatcher.any` som installeras med Dispatcher. Följande ändringar krävs för att ge stöd åt webbserverkonfigurationerna från föregående `httpd.conf` fil:
 
-* Egenskapen `/virtualhosts` gör att Dispatcher hanterar begäranden för domänerna `brandA.com` och `brandB.com`. (rad 12)
-* Egenskapen `/statfileslevel` är inställd på 2, så att lägesfiler skapas i varje katalog som innehåller domänens webbinnehåll (rad 41): `/statfileslevel "2"`
+* The `/virtualhosts` egenskapen gör att Dispatcher hanterar begäranden för `brandA.com` och `brandB.com` domäner. (rad 12)
+* The `/statfileslevel` egenskapen ställs in på 2, så att lägesfiler skapas i varje katalog som innehåller domänens webbinnehåll (rad 41): `/statfileslevel "2"`
 
 Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbservern (rad 40): `/usr/lib/apache/httpd-2.4.3/htdocs`
 
@@ -501,50 +500,50 @@ Som vanligt är dokumentroten i cachen densamma som dokumentroten på webbserver
 >
 >Eftersom en enda Dispatcher-servergrupp har definierats kräver replikeringsagenten för Dispatcher Flush på AEM publiceringsinstans inga särskilda konfigurationer.
 
-## Skriva om länkar till icke-HTML-filer {#rewriting-links-to-non-html-files}
+## Skriva om länkar till filer som inte är HTML {#rewriting-links-to-non-html-files}
 
 Om du vill skriva om referenser till filer som har andra tillägg än .html eller .htm skapar du en Sling-omskrivartransformeringskomponent och lägger till den i standardförskrivningsflödet.
 
-Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. Den främsta komponenten i [How to Create a Fully Featured Internet Website](https://helpx.adobe.com/experience-manager/6-3/sites/developing/using/the-basics.html) skapar sådana länkar.
+Skriv om referenser när resurssökvägar inte löses korrekt i webbserverkontexten. En omformare krävs till exempel när bildgenererande komponenter skapar länkar som /content/sitea/en/products.navimage.png. komponenten topnav i [Skapa en komplett webbplats](https://helpx.adobe.com/experience-manager/6-5/sites/developing/using/the-basics.html) skapar sådana länkar.
 
-[Sling rewriter](https://sling.apache.org/documentation/bundles/output-rewriting-pipelines-org-apache-sling-rewriter.html) är en modul som efterbearbetar Sling-utdata. implementeringar av rewriter-pipeline består av en generator, en eller flera transformatorer och en serialiserare:
+The [Sling Rewriter](https://sling.apache.org/documentation/bundles/output-rewriting-pipelines-org-apache-sling-rewriter.html) är en modul som efterbearbetar Sling-utdata. implementeringar av rewriter-pipeline består av en generator, en eller flera transformatorer och en serialiserare:
 
 * **Generator:** Tolkar Sling-utdataströmmen (HTML-dokument) och genererar SAX-händelser när specifika elementtyper påträffas.
 * **Transformator:** Lyssnar efter SAX-händelser och ändrar följaktligen händelsemålet (ett HTML-element). En omskrivarpipeline innehåller noll eller flera omformare. Transformers körs i sekvens och skickar SAX-händelserna till nästa transformator i sekvensen.
-* **Serialisering:** Serialiserar utdata, inklusive ändringar från varje transformator.
+* **Serialiserare:** Serialiserar utdata, inklusive ändringar från varje transformator.
 
 ![](assets/chlimage_1-15.png)
 
-### AEM förinställda skrivarpipeline {#the-aem-default-rewriter-pipeline}
+### AEM förinställd skrivarpipeline {#the-aem-default-rewriter-pipeline}
 
 AEM använder en standardomskrivare för pipeline som bearbetar dokument av typen text/html:
 
-* Generatorn tolkar HTML-dokument och genererar SAX-händelser när den påträffar elementen a, img, area, form, base, link, script och body. Generatoraliaset är `htmlparser`.
-* Rörledningen innehåller följande transformatorer: `linkchecker`, `mobile`, `mobiledebug`, `contentsync`. Transformeraren `linkchecker` gör att sökvägar till refererade HTML- eller HTML-filer skapas externt för att förhindra brutna länkar.
+* Generatorn tolkar HTML-dokument och genererar SAX-händelser när den påträffar elementen a, img, area, form, base, link, script och body. Generatoralias är `htmlparser`.
+* Rörledningen innehåller följande transformatorer: `linkchecker`, `mobile`, `mobiledebug`, `contentsync`. The `linkchecker` transformer externaliserar sökvägar till refererade HTML- eller HTM-filer för att förhindra brutna länkar.
 * Serialiseraren skriver HTML-utdata. Serialiaset är htmlwriter.
 
-Noden `/libs/cq/config/rewriter/default` definierar pipelinen.
+The `/libs/cq/config/rewriter/default` -noden definierar pipelinen.
 
-### Skapar en transformator {#creating-a-transformer}
+### Skapa en omformare {#creating-a-transformer}
 
 Utför följande åtgärder för att skapa en transformatorkomponent och använda den i en pipeline:
 
-1. Implementera gränssnittet `org.apache.sling.rewriter.TransformerFactory`. Den här klassen skapar instanser av klassen Transformer. Ange värden för egenskapen `transformer.type` (transformatoralias) och konfigurera klassen som en OSGi-tjänstkomponent.
-1. Implementera gränssnittet `org.apache.sling.rewriter.Transformer`. Om du vill minimera arbetet kan du utöka klassen `org.apache.cocoon.xml.sax.AbstractSAXPipe`. Åsidosätt metoden startElement för att anpassa skrivbeteendet. Den här metoden anropas för varje SAX-händelse som skickas till transformatorn.
+1. Implementera `org.apache.sling.rewriter.TransformerFactory` gränssnitt. Den här klassen skapar instanser av klassen Transformer. Ange värden för `transformer.type` -egenskapen (transformer-alias) och konfigurera klassen som en OSGi-tjänstkomponent.
+1. Implementera `org.apache.sling.rewriter.Transformer` gränssnitt. Om du vill minimera arbetet kan du utöka `org.apache.cocoon.xml.sax.AbstractSAXPipe` klassen. Åsidosätt metoden startElement för att anpassa skrivbeteendet. Den här metoden anropas för varje SAX-händelse som skickas till transformatorn.
 1. Paketera och distribuera klasserna.
 1. Lägg till en konfigurationsnod i AEM program för att lägga till transformatorn i pipeline.
 
 >[!TIP]
 >Du kan i stället konfigurera TransformerFactory så att transformatorn infogas i alla definierade omskrivare. Du behöver alltså inte konfigurera en pipeline:
 >
->* Ställ in egenskapen `pipeline.mode` på `global`.
->* Ange egenskapen `service.ranking` som ett positivt heltal.
->* Ta inte med en `pipeline.type`-egenskap.
+>* Ange `pipeline.mode` egenskap till `global`.
+>* Ange `service.ranking` till ett positivt heltal.
+>* Inkludera inte `pipeline.type` -egenskap.
 
 
 >[!NOTE]
 >
->Skapa ditt Maven-projekt med hjälp av arkivtypen [multimodule](https://helpx.adobe.com/experience-manager/aem-previous-versions.html) i plugin-programmet Content Package Maven. Strukturlister skapar och installerar automatiskt ett innehållspaket.
+>Använd [multimodule](https://helpx.adobe.com/experience-manager/aem-previous-versions.html) Skapa ditt Maven-projekt genom att arkivera texten i innehållspaketets plugin. Strukturlister skapar och installerar automatiskt ett innehållspaket.
 
 I följande exempel implementeras en transformator som skriver om referenser till bildfiler.
 
@@ -653,7 +652,7 @@ Skapa en JCR-nod som definierar en pipeline som använder din transformator. Fö
 
 >[!NOTE]
 >
->Om du ställer in egenskapen `pipeline.mode` på `global` behöver du inte konfigurera en pipeline. I `global`-läget infogas transformatorn i alla rörledningar.
+>Om du anger egenskapen Transformer `pipeline.mode` till `global`behöver du inte konfigurera en pipeline. The `global` I infogas transformatorn i alla rörledningar.
 
 ### Konfigurationsnod för omskrivare - XML-representation {#rewriter-configuration-node-xml-representation}
 
