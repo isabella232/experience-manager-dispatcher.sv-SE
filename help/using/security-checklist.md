@@ -1,8 +1,8 @@
 ---
 title: Checklistan för Dispatcher-säkerhet
-seo-title: Checklistan för Dispatcher-säkerhet
+seo-title: The Dispatcher Security Checklist
 description: En checklista för säkerhet som ska slutföras innan produktionen påbörjas.
-seo-description: En checklista för säkerhet som ska slutföras innan produktionen påbörjas.
+seo-description: A security checklist that should be completed before going on production.
 uuid: 7bfa3202-03f6-48e9-8d2e-2a40e137ecbe
 contentOwner: User
 products: SG_EXPERIENCEMANAGER/DISPATCHER
@@ -13,16 +13,15 @@ jcr-lastmodifiedby: remove-legacypath-6-1
 index: y
 internal: n
 snippet: y
-translation-type: tm+mt
-source-git-commit: 7889c025fb8fb29e6f11ea01c5248470556d3160
+exl-id: 49009810-b5bf-41fd-b544-19dd0c06b013
+source-git-commit: a21b527700b3a5c3a11eadaefc729e754ba2b37b
 workflow-type: tm+mt
-source-wordcount: '653'
+source-wordcount: '638'
 ht-degree: 0%
 
 ---
 
-
-# Dispatcher Security Checklist{#the-dispatcher-security-checklist}
+# Checklistan för Dispatcher-säkerhet{#the-dispatcher-security-checklist}
 
 <!-- 
 
@@ -39,11 +38,11 @@ Adobe rekommenderar att du slutför följande checklista innan du börjar produc
 
 >[!CAUTION]
 >
->Du måste också fylla i checklistan för dokumentskydd för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html).
+>Du måste också fylla i checklistan för dokumentskydd för din version av AEM innan du publicerar. Se motsvarande [Adobe Experience Manager-dokumentation](https://helpx.adobe.com/experience-manager/6-5/sites/administering/using/security-checklist.html).
 
 ## Använd den senaste versionen av Dispatcher {#use-the-latest-version-of-dispatcher}
 
-Du bör installera den senaste tillgängliga versionen för din plattform. Du bör uppgradera din Dispatcher-instans för att använda den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installera Dispatcher](dispatcher-install.md).
+Du bör installera den senaste tillgängliga versionen för din plattform. Du bör uppgradera din Dispatcher-instans för att använda den senaste versionen och dra nytta av produkt- och säkerhetsförbättringarna. Se [Installerar Dispatcher](dispatcher-install.md).
 
 >[!NOTE]
 >
@@ -51,11 +50,11 @@ Du bör installera den senaste tillgängliga versionen för din plattform. Du b�
 >
 >`[Thu Apr 30 17:30:49 2015] [I] [23171(140735307338496)] Dispatcher initialized (build 4.1.9)`
 >
->Om du vill hitta loggfilen kontrollerar du dispatcherkonfigurationen i `httpd.conf`.
+>Om du vill hitta loggfilen kontrollerar du dispatcherkonfigurationen i din `httpd.conf`.
 
 ## Begränsa klienter som kan tömma cachen {#restrict-clients-that-can-flush-your-cache}
 
-Adobe rekommenderar att du [begränsar antalet klienter som kan tömma cachen.](dispatcher-configuration.md#limiting-the-clients-that-can-flush-the-cache)
+Adobe rekommenderar att du [begränsa vilka klienter som kan tömma cachen.](dispatcher-configuration.md#limiting-the-clients-that-can-flush-the-cache)
 
 ## Aktivera HTTPS för transportlagersäkerhet {#enable-https-for-transport-layer-security}
 
@@ -80,13 +79,13 @@ Last Modified Date: 2015-06-26T04:41:28.841-0400
 
 ## Begränsa åtkomst {#restrict-access}
 
-När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Se [Exempel /filter Avsnitt](dispatcher-configuration.md#main-pars_184_1_title) i Dispatcher-dokumentationen.
+När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Se [Exempel/filteravsnitt](dispatcher-configuration.md#main-pars_184_1_title) i Dispatcher-dokumentationen.
 
-## Kontrollera att åtkomst till administrativa URL:er är nekad {#make-sure-access-to-administrative-urls-is-denied}
+## Kontrollera att åtkomst till administrativa URL:er nekas {#make-sure-access-to-administrative-urls-is-denied}
 
 Se till att du använder filter för att blockera extern åtkomst till administrativa URL:er, t.ex. webbkonsolen.
 
-En lista över URL:er som måste blockeras finns i [Testa Dispatcher Security](dispatcher-configuration.md#testing-dispatcher-security).
+Se [Testar Dispatcher Security](dispatcher-configuration.md#testing-dispatcher-security) för en lista över URL:er som måste blockeras.
 
 ## Använd Tillåtelselista i stället för Blockeringslista {#use-allowlists-instead-of-blocklists}
 
@@ -98,7 +97,7 @@ När du konfigurerar Dispatcher bör du se till att webbservern körs av en dedi
 
 IIS-användare måste dessutom konfigurera sin webbplats på följande sätt:
 
-1. Välj **Anslut som specifik användare** i inställningen för fysisk sökväg för din webbplats.
+1. I inställningen för fysisk sökväg för din webbplats väljer du **Anslut som specifik användare**.
 1. Ange användaren.
 
 ## Förhindra DoS-attacker (Denial of Service) {#prevent-denial-of-service-dos-attacks}
@@ -107,9 +106,9 @@ En denial of service-attack (DoS) är ett försök att göra en datorresurs otil
 
 På dispatchernivå finns det två metoder för att konfigurera för att förhindra DoS-attacker: [](https://docs.adobe.com/content/docs/en/dispatcher.html#/filter (Filter))
 
-* Använd modulen mod_rewrite (till exempel [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
+* Använd modulen mod_rewrite (till exempel) [Apache 2.4](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)) för att utföra URL-valideringar (om URL-mönsterreglerna inte är för komplexa).
 
-* Förhindra att dispatchern cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-conten-tfilter).\
+* Förhindra att avsändaren cachelagrar URL:er med falska tillägg genom att använda [filter](dispatcher-configuration.md#configuring-access-to-conten-tfilter).\
    Ändra till exempel cachningsreglerna för att begränsa cachning till de förväntade MIME-typerna, som:
 
    * `.html`
@@ -121,7 +120,7 @@ På dispatchernivå finns det två metoder för att konfigurera för att förhin
    * `.pdf`
    * `.ppt`
 
-   Ett exempel på en konfigurationsfil kan visas för [att begränsa extern åtkomst](#restrict-access), vilket inkluderar begränsningar för MIME-typer.
+   En exempelkonfigurationsfil finns för [begränsa extern åtkomst](#restrict-access)innehåller detta begränsningar för MIME-typer.
 
 Om du vill aktivera alla funktioner för publiceringsinstanserna på ett säkert sätt konfigurerar du filter så att de inte får åtkomst till följande noder:
 
@@ -153,18 +152,17 @@ Last Modified Date: 2015-06-26T04:38:17.016-0400
 
 ## Konfigurera Dispatcher för att förhindra CSRF-attacker {#configure-dispatcher-to-prevent-csrf-attacks}
 
-AEM tillhandahåller ett [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker av typen Cross-Site Request. För att du ska kunna använda det här ramverket måste du tillåtslista CSRF-tokenstöd i dispatchern. Du kan göra detta genom att:
+AEM tillhandahåller en [ramverk](https://helpx.adobe.com/experience-manager/6-3/sites/administering/using/security-checklist.html#verification-steps) som syftar till att förhindra attacker av typen cross-site Request. För att du ska kunna använda det här ramverket måste du tillåtslista CSRF-tokenstöd i dispatchern. Du kan göra detta genom att:
 
-1. Skapa ett filter som tillåter sökvägen `/libs/granite/csrf/token.json`;
-1. Lägg till rubriken `CSRF-Token` i avsnittet `clientheaders` i Dispatcher-konfigurationen.
+1. Skapa ett filter som tillåter `/libs/granite/csrf/token.json` sökväg,
+1. Lägg till `CSRF-Token` sidhuvud till `clientheaders` i Dispatcher-konfigurationen.
 
 ## Förhindra clickjacking {#prevent-clickjacking}
 
-För att förhindra clickjacking rekommenderar vi att du konfigurerar webbservern så att HTTP-huvudet `X-FRAME-OPTIONS` är inställt på `SAMEORIGIN`.
+För att förhindra clickjacking rekommenderar vi att du konfigurerar webbservern så att den `X-FRAME-OPTIONS` HTTP-huvudet är inställt på `SAMEORIGIN`.
 
-Mer [information om clickjacking finns på OWASP-platsen](https://www.owasp.org/index.php/Clickjacking).
+Mer [information om clickjacking finns på OWASP-webbplatsen](https://www.owasp.org/index.php/Clickjacking).
 
 ## Utför ett penetrationstest {#perform-a-penetration-test}
 
 Adobe rekommenderar starkt att du utför ett penetrationstest av din AEM infrastruktur innan du börjar producera.
-
