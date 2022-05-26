@@ -9,7 +9,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 1d449ee2-4cdd-4b7a-8b4e-7e6fc0a1d7ee
 exl-id: c9266683-6890-4359-96db-054b7e856dd0
-source-git-commit: 76f7a3fc8d98657c5f46912f452c05fce1b5be61
+source-git-commit: 85a7f38ecb5f5fe620ff51a7cdbe29f546559288
 workflow-type: tm+mt
 source-wordcount: '3190'
 ht-degree: 0%
@@ -27,7 +27,7 @@ Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller 
 Processen för att distribuera dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
 1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om dispatcher](https://helpx.adobe.com/experience-manager/using/dispatcher-faq.html).
-1. Installera en [webbserver som stöds](https://helpx.adobe.com/experience-manager/6-3/sites/deploying/using/technical-requirements.html) enligt webbserverdokumentationen.
+1. Installera en [webbserver som stöds](https://helpx.adobe.com/experience-manager/6-5/sites/deploying/using/technical-requirements.html) enligt webbserverdokumentationen.
 1. [Installera modulen Dispatcher](dispatcher-install.md) på webbservern och konfigurera webbservern därefter.
 1. [Konfigurera Dispatcher](dispatcher-configuration.md) (filen dispatcher.any).
 1. [Konfigurera AEM](page-invalidate.md) så att innehållsuppdateringar gör cachen ogiltig.
