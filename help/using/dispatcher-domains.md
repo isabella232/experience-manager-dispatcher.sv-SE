@@ -11,9 +11,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 40d91d66-c99b-422d-8e61-c0ced23272ef
 exl-id: 1470b636-7e60-48cc-8c31-899f8785dafa
-source-git-commit: 7d2d1cbbb2fb444769239d48c9fbff4cfd2373a2
+source-git-commit: c7af1a042b0106fa0a559448398a8dd636d920c2
 workflow-type: tm+mt
-source-wordcount: '2965'
+source-wordcount: '2968'
 ht-degree: 0%
 
 ---
@@ -62,11 +62,9 @@ När replikeringsagenterna för Dispatcher Flush begär att Dispatcher ogiltigf�
 
 ![](assets/chlimage_1-9.png)
 
-<ol type="a">
-  <li>En sida aktiveras på AEM författarinstans och innehållet replikeras till publiceringsinstansen.</li>
-  <li>Dispatcher Flush Agent anropar Dispatcher för att ogiltigförklara cachen för det replikerade innehållet.</li>
-  <li>Dispatcher vidrör en eller flera .stat-filer för att göra de cachelagrade filerna ogiltiga.</li>
-</ol>
+* a - En sida aktiveras på AEM författarinstans och innehållet replikeras till publiceringsinstansen.
+* b - Dispatcher Flush Agent anropar Dispatcher för att ogiltigförklara cachen för det replikerade innehållet.
+* c - Dispatcher vidrör en eller flera .stat-filer för att göra de cachelagrade filerna ogiltiga.
 
 Om du vill använda Dispatcher med flera domäner måste du konfigurera AEM, Dispatcher och webbservern. Lösningarna som beskrivs på den här sidan är allmänna och gäller de flesta miljöer. På grund av komplexiteten hos vissa AEM topologier kan din lösning kräva ytterligare anpassade konfigurationer för att lösa särskilda problem. Du kommer troligen att behöva anpassa exemplen för att uppfylla din befintliga IT-infrastruktur och hanteringspolicy.
 
