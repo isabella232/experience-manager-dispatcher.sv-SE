@@ -14,9 +14,9 @@ index: y
 internal: n
 snippet: y
 exl-id: 49009810-b5bf-41fd-b544-19dd0c06b013
-source-git-commit: a21b527700b3a5c3a11eadaefc729e754ba2b37b
+source-git-commit: 5a387498c7fd83cad1fafdbfded6a78f55acbc14
 workflow-type: tm+mt
-source-wordcount: '638'
+source-wordcount: '639'
 ht-degree: 0%
 
 ---
@@ -161,7 +161,7 @@ AEM tillhandahåller en [ramverk](https://helpx.adobe.com/experience-manager/6-3
 
 För att förhindra clickjacking rekommenderar vi att du konfigurerar webbservern så att den `X-FRAME-OPTIONS` HTTP-huvudet är inställt på `SAMEORIGIN`.
 
-Mer [information om clickjacking finns på OWASP-webbplatsen](https://www.owasp.org/index.php/Clickjacking).
+Mer [information om clickjacking finns på OWASP-webbplatsen](https://owasp.org/www-community/attacks/Clickjacking).
 
 ## Utför ett penetrationstest {#perform-a-penetration-test}
 
