@@ -13,7 +13,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 79cd94be-a6bc-4d34-bfe9-393b4107925c
 exl-id: 90eb6a78-e867-456d-b1cf-f62f49c91851
-source-git-commit: 25f8569bdeb6b675038bea02637900e9d0fc1f27
+source-git-commit: f447ff9b3785248a4906c1c9abdcbd18576aa36d
 workflow-type: tm+mt
 source-wordcount: '1404'
 ht-degree: 0%
@@ -128,7 +128,7 @@ HTTP-begäran gör att Dispatcher tar bort specifika filer från cachen. Dispatc
 
 ### Ta bort cachelagrade filer {#delete-cached-files}
 
-Utfärda en HTTP-begäran som får Dispatcher att ta bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Om du tar bort cachelagrade filer på det här sättet är det lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
+Utfärda en HTTP-begäran som får Dispatcher att ta bort filer från cachen. Dispatcher cachelagrar filerna igen endast när de tar emot en klientbegäran för sidan. Att ta bort cachelagrade filer på det här sättet är lämpligt för webbplatser som sannolikt inte tar emot samtidiga begäranden för samma sida.
 
 HTTP-begäran har följande format:
 
