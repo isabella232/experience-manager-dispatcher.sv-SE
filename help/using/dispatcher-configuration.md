@@ -1,10 +1,10 @@
 ---
 title: Konfigurera Dispatcher
-description: Lär dig konfigurera Dispatcher.
+description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: deb232be3c4c5e3d11d13cbccb282409d90b93bb
+source-git-commit: aed3c791a308b37ac493a78e918da3a4db1c8a64
 workflow-type: tm+mt
-source-wordcount: '8528'
+source-wordcount: '8549'
 ht-degree: 0%
 
 ---
@@ -153,7 +153,7 @@ Använd `/name` för att ange ett unikt namn som identifierar Dispatcher-instans
 The `/farms` -egenskapen definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är kopplad till olika webbplatser eller URL-adresser. The `/farms` kan innehålla en eller flera grupper:
 
 * Använd en enda servergrupp när du vill att Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
-* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteenden.
+* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteende.
 
 The `/farms` -egenskapen är en egenskap på den översta nivån i konfigurationsstrukturen. Om du vill definiera en servergrupp lägger du till en underordnad egenskap i `/farms` -egenskap. Använd ett egenskapsnamn som unikt identifierar servergruppen i Dispatcher-instansen.
 
