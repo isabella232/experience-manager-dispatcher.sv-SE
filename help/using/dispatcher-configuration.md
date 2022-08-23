@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 385495c76cd770409e9a002c685e8d375b159207
+source-git-commit: d7045fd779bf2c59034247266930e4b79ec2156f
 workflow-type: tm+mt
-source-wordcount: '8573'
+source-wordcount: '8572'
 ht-degree: 0%
 
 ---
@@ -153,7 +153,7 @@ Använd `/name` för att ange ett unikt namn som identifierar Dispatcher-instans
 The `/farms` -egenskapen definierar en eller flera uppsättningar Dispatcher-beteenden, där varje uppsättning är kopplad till olika webbplatser eller URL-adresser. The `/farms` kan innehålla en eller flera grupper:
 
 * Använd en enda servergrupp när du vill att Dispatcher ska hantera alla dina webbsidor eller webbplatser på samma sätt.
-* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteende.
+* Skapa flera grupper när olika delar av webbplatsen eller olika webbplatser kräver olika Dispatcher-beteenden.
 
 The `/farms` -egenskapen är en egenskap på den översta nivån i konfigurationsstrukturen. Om du vill definiera en servergrupp lägger du till en underordnad egenskap i `/farms` -egenskap. Använd ett egenskapsnamn som unikt identifierar servergruppen i Dispatcher-instansen.
 
@@ -1374,7 +1374,7 @@ Mer information finns även i `/invalidate` och `/statfileslevel`avsnitt ovan.
 
 ### Konfigurerar tidsbaserad cacheinvalidering - /enableTTL {#configuring-time-based-cache-invalidation-enablettl}
 
-Om värdet är 1 (/enableTTL &quot;1&quot;) visas `/enableTTL` egenskapen utvärderar svarshuvuden från serverdelen och om de innehåller en `Cache-Control` max-age eller `Expires` datum skapas en extra, tom fil intill cachefilen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
+Om inställt på 1 (`/enableTTL "1"`), `/enableTTL` egenskapen utvärderar svarshuvuden från serverdelen och om de innehåller en `Cache-Control` max-age eller `Expires` datum skapas en extra, tom fil intill cachefilen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
 
 >[!NOTE]
 >
