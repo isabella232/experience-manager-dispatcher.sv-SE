@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: aed3c791a308b37ac493a78e918da3a4db1c8a64
+source-git-commit: 385495c76cd770409e9a002c685e8d375b159207
 workflow-type: tm+mt
-source-wordcount: '8549'
+source-wordcount: '8573'
 ht-degree: 0%
 
 ---
@@ -1374,7 +1374,11 @@ Mer information finns även i `/invalidate` och `/statfileslevel`avsnitt ovan.
 
 ### Konfigurerar tidsbaserad cacheinvalidering - /enableTTL {#configuring-time-based-cache-invalidation-enablettl}
 
-Om den anges visas `/enableTTL` egenskapen utvärderar svarshuvuden från serverdelen och om de innehåller en `Cache-Control` max-age eller `Expires` datum skapas en extra, tom fil intill cachefilen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
+Om värdet är 1 (/enableTTL &quot;1&quot;) visas `/enableTTL` egenskapen utvärderar svarshuvuden från serverdelen och om de innehåller en `Cache-Control` max-age eller `Expires` datum skapas en extra, tom fil intill cachefilen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
+
+>[!NOTE]
+>
+>Kom ihåg att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
 
 >[!NOTE]
 >
