@@ -13,9 +13,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 79cd94be-a6bc-4d34-bfe9-393b4107925c
 exl-id: 90eb6a78-e867-456d-b1cf-f62f49c91851
-source-git-commit: f447ff9b3785248a4906c1c9abdcbd18576aa36d
+source-git-commit: f255701f23a628ba0d8b6cd91228462e1b552ffa
 workflow-type: tm+mt
-source-wordcount: '1404'
+source-wordcount: '1421'
 ht-degree: 0%
 
 ---
@@ -114,6 +114,7 @@ Flush-åtgärden för dispatcher styrs av en replikeringsagent som körs på pub
    **Obs!** För Dispatcher Flush-agenter används URI-egenskapen endast om du använder sökvägsbaserade virtualhost-poster för att skilja mellan grupper. Du använder det här fältet för att ange gruppen som ogiltig. Servergrupp #1 har till exempel en virtuell värd för `www.mysite.com/path1/*` och grupp 2 har en virtuell värd för `www.mysite.com/path2/*`. Du kan använda en URL med `/path1/invalidate.cache` för att rikta in sig på den första gården och `/path2/invalidate.cache` för den andra gruppen. Mer information finns i [Använda Dispatcher med flera domäner](dispatcher-domains.md).
 
 1. Konfigurera andra parametrar efter behov.
+1. Logga in i publiceringsinstansen och validera justeringsagentens konfiguration. Kontrollera även att det är aktiverat.
 1. Upprepa för varje publiceringsinstans som påverkas.
 
 När du har konfigurerat och aktiverar en sida från författaren till publiceringen initierar den här agenten en standardreplikering. Loggen innehåller meddelanden som anger begäranden från din publiceringsserver, som i följande exempel:
