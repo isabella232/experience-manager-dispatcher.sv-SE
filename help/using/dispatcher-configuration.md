@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 3455a90308d8661725850e19b67d7ff65f6f662f
+source-git-commit: f379daec71240150706eb90d930dbc756bbf8eb1
 workflow-type: tm+mt
-source-wordcount: '8561'
+source-wordcount: '8636'
 ht-degree: 0%
 
 ---
@@ -1280,31 +1280,38 @@ The `ignoreUrlParams` -avsnittet anger vilka URL-parametrar som ska ignoreras n�
 
 När en parameter ignoreras för en sida cachelagras sidan första gången som sidan begärs. Efterföljande begäranden för sidan skickas till den cachelagrade sidan, oavsett värdet på parametern i begäran.
 
+>[!NOTE]
+>
+>Vi rekommenderar att du konfigurerar `ignoreUrlParams` ställa in tillåtelselista. Därför ignoreras alla frågeparametrar och endast kända eller förväntade frågeparametrar undantas (&quot;nekas&quot;) från att ignoreras. Mer information och exempel finns i [den här sidan](https://github.com/adobe/aem-dispatcher-optimizer-tool/blob/main/docs/Rules.md#dot---the-dispatcher-publish-farm-cache-should-have-its-ignoreurlparams-rules-configured-in-an-allow-list-manner).
+
 Om du vill ange vilka parametrar som ska ignoreras lägger du till regler i `ignoreUrlParams` egenskap:
 
-* Om du vill ignorera en parameter skapar du en glob-egenskap som tillåter parametern.
-* Om du vill förhindra att sidan cachelagras skapar du en globegenskap som nekar parametern.
+* Om du vill cachelagra en sida trots att begäran innehåller en URL-parameter, skapar du en glob-egenskap som tillåter parametern (att ignoreras).
+* Om du vill förhindra att sidan cachas skapar du en globegenskap som nekar parametern (som ignoreras).
 
-I följande exempel ignoreras Dispatcher `q` parameter, så att begärande-URL:er som innehåller q-parametern cachelagras:
+I följande exempel ignoreras alla parametrar utom `nocache` parameter. Begär därför URL:er som innehåller `nocache` -parametern cachelagras aldrig av dispatchern:
 
 ```xml
 /ignoreUrlParams
 {
-    /0001 { /glob "*" /type "deny" }
-    /0002 { /glob "q" /type "allow" }
+    # allow-the-url-parameter-nocache-to-bypass-dispatcher-on-every-request
+    /0001 { /glob "nocache" /type "deny" }
+    # all-other-url-parameters-are-ignored-by-dispatcher-and-requests-are-cached
+    /0002 { /glob "*" /type "allow" }
 }
 ```
 
-Använda exemplet `ignoreUrlParams` värdet gör följande HTTP-begäran att sidan cachelagras eftersom `q` parametern ignoreras:
+Med tanke på `ignoreUrlParams` i konfigurationsexemplet ovan gör följande HTTP-begäran att sidan cachelagras eftersom `willbecached` parametern ignoreras:
 
 ```xml
-GET /mypage.html?q=5
+GET /mypage.html?willbecached=true
 ```
 
-Använda exemplet `ignoreUrlParams` värde, följande HTTP-begäran gör att sidan **not** cachelagras eftersom `p` parametern ignoreras inte:
+Med tanke på `ignoreUrlParams` konfigurationsexempel: följande HTTP-begäran gör att sidan **not** cachelagras eftersom `nocache` parametern ignoreras inte:
 
 ```xml
-GET /mypage.html?q=5&p=4
+GET /mypage.html?nocache=true
+GET /mypage.html?nocache=true&willbecached=true
 ```
 
 Mer information om globegenskaper finns i [Designa mönster för globegenskaper](#designing-patterns-for-glob-properties).
