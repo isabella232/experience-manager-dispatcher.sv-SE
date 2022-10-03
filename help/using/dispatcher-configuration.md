@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: f379daec71240150706eb90d930dbc756bbf8eb1
+source-git-commit: 112aa011e7a338be2b397d0c9b785fc2d9905b5d
 workflow-type: tm+mt
-source-wordcount: '8636'
+source-wordcount: '8675'
 ht-degree: 0%
 
 ---
@@ -406,7 +406,7 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 >[!CAUTION]
 >
->`/allowAuthorized` **måste** anges till `"0"` i `/cache` för att aktivera den här funktionen.
+>`/allowAuthorized` **måste** anges till `"0"` i `/cache` för att aktivera den här funktionen. Enligt informationen i [Cachelagring när autentisering används](#caching-when-authentication-is-used) -sektion, när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation **not** cachelagrad. Om behörighetskänslig cachelagring krävs finns mer information i [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/permissions-cache.html) sida.
 
 Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Se [Skapa en stängd användargrupp](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/cug.html?lang=en#creating-the-user-group-to-be-used) om du vill ha information om hur du använder den här funktionen med CUG. Se även Dispatcher [Säkerhetschecklista](/help/using/security-checklist.md) innan du publicerar.
 
