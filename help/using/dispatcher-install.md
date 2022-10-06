@@ -10,7 +10,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
 exl-id: 9375d1c0-8d9e-46cb-9810-fa4162a8c1ba
-source-git-commit: d19a27256c44ec00fd440b2f8a2fe408a4a4b7c8
+source-git-commit: 63dc6184b502b517238c60ef6223b39bd7594306
 workflow-type: tm+mt
 source-wordcount: '3693'
 ht-degree: 0%
@@ -177,7 +177,7 @@ Standardagenten för tömningsreplikering på författarinstansen är konfigurer
 
 Om webbplatsen använder en autentiseringsmetod måste Flush-replikeringsagenten konfigureras därefter.
 
-1. Öppna IIS-hanteraren och välj den webbplats som du använder som Disptcher-cache.
+1. Öppna IIS-hanteraren och välj den webbplats som du använder som Dispatcher-cache.
 1. Dubbelklicka på Autentisering i IIS-avsnittet i vyn Funktioner.
 1. Om anonym autentisering inte är aktiverat väljer du Anonym autentisering och klickar på Aktivera i åtgärdsområdet.
 
@@ -190,7 +190,7 @@ Använd följande procedur för att lägga till Dispatcher ISAPI-modulen i IIS.
 1. Dubbelklicka på Hanterarmappningar i IIS-avsnittet med läget Funktionsvy.
 1. På åtgärdspanelen på sidan Hanterarmappningar klickar du på Lägg till skriptmappning för jokertecken, lägger till följande egenskapsvärden och klickar sedan på OK:
 
-   * Sökväg till begäran: *
+   * Sökväg till begäran: &#42;
    * Körbar: Den absoluta sökvägen till filen disp_iis.dll, till exempel `C:\inetpub\Scripts\disp_iis.dll`.
    * Namn: Ett beskrivande namn för hanterarmappningen, till exempel `Dispatcher`.
 
