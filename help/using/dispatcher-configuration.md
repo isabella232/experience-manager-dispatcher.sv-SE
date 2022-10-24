@@ -2,7 +2,7 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 112aa011e7a338be2b397d0c9b785fc2d9905b5d
+source-git-commit: 0debee043078b869d0af3258075bd83bf0312c8f
 workflow-type: tm+mt
 source-wordcount: '8675'
 ht-degree: 0%
@@ -841,7 +841,7 @@ En enskild post kan ha antingen `glob` eller en kombination av `method`, `url`, 
 
 ### Testar Dispatcher Security {#testing-dispatcher-security}
 
-Dispatcher-filter ska blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 403 returneras. Justera filtren om du får andra resultat.
+Dispatcher-filter ska blockera åtkomst till följande sidor och skript AEM publiceringsinstanser. Använd en webbläsare för att försöka öppna följande sidor som en besökare skulle göra och verifiera att koden 404 returneras. Justera filtren om du får andra resultat.
 
 Observera att du bör se normal sidåtergivning för `/content/add_valid_page.html?debug=layout`.
 
@@ -901,7 +901,7 @@ Skriv följande kommando i en terminal eller kommandotolk för att avgöra om an
 
 `curl -X POST "https://anonymous:anonymous@hostname:port/content/usergenerated/mytestnode"`
 
-Skicka följande kommando i en terminal eller kommandotolk för att försöka göra Dispatcher-cachen ogiltig och kontrollera att du får ett code 404-svar:
+Skicka följande kommando i en terminal eller kommandotolk för att försöka göra Dispatcher-cachen ogiltig och kontrollera att du får ett code 403-svar:
 
 `curl -H "CQ-Handle: /content" -H "CQ-Path: /content" https://yourhostname/dispatcher/invalidate.cache`
 
