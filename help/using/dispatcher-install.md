@@ -10,7 +10,7 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: f00ad751-6b95-4365-8500-e1e0108d9536
 exl-id: 9375d1c0-8d9e-46cb-9810-fa4162a8c1ba
-source-git-commit: 63dc6184b502b517238c60ef6223b39bd7594306
+source-git-commit: 663e493f3e1ae26c264e574cec4e0b271a971809
 workflow-type: tm+mt
 source-wordcount: '3693'
 ht-degree: 0%
@@ -339,8 +339,8 @@ Ange följande kommandon i ett terminalfönster och ersätt `[path to the dispat
 ```shell
 semanage fcontext -a -t httpd_modules_t [path to the dispatcher.so file]
 setsebool -P httpd_can_network_connect on
-chcon -R --type httpd_sys_content_t [path to the docroot]
-semanage fcontext -a -t httpd_sys_content_t "[path to the docroot](/.*)?"
+chcon -R --type httpd_sys_rw_content_t [path to the docroot]
+semanage fcontext -a -t httpd_sys_rw_content_t "[path to the docroot](/.*)?"
 ```
 
 ### Apache Web Server - Konfigurera Apache Web Server för Dispatcher {#apache-web-server-configure-apache-web-server-for-dispatcher}
