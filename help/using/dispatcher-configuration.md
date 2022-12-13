@@ -2,7 +2,7 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 9ee19d28b9d18f2ffd4f45129e48b5431beacc77
+source-git-commit: 51be516f90587ceda19180f13727c8372a794261
 workflow-type: tm+mt
 source-wordcount: '8675'
 ht-degree: 0%
@@ -286,10 +286,6 @@ Följande kod är en exempelkonfiguration för `/clientheaders`:
   "accept-language"
   "accept"
   "host"
-  "if-match"
-  "if-none-match"
-  "if-range"
-  "if-unmodified-since"
   "max-forwards"
   "proxy-authorization"
   "proxy-connection"
