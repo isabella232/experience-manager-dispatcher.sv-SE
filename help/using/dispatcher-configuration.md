@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 51be516f90587ceda19180f13727c8372a794261
+source-git-commit: 0378cfc2585339920894dd354c59929ef2bf49e0
 workflow-type: tm+mt
-source-wordcount: '8675'
+source-wordcount: '8710'
 ht-degree: 0%
 
 ---
@@ -1285,6 +1285,11 @@ Om du vill ange vilka parametrar som ska ignoreras lägger du till regler i `ign
 * Om du vill cachelagra en sida trots att begäran innehåller en URL-parameter, skapar du en glob-egenskap som tillåter parametern (att ignoreras).
 * Om du vill förhindra att sidan cachas skapar du en globegenskap som nekar parametern (som ignoreras).
 
+>[!NOTE]
+>
+>När du konfigurerar glob-egenskapen bör du tänka på att den ska matcha frågeparameternamnet. Om du till exempel vill ignorera parametern &quot;p1&quot; från följande URL `http://example.com/path/test.html?p1=test&p2=v2`ska globegenskapen vara:
+> `/0002 { /glob "p1" /type "allow" }`
+
 I följande exempel ignoreras alla parametrar utom `nocache` parameter. Begär därför URL:er som innehåller `nocache` -parametern cachelagras aldrig av dispatchern:
 
 ```xml
@@ -1382,7 +1387,7 @@ Om inställt på 1 (`/enableTTL "1"`), `/enableTTL` egenskapen utvärderar svars
 
 >[!NOTE]
 >
->Kom ihåg att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
+>Tänk på att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
 
 >[!NOTE]
 >
