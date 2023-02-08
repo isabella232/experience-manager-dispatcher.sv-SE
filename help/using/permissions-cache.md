@@ -10,9 +10,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 4f9b2bc8-a309-47bc-b70d-a1c0da78d464
 exl-id: 3d8d8204-7e0d-44ad-b41b-6fec2689c6a6
-source-git-commit: ef395d122b1f248cbcdad5a74ff111872c4d2b00
+source-git-commit: 31eaa42b17838d97cacd5c535e04be01a3eb6807
 workflow-type: tm+mt
-source-wordcount: '856'
+source-wordcount: '918'
 ht-degree: 0%
 
 ---
@@ -60,7 +60,6 @@ I följande diagram visas ordningen för händelser som inträffar när en webbl
 1. Renderingen anropar den AEM autentiseringsservern (det här är inte Dispatcher AuthChcker-servleten) för att utföra en säkerhetskontroll. När användaren är auktoriserad inkluderar återgivningen den återgivna sidan i svarsmeddelandets brödtext.
 1. Skickaren vidarebefordrar svaret till webbläsaren. Dispatcher lägger till brödtexten i återgivningens svarsmeddelande i cachen.
 
-
 ## Tillämpa behörighetskänslig cachelagring {#implementing-permission-sensitive-caching}
 
 Så här implementerar du behörighetskänslig cachelagring:
@@ -71,6 +70,11 @@ Så här implementerar du behörighetskänslig cachelagring:
 >[!NOTE]
 >
 >Vanligtvis lagras säkra resurser i en separat mapp än osäkra filer. Till exempel /content/secure/
+
+>[!NOTE]
+>
+>När det finns ett CDN (eller någon annan cache) framför dispatchern bör du ställa in cache-rubrikerna så att CDN inte cachelagrar det privata innehållet. Till exempel: `Header always set Cache-Control private`.
+>För AEM as a Cloud Service se [Cachelagring](https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/implementing/content-delivery/caching.html) om du vill ha mer information om hur du ställer in privata cachelagringshuvuden.
 
 ## Skapa Auth Checker-servleten {#create-the-auth-checker-servlet}
 
