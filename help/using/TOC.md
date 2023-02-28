@@ -3,9 +3,9 @@ cloud: Experience Cloud
 product: experience manager
 sub-product: experience manager dispatcher
 archetype: Administrator
-user-guide-title: Hjälp om Experience Manager Dispatcher
-breadcrumb-title: Dispatcher Guide
-user-guide-description: Lär dig använda Dispatcher för cachning, belastningsutjämning och förbättrad säkerhet för AEM.
+user-guide-title: Hjälp med Experience Manager Dispatcher
+breadcrumb-title: Användarhandbok om Dispatcher
+user-guide-description: Lär dig använda Dispatcher för cachelagring, belastningsutjämning och förbättrad säkerhet för AEM-servern.
 feature-set: Experience Manager
 feature: Dispatcher
 topic: Administration
@@ -13,7 +13,7 @@ role: Admin
 source-git-commit: a21b527700b3a5c3a11eadaefc729e754ba2b37b
 workflow-type: tm+mt
 source-wordcount: '84'
-ht-degree: 4%
+ht-degree: 29%
 
 ---
 
