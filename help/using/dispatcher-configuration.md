@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 0378cfc2585339920894dd354c59929ef2bf49e0
+source-git-commit: 0ac7c1cf3fc9330665b7a758cea38410c1958f1c
 workflow-type: tm+mt
-source-wordcount: '8710'
+source-wordcount: '8984'
 ht-degree: 0%
 
 ---
@@ -1383,11 +1383,35 @@ Mer information finns även i `/invalidate` och `/statfileslevel`avsnitt ovan.
 
 ### Konfigurerar tidsbaserad cacheinvalidering - /enableTTL {#configuring-time-based-cache-invalidation-enablettl}
 
-Om inställt på 1 (`/enableTTL "1"`), `/enableTTL` egenskapen utvärderar svarshuvuden från serverdelen och om de innehåller en `Cache-Control` max-age eller `Expires` datum skapas en extra, tom fil intill cachefilen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
+Tidsbaserad cacheogiltigförklaring beror på `/enableTTL` och det finns regelbundna förfallorubriker från HTTP-standarden. Om du ställer in egenskapen på 1 (`/enableTTL "1"`) utvärderas svarshuvuden från baksidan och om rubrikerna innehåller en `Cache-Control`, `max-age` eller `Expires` datum skapas en extra, tom fil bredvid den cachelagrade filen med samma ändringsdatum som förfallodatumet. När den cachelagrade filen begärs efter ändringstiden återbegärs den automatiskt från serverdelen.
+
+Före dispatcherversion 4.3.5 baserades logiken för TTL-ogiltigförklaring endast på det konfigurerade TTL-värdet. Med dispatcher version 4.3.5, båda de angivna TTL-värdena **och** Invalideringsreglerna för dispatchercachen beaktas. För en cachelagrad fil:
+
+1. If `/enableTTL` anges till 1, filens förfallodatum kontrolleras. Om filen har gått ut enligt angiven TTL utförs inga andra kontroller och den cachelagrade filen efterfrågas igen från serverdelen.
+2. Om filen inte har gått ut eller `/enableTTL` är inte konfigurerat tillämpas standardcacheminnets ogiltigförklaringsregler, som de som anges av [/statfilerlevel](#invalidating-files-by-folder-level) och [/invalidate](#automatically-invalidating-cached-files). Det innebär att dispatchern kan göra filer ogiltiga för vilka TTL-värdet inte har gått ut.
+
+Den nya implementeringen stöder användning där filerna har en längre TTL-värde (till exempel på CDN) men kan fortfarande ogiltigförklaras även om TTL-värdet inte har gått ut. Det prioriterar innehållets aktualitet framför cache-träffkvoten för dispatchern.
+
+Om du behöver **endast** förfallologiken som tillämpas på en fil och ange sedan `/enableTTL` till 1 och exkludera den filen från standardcacheminnets ogiltigförklaring. Du kan till exempel:
+
+* Konfigurera [ogiltigförklara regler](#automatically-invalidating-cached-files) i cacheavsnittet om du vill ignorera filen. I kodutdraget nedan slutar alla filer i `.example.html` ignoreras och upphör att gälla endast när den angivna TTL:en har passerats.
+
+```xml
+  /invalidate
+  {
+   /0000  { /glob "*" /type "deny" }
+   /0001  { /glob "*.html" /type "allow" }
+   /0002  { /glob "*.example.html" /type "deny" }
+  }
+```
+
+* Utforma innehållsstrukturen på ett sådant sätt att du kan ställa in en hög [/statfilelevel](#invalidating-files-by-folder-level) så filen inte blir automatiskt ogiltig.
+
+Detta säkerställer att `.stat` filogiltigförklaring används inte och endast TTL-förfallodatum är aktivt för de angivna filerna.
 
 >[!NOTE]
 >
->Tänk på att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
+>Kom ihåg att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
 
 >[!NOTE]
 >
