@@ -1,16 +1,15 @@
 ---
 title: Skicka de vanligaste frågorna
-seo-title: De vanligaste frågorna för AEM Dispatcher
+seo-title: Top issues for AEM Dispatcher
 description: De vanligaste frågorna för AEM Dispatcher
-seo-description: De vanligaste problemen för Adobe AEM Dispatcher
-translation-type: tm+mt
-source-git-commit: eed7c3f77ec64f2e7c5cfff070ef96108886a059
+seo-description: Top issues for Adobe AEM Dispatcher
+exl-id: 4dcc7318-aba5-4b17-8cf4-190ffefbba75
+source-git-commit: 26c8edbb142297830c7c8bd068502263c9f0e7eb
 workflow-type: tm+mt
-source-wordcount: '1644'
+source-wordcount: '1578'
 ht-degree: 0%
 
 ---
-
 
 # Vanliga frågor och svar om AEM Dispatcher
 
@@ -20,7 +19,7 @@ ht-degree: 0%
 
 ### Vad är Dispatcher?
 
-Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som gör att du kan skapa en snabb och dynamisk webbmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, t.ex. Apache, i syfte att lagra (eller &quot;cachelagra&quot;) så mycket som möjligt av det statiska webbplatsinnehållet och så sällan som möjligt komma åt webbplatsens layoutmotor. I en belastningsutjämningsroll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
+Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och/eller belastningsutjämning som gör att du kan skapa en snabb och dynamisk webbmiljö. För cachelagring fungerar Dispatcher som en del av en HTTP-server, till exempel Apache. Syftet är att lagra (eller&quot;cachelagra&quot;) så mycket av det statiska webbplatsinnehållet som möjligt och att så sällan som möjligt få åtkomst till webbplatsens layoutmotor. I en lastbalanserande roll distribuerar Dispatcher användarförfrågningar (inläsning) över olika AEM instanser (återgivningar).
 
 För cachelagring använder modulen Dispatcher webbserverns förmåga att hantera statiskt innehåll. Dispatcher placerar de cachelagrade dokumenten i dokumentroten på webbservern.
 
@@ -28,37 +27,37 @@ För cachelagring använder modulen Dispatcher webbserverns förmåga att hanter
 
 Dispatcher använder webbserverns förmåga att hantera statiskt innehåll. Dispatcher lagrar cachelagrade dokument i webbserverns dokumentrot. Dispatcher har två primära metoder för att uppdatera cacheinnehållet när ändringar görs på webbplatsen.
 
-* **Innehållsuppdateringar** tar bort sidor som har ändrats samt filer som är direkt kopplade till dem.
-* **Automatisk** invalidering gör automatiskt de delar av cachen som kan vara inaktuella efter en uppdatering ogiltiga. Det flaggar till exempel att relevanta sidor är inaktuella, utan att något tas bort.
+* **Innehållsuppdateringar** ta bort sidor som har ändrats och filer som är direkt kopplade till dem.
+* **Automatisk invalidering** gör automatiskt de delar av cachen som kan vara inaktuella efter en uppdatering blir ogiltiga. Det flaggar till exempel att relevanta sidor är inaktuella, utan att något tas bort.
 
 ### Vilka är fördelarna med lastbalansering?
 
-Belastningsutjämning distribuerar användarförfrågningar (belastning) över flera AEM instanser. I följande lista beskrivs fördelarna med belastningsutjämning:
+Belastningsutjämning distribuerar användarförfrågningar (inläsning) över flera AEM instanser. I följande lista beskrivs fördelarna med belastningsutjämning:
 
-* **Ökad processorkraft**: I praktiken innebär det att Dispatcher delar dokumentförfrågningar mellan flera instanser av AEM. Eftersom varje instans har färre dokument att behandla har du snabbare svarstider. Dispatcher sparar intern statistik för varje dokumentkategori så att den kan beräkna inläsningen och distribuera frågorna effektivt.
+* **Ökad processorkraft**: I praktiken innebär den här metoden att Dispatcher delar dokumentbegäranden mellan flera instanser av AEM. Eftersom varje instans har färre dokument att behandla har du snabbare svarstider. Dispatcher sparar intern statistik för varje dokumentkategori så att den kan beräkna inläsningen och distribuera frågorna effektivt.
 * **Ökad felsäker täckning**: Om Dispatcher inte tar emot svar från en instans vidarebefordrar den automatiskt begäranden till en av de andra instanserna. Om en instans blir otillgänglig är den enda effekten en nedgång av webbplatsen, som står i proportion till den förlorade datorkraften.
 
 >[!NOTE]
 >
->Mer information finns på sidan [Dispatcher Overview](dispatcher.md)
+>Mer information finns i [Dispatcher - översikt](dispatcher.md)
 
 ## Installera och konfigurera
 
 ### Var hämtar jag Dispatcher-modulen från?
 
-Du kan hämta den senaste Dispatcher-modulen från sidan [Dispatcher Release Notes](release-notes.md).
+Du kan hämta den senaste Dispatcher-modulen från [Dispatcher Release Notes](release-notes.md) sida.
 
 ### Hur installerar jag modulen Dispatcher?
 
-Se sidan [Installera Dispatcher](dispatcher-install.md)
+Se [Installerar Dispatcher](dispatcher-install.md) page
 
 ### Hur konfigurerar jag modulen Dispatcher?
 
-Se sidan [Konfigurera Dispatcher](dispatcher-configuration.md).
+Se [Konfigurera Dispatcher](dispatcher-configuration.md) sida.
 
 ### Hur konfigurerar jag Dispatcher för författarinstansen?
 
-Detaljerade steg finns i [Använda Dispatcher med en författarinstans](dispatcher.md#using-a-dispatcher-with-an-author-server).
+Se [Använda Dispatcher med en författarinstans](dispatcher.md#using-a-dispatcher-with-an-author-server) för de detaljerade stegen.
 
 ### Hur konfigurerar jag Dispatcher med flera domäner?
 
@@ -67,11 +66,11 @@ Du kan konfigurera CQ Dispatcher med flera domäner, förutsatt att domänerna u
 * Webbinnehållet för båda domänerna lagras i en enda AEM
 * Filerna i Dispatcher-cachen kan ogiltigförklaras separat för varje domän
 
-Läs [Använda Dispatcher med flera domäner](dispatcher-domains.md) om du vill ha mer information.
+Läs [Använda Dispatcher med flera domäner](dispatcher-domains.md) för mer information.
 
 ### Hur konfigurerar jag Dispatcher så att alla begäranden från en användare dirigeras till samma Publish-instans?
 
-Du kan använda funktionen [klisterlappande anslutningar](dispatcher-configuration.md#identifying-a-sticky-connection-folder-stickyconnectionsfor), som ser till att alla dokument för en användare bearbetas i samma instans av AEM. Den här funktionen är viktig om du använder personaliserade sidor och sessionsdata. Data lagras på instansen. Därför måste efterföljande begäranden från samma användare returnera till den instansen, annars går data förlorade.
+Du kan använda [klisterlappande anslutningar](dispatcher-configuration.md#identifying-a-sticky-connection-folder-stickyconnectionsfor) som ser till att alla dokument för en användare bearbetas i samma instans av AEM. Den här funktionen är viktig om du använder personaliserade sidor och sessionsdata. Data lagras på instansen. Därför måste efterföljande begäranden från samma användare returnera till den instansen, annars går data förlorade.
 
 Eftersom häftiga anslutningar begränsar Dispatcher möjlighet att optimera begäranden bör du bara använda den här metoden när det behövs. Du kan ange den mapp som innehåller de&quot;klisterlappande&quot; dokumenten, så att alla dokument i mappen behandlas på samma plats för en användare.
 
@@ -104,27 +103,27 @@ CQ-Handle: path-pattern
 Content-Length: 0
 ```
 
-Dispatcher tar bort de cachelagrade filer och mappar som har namn som matchar värdet i CQ-Handle-huvudet. En CQ-Handle på `/content/geomtrixx-outdoors/en` matchar till exempel följande objekt:
+Dispatcher tar bort de cachelagrade filer och mappar som har namn som matchar värdet i CQ-Handle-huvudet. En CQ-Handle med `/content/geomtrixx-outdoors/en` matchar följande objekt:
 
-Alla filer (oavsett filtillägg) med namnet en i katalogen geometrixx-outdoor
-En katalog med namnet `_jcr_content` nedanför katalogen en (som, om den finns, innehåller cachelagrade återgivningar av undernoder på sidan)
-Katalogen en tas bara bort om `CQ-Action` är `Delete` eller `Deactivate`.
+Alla filer (oavsett filtillägg) med namnet en i katalogen geometrixx-outdoor.
+Alla kataloger med namn `_jcr_content` nedanför katalogen en (som, om den finns, innehåller cachelagrade återgivningar av sidans undernoder).
+Katalogen `en` tas bara bort om `CQ-Action` är `Delete` eller `Deactivate`.
 
-Mer information om det här avsnittet finns i [Invalidera Dispatcher Cache](page-invalidate.md) manuellt.
+Mer information om detta avsnitt finns på [Invalidera Dispatcher-cachen manuellt](page-invalidate.md).
 
 ### Hur implementerar jag behörighetskänslig cachelagring?
 
-Se sidan [Cachelagra säkert innehåll](permissions-cache.md).
+Se [Cachelagra säkert innehåll](permissions-cache.md) sida.
 
 ### Hur skyddar jag kommunikationen mellan Dispatcher- och CQ-instanserna?
 
-Se [Dispatcher Security Checklist](security-checklist.md) och [AEM Security Checklist](https://helpx.adobe.com/experience-manager/6-4/sites/administering/using/security-checklist.html) sidor.
+Se [Dispatcher Security Checklist](security-checklist.md) och [AEM](https://experienceleague.adobe.com/docs/experience-manager-64/administering/security/security-checklist.html?lang=en) sidor.
 
-### Dispatcher-problem `jcr:content` har ändrats till `jcr%3acontent`
+### Skickaproblem `jcr:content` ändrat till `jcr%3acontent`
 
-**Fråga**: Vi har nyligen stött på ett problem på dispatchernivå där ett av de stora anropen som hämtade data från CQ-databasen hade  `jcr:content` inneburit fel och som kodades för att  `jcr%3acontent` resultera i fel resultatuppsättning.
+**Fråga**: Företaget har nyligen stött på ett problem på Dispatcher-nivå. En av AJAX samtal som fick data från CQ-databasen hade `jcr:content` i den. Det blev kodat till `jcr%3acontent` vilket resulterar i fel resultatmängd.
 
-**Svar**: Använd  `ResourceResolver.map()` metod för att hämta en egen URL som ska användas/utfärdas hämta begäranden från och även för att lösa cachelagringsproblemet med Dispatcher. Metoden map() kodar kolon `:` till understreck och metoden resolve() avkodar dem tillbaka till SLING JCR-läsbart format. Du måste använda metoden map() för att generera den URL som används i Ajax-anropet.
+**Svar**: Använd `ResourceResolver.map()` metod för att hämta en Friendly-URL som ska användas/utfärdas, hämta begäranden från och även för att lösa cachelagringsproblemet med Dispatcher. Metoden map() kodar `:` kolon till understreck och metoden resolve() avkodar dem till SLING JCR-läsbart format. Använd metoden map() för att generera den URL som används i Ajax-anropet.
 
 Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html#namespace-mangling](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html#namespace-mangling)
 
@@ -132,26 +131,22 @@ Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-
 
 ### Hur konfigurerar jag push-agenter för Dispatcher i en Publish-instans?
 
-Se sidan [Replikering](https://helpx.adobe.com/content/help/en/experience-manager/6-4/sites/deploying/using/replication.html#ConfiguringyourReplicationAgents).
+Se [Replikering](https://experienceleague.adobe.com/docs/experience-manager-64/deploying/configuring/replication.html?lang=en#configuring-your-replication-agents) sida.
 
 ### Hur felsöker jag problem med att tömma Dispatcher?
 
-[Läs den här felsökningsartikeln ](https://helpx.adobe.com/content/help/en/experience-manager/kb/troubleshooting-dispatcher-flushing-issues.html) som ger svar på följande frågor:
+[Se de här felsökningsartiklarna](https://experienceleague.adobe.com/search.html?lang=en#q=troubleshooting%20dispatcher%20flushing%20issues&amp;sort=relevancy&amp;f:el_product=[Experience%20Manager]).
 
-* Hur felsöker jag en situation där inget innehåll sparas i Dispatcher-cachen?
-* Hur felsöker jag en situation där cachefiler inte uppdateras?
-* Hur felsöker jag en situation där inget relaterat till Dispatcher-tömning fungerar?
-
-Om åtgärderna Ta bort gör att Dispatcher rensas ska du [använda lösningen i det här community-blogginlägget av Sensei Martin](https://mkalugin-cq.blogspot.in/2012/04/i-have-been-working-on-following.html).
+Om åtgärderna Ta bort gör att Dispatcher rensas [använd lösningen i det här blogginlägget från Sensei Martin](https://mkalugin-cq.blogspot.com/2012/04/i-have-been-working-on-following.html).
 
 ### Hur tömmer jag DAM-resurser från Dispatcher-cachen?
 
-Du kan använda funktionen &quot;kedjereplikering&quot;.  När den här funktionen är aktiverad skickar dispatcherns push-agent en tömningsbegäran när en replikering tas emot från författaren.
+Du kan använda funktionen &quot;kedjereplikering&quot;. När den här funktionen är aktiverad skickar Dispatcher flush-agenten en tömningsbegäran när en replikering tas emot från författaren.
 
 Så här aktiverar du den:
 
-1. [Följ stegen ](page-invalidate.md#invalidating-dispatcher-cache-from-a-publishing-instance) här för att skapa tömningsagenter vid publicering
-1. Gå till var och en av agentens konfigurationer och markera kryssrutan **Utlösare** på fliken **Vid mottagning**.
+1. [Följ stegen här](page-invalidate.md#invalidating-dispatcher-cache-from-a-publishing-instance) för att skapa tömningsagenter vid publicering
+1. Gå till varje agentes konfiguration och på **Utlösare** -fliken, kontrollera **Vid mottagning** box.
 
 ## Övrigt
 
@@ -163,15 +158,15 @@ Om dokumentet har konfigurerats för automatisk ogiltigförklaring kontrollerar 
 
 ### Hur returnerar Dispatcher dokument?
 
-Du kan definiera om Dispatcher cachelagrar ett dokument med hjälp av [Dispatcher configuration](dispatcher-configuration.md)-filen, `dispatcher.any`. Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i den här listan begär Dispatcher dokumentet från AEM.
+Du kan definiera om Dispatcher ska cachelagra ett dokument med [Dispatcher-konfiguration](dispatcher-configuration.md) fil, `dispatcher.any`. Dispatcher kontrollerar begäran mot listan med cachelagrade dokument. Om dokumentet inte finns med i den här listan begär Dispatcher dokumentet från AEM.
 
-Egenskapen `/rules` styr vilka dokument som cachelagras enligt dokumentsökvägen. Oavsett `/rules`-egenskapen cachelagras aldrig ett dokument i följande fall:
+The `/rules` anger vilka dokument som cachelagras enligt dokumentets sökväg. Oavsett `/rules` egenskapen, Dispatcher cachelagrar aldrig ett dokument under följande omständigheter:
 
-* Om URI:n för begäran innehåller ett frågetecken `(?)`.
-* Detta indikerar vanligtvis en dynamisk sida, till exempel ett sökresultat som inte behöver cachas.
+* URI för begäran innehåller en `(?)` frågetecken.
+* Det indikerar en dynamisk sida, till exempel ett sökresultat som inte behöver cachas.
 * Filtillägget saknas.
 * Webbservern behöver tillägget för att kunna avgöra dokumenttypen (MIME-typen).
-* Autentiseringshuvudet har angetts (detta kan konfigureras)
+* Autentiseringshuvudet är inställt (konfigurerbart).
 * Om AEM svarar med följande rubriker:
    * no-cache
    * no store
@@ -181,9 +176,8 @@ Dispatcher lagrar cachelagrade filer på webbservern som om de var en del av en 
 
 >[!NOTE]
 >
->Metoderna GET eller HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i avsnittet [Caching HTTP Response Headers](dispatcher-configuration.md#caching-http-response-headers).
+>Metoderna GET eller HEAD (för HTTP-huvudet) kan nås av Dispatcher. Mer information om cachelagring av svarshuvuden finns i [Cachelagra HTTP-svarshuvuden](dispatcher-configuration.md#caching-http-response-headers) -avsnitt.
 
 ### Kan jag implementera flera utskickare i en konfiguration?
 
 Ja. I så fall måste du se till att båda utskickarna har direktåtkomst till den AEM webbplatsen. En Dispatcher kan inte hantera begäranden från en annan Dispatcher.
-
