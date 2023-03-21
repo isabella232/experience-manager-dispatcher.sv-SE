@@ -4,7 +4,7 @@ seo-title: Top issues for AEM Dispatcher
 description: De vanligaste frågorna för AEM Dispatcher
 seo-description: Top issues for Adobe AEM Dispatcher
 exl-id: 4dcc7318-aba5-4b17-8cf4-190ffefbba75
-source-git-commit: 26c8edbb142297830c7c8bd068502263c9f0e7eb
+source-git-commit: f83b02d74a22e055b486305dfe5420e152efb452
 workflow-type: tm+mt
 source-wordcount: '1578'
 ht-degree: 0%
@@ -131,7 +131,7 @@ Läs mer: [https://sling.apache.org/documentation/the-sling-engine/mappings-for-
 
 ### Hur konfigurerar jag push-agenter för Dispatcher i en Publish-instans?
 
-Se [Replikering](https://experienceleague.adobe.com/docs/experience-manager-64/deploying/configuring/replication.html?lang=en#configuring-your-replication-agents) sida.
+Se [Replikering](https://experienceleague.adobe.com/docs/experience-manager-65/deploying/configuring/replication.html?lang=en#configuring-your-replication-agents) sida.
 
 ### Hur felsöker jag problem med att tömma Dispatcher?
 
@@ -148,7 +148,7 @@ Så här aktiverar du den:
 1. [Följ stegen här](page-invalidate.md#invalidating-dispatcher-cache-from-a-publishing-instance) för att skapa tömningsagenter vid publicering
 1. Gå till varje agentes konfiguration och på **Utlösare** -fliken, kontrollera **Vid mottagning** box.
 
-## Övrigt
+## Diverse
 
 Hur avgör Dispatcher om ett dokument är aktuellt?
 För att avgöra om ett dokument är uppdaterat utför Dispatcher följande åtgärder:

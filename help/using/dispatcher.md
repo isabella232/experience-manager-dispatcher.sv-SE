@@ -9,9 +9,9 @@ topic-tags: dispatcher
 content-type: reference
 discoiquuid: 1d449ee2-4cdd-4b7a-8b4e-7e6fc0a1d7ee
 exl-id: c9266683-6890-4359-96db-054b7e856dd0
-source-git-commit: e87af532ee3268f0a45679e20031c3febc02de58
+source-git-commit: 7dd2ba37e149af960ba428421d64a5a24542eeeb
 workflow-type: tm+mt
-source-wordcount: '3165'
+source-wordcount: '3154'
 ht-degree: 0%
 
 ---
@@ -26,7 +26,7 @@ Dispatcher är ett Adobe Experience Manager verktyg för cachelagring och belast
 
 Processen för att distribuera Dispatcher är oberoende av webbservern och den OS-plattform som valts:
 
-1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om Dispatcher](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/troubleshooting/dispatcher-faq.html?lang=en).
+1. Läs mer om Dispatcher (den här sidan). Se även [vanliga frågor om Dispatcher](/help/using/dispatcher-faq.md).
 1. Installera en [webbserver som stöds](https://experienceleague.adobe.com/docs/experience-manager-65/deploying/introduction/technical-requirements.html?lang=en) enligt webbserverdokumentationen.
 1. [Installera modulen Dispatcher](dispatcher-install.md) på webbservern och konfigurera webbservern därefter.
 1. [Konfigurera Dispatcher](dispatcher-configuration.md) (filen dispatcher.any).
@@ -45,7 +45,7 @@ Använd följande information efter behov:
 
 * [Checklistan för Dispatcher-säkerhet](security-checklist.md)
 * [Dispatcher Knowledge Base](https://helpx.adobe.com/experience-manager/kb/index/dispatcher.html)
-* [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/docs/experience-manager-64/deploying/configuring/configuring-performance.html?lang=en)
+* [Optimera en webbplats för cacheprestanda](https://experienceleague.adobe.com/docs/experience-manager-65/deploying/configuring/configuring-performance.html)
 * [Använda Dispatcher med flera domäner](dispatcher-domains.md)
 * [Använda SSL med Dispatcher](dispatcher-ssl.md)
 * [Implementera behörighetskänslig cachelagring](permissions-cache.md)
