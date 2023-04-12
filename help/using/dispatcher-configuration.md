@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 26c8edbb142297830c7c8bd068502263c9f0e7eb
+source-git-commit: 434a17077cea8958a55a637eddd1f4851fc7f2ee
 workflow-type: tm+mt
-source-wordcount: '8900'
+source-wordcount: '8941'
 ht-degree: 0%
 
 ---
@@ -1411,7 +1411,7 @@ Om du gör det ser du till att `.stat` filogiltigförklaring används inte och e
 
 >[!NOTE]
 >
->Kom ihåg att TTL-baserad cachning är en supermängd rubrikcache-lagring och som sådan är `/headers` ska också vara korrekt konfigurerad.
+>Kom ihåg att inställningen `/enableTTL` till 1 aktiverar endast TTL-cachelagring på dispatchersidan. TTL-informationen i den extra filen (se ovan) tillhandahålls inte till någon annan användaragent som begär en sådan filtyp från avsändaren. Om du vill ge cachelagringshuvuden till underordnade system som ett CDN eller en webbläsare, bör du konfigurera `/cache/headers` i enlighet med detta.
 
 >[!NOTE]
 >
@@ -1795,7 +1795,7 @@ Om du vill bekräfta grundläggande åtgärder och interaktion för webbservern,
 1. Starta AEM.
 1. Kontrollera loggen och felfilerna för webbservern och Dispatcher.
    * Beroende på webbservern bör du se meddelanden som:
-      * `[Thu May 30 05:16:36 2002] [notice] Apache/2.0.50 (Unix) configured` and
+      * `[Thu May 30 05:16:36 2002] [notice] Apache/2.0.50 (Unix) configured` och
       * `[Fri Jan 19 17:22:16 2001] [I] [19096] Dispatcher initialized (build XXXX)`
 
 1. Surfa på webbplatsen via webbservern. Bekräfta att innehållet visas som det ska.\
