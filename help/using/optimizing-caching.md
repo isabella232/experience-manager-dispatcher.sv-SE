@@ -45,7 +45,6 @@ Dispatcher har ett antal inbyggda mekanismer som du kan använda för att optime
 >
 >* kan cachelagra allt som du kan lagra som en sida och begära med en URL
 >* kan inte lagra andra saker, t.ex. HTTP-huvuden, cookies, sessionsdata och formulärdata.
-
 >
 >I allmänhet handlar många cachelagringsstrategier om att välja bra URL:er och inte förlita sig på dessa ytterligare data.
 
@@ -142,7 +141,6 @@ Dispatcher kan inte cachelagra anpassade data, så vi rekommenderar att du begr�
 >
 >* Använd iFrames för att dela upp sidan i en del som är densamma för alla användare och en del som är densamma för alla sidor i användaren. Du kan sedan cachelagra båda dessa delar.
 >* använda JavaScript på klientsidan för att visa personlig information. Du måste dock se till att sidan fortfarande visas korrekt om en användare stänger av JavaScript.
-
 >
 
 

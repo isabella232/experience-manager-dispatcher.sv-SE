@@ -113,7 +113,7 @@ Nödvändigt arkiv för Microsoft Internet Information System:
 
 ZIP-filen innehåller följande filer:
 
-| Arkiv | Beskrivning |
+| Fil | Beskrivning |
 |--- |--- |
 | `disp_iis.dll` | Distribuera biblioteksfilen för dynamisk länk. |
 | `disp_iis.ini` | Konfigurationsfil för IIS. Det här exemplet kan uppdateras med dina krav. **Anteckning**: INI-filen måste ha samma namn-rot som dll-filen. |
@@ -298,7 +298,7 @@ Dispatcher finns som:
 
 Installationsarkivfilerna innehåller följande filer - beroende på om du har valt Windows eller Unix:
 
-| Arkiv | Beskrivning |
+| Fil | Beskrivning |
 |--- |--- |
 | disp_apache&lt;x.y>.dll | Windows: Distribuera biblioteksfilen för dynamisk länk. |
 | dispatcher-apache&lt;x.y>-&lt;rel-nr>.so | Unix: Dispatcher-biblioteksfilen för delade objekt. |
@@ -585,7 +585,7 @@ Dispatcher finns som:
 
 Installationsarkivfilerna innehåller följande filer - beroende på om du har valt Windows eller Unix:
 
-| Arkiv | Beskrivning |
+| Fil | Beskrivning |
 |---|---|
 | `disp_ns.dll` | Windows: Distribuera biblioteksfilen för dynamisk länk. |
 | `dispatcher.so` | Unix: Dispatcher-biblioteksfilen för delade objekt. |

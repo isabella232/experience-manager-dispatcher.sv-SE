@@ -1,5 +1,5 @@
 ---
-title: 'Använda Dispatcher med flera domäner '
+title: Använda Dispatcher med flera domäner
 seo-title: Using Dispatcher with Multiple Domains
 description: Lär dig hur du använder Dispatcher för att bearbeta sidförfrågningar i flera webbdomäner.
 seo-description: Learn how to use Dispatcher to process page requests in multiple web domains.
