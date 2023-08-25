@@ -2,7 +2,7 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 434a17077cea8958a55a637eddd1f4851fc7f2ee
+source-git-commit: 5fe3bb534b239d5aec892623cab65e84e04c7d10
 workflow-type: tm+mt
 source-wordcount: '8941'
 ht-degree: 0%
@@ -100,7 +100,7 @@ En exempelkonfiguration är strukturerad på följande sätt:
 
 Du kan inkludera andra filer som bidrar till konfigurationen:
 
-* Om konfigurationsfilen är stor kan du dela upp den i flera mindre filer (som är enklare att hantera) och ta med var och en av dem.
+* Om konfigurationsfilen är stor kan du dela upp den i flera mindre filer (som är enklare att hantera) och inkludera alla.
 * Inkludera filer som genereras automatiskt.
 
 Om du till exempel vill ta med filen myFarm.any i konfigurationen /farm använder du följande kod:
@@ -186,15 +186,15 @@ Värdet kan innehålla alla alfanumeriska tecken (a-z, 0-9). I följande exempel
 
 >[!NOTE]
 >
->Om du använder mer än en renderingsgrupp utvärderas listan nedifrån och upp. Detta flöde är relevant när du definierar [Virtuella värdar](#identifying-virtual-hosts-virtualhosts) för era webbplatser.
+>Om du använder mer än en renderingsgrupp utvärderas listan längst ned. Det här flödet är relevant när du definierar [Virtuella värdar](#identifying-virtual-hosts-virtualhosts) för era webbplatser.
 
-Varje servergruppsegenskap kan innehålla följande underordnade egenskaper:
+Varje gruppegenskap kan innehålla följande underordnade egenskaper:
 
 | Egenskapsnamn | Beskrivning |
 |--- |--- |
 | [/hemsida](#specify-a-default-page-iis-only-homepage) | Standardstartsida (valfritt) (endast IIS) |
 | [/clientheaders](#specifying-the-http-headers-to-pass-through-clientheaders) | Rubrikerna från klientens HTTP-begäran som ska skickas. |
-| [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | De virtuella värdarna för den här servergruppen. |
+| [/virtualhosts](#identifying-virtual-hosts-virtualhosts) | Den här servergruppens virtuella värdar. |
 | [/sessionmanagement](#enabling-secure-sessions-sessionmanagement) | Stöd för sessionshantering och autentisering. |
 | [/renders](#defining-page-renderers-renders) | Servrarna som tillhandahåller återgivna sidor (vanligtvis AEM publiceringsinstanser). |
 | [/filter](#configuring-access-to-content-filter) | Definierar de URL:er som Dispatcher aktiverar åtkomst till. |
@@ -215,7 +215,7 @@ Varje servergruppsegenskap kan innehålla följande underordnade egenskaper:
 >
 >The `/homepage`parametern (endast IIS) fungerar inte längre. I stället bör du använda [IIS URL-omskrivningsmodul](https://learn.microsoft.com/en-us/iis/extensions/url-rewrite-module/using-the-url-rewrite-module).
 >
->Om du använder Apache ska du använda `mod_rewrite` -modul. Se dokumentationen för Apache-webbplatsen för mer information om `mod_rewrite` (t.ex. [Apache 2.4](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)). När du använder `mod_rewrite`är det lämpligt att använda flaggan genomgång|PT (skicka till nästa hanterare) för att tvinga omskrivningsmotorn att ange `uri` fält för den interna `request_rec` struktur till värdet av `filename` fält.
+>Om du använder Apache ska du använda `mod_rewrite` -modul. Se dokumentationen för Apache-webbplatsen för mer information om `mod_rewrite` (till exempel [Apache 2.4](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)). När du använder `mod_rewrite`är det lämpligt att använda flaggan genomgång|PT (skicka till nästa hanterare) för att tvinga omskrivningsmotorn att ange `uri` fält för den interna `request_rec` struktur till värdet av `filename` fält.
 
 <!-- 
 
@@ -344,7 +344,7 @@ Följande konfigurationshandtag *alla* begäranden:
 
 ### Matchar den virtuella värden {#resolving-the-virtual-host}
 
-När Dispatcher tar emot en HTTP- eller HTTPS-begäran hittar den det virtuella värdvärdet som bäst matchar `host,` `uri`och `scheme` begärans huvud. Dispatcher utvärderar värdena i `virtualhosts` i följande ordning:
+När Dispatcher tar emot en HTTP- eller HTTPS-begäran, hittas det virtuella värdvärde som bäst matchar `host,` `uri`och `scheme` begärans rubriker. Dispatcher utvärderar värdena i `virtualhosts` i följande ordning:
 
 * Dispatcher börjar längst ned i servergruppen och fortsätter uppåt i filen dispatcher.any.
 * För varje grupp börjar Dispatcher med det översta värdet i `virtualhosts` och flyttar ned värdeslistan.
@@ -368,7 +368,7 @@ Följande exempel representerar ett fragment från en `dispatcher.any` en fil so
     {
     /virtualhosts
       {
-      "www.mycompany.com"
+      "www.mycompany.com/products/*"
       }
     /renders
       {
@@ -380,7 +380,7 @@ Följande exempel representerar ett fragment från en `dispatcher.any` en fil so
     {
     /virtualhosts
       {
-      "www.mycompany.com/products/*"
+      "www.mycompany.com"
       }
     /renders
       {
@@ -402,9 +402,9 @@ I följande tabell visas de virtuella värdarna som matchas för de angivna HTTP
 
 >[!CAUTION]
 >
->`/allowAuthorized` Ange till `"0"` i `/cache` för att aktivera den här funktionen. Enligt informationen i [Cachelagring när autentisering används](#caching-when-authentication-is-used) -sektion, när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation **not** cachelagrad. Om behörighetskänslig cachelagring krävs finns mer information i [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/permissions-cache.html) sida.
+>`/allowAuthorized` Ange till `"0"` i `/cache` för att aktivera funktionen. Enligt informationen i [Cachelagring när autentisering används](#caching-when-authentication-is-used) -sektion, när du anger `/allowAuthorized 0 ` begäranden som innehåller autentiseringsinformation **not** cachelagrad. Om behörighetskänslig cachelagring krävs finns mer information i [Cachelagra skyddat innehåll](https://experienceleague.adobe.com/docs/experience-manager-dispatcher/using/configuring/permissions-cache.html) sida.
 
-Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Se [Skapa en stängd användargrupp](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/cug.html?lang=en#creating-the-user-group-to-be-used) om du vill ha information om hur du använder den här funktionen med CUG. Se även Dispatcher [Säkerhetschecklista](/help/using/security-checklist.md) innan du publicerar.
+Skapa en säker session för åtkomst till renderingsgruppen så att användarna måste logga in för att komma åt alla sidor i gruppen. När användaren har loggat in kan han/hon komma åt sidor i servergruppen. Se [Skapa en stängd användargrupp](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/cug.html?lang=en#creating-the-user-group-to-be-used) om du vill ha information om hur du använder den här funktionen med CUG. Se även Skicka [Säkerhetschecklista](/help/using/security-checklist.md) innan du publicerar.
 
 The `/sessionmanagement` egenskapen är en underegenskap till `/farms`.
 
@@ -420,7 +420,7 @@ Katalogen som lagrar sessionsinformationen. Om katalogen inte finns skapas den.
 
 >[!CAUTION]
 >
-> När katalogunderparametern konfigureras **inte** peka på rotmappen (`/directory "/"`) eftersom det kan orsaka allvarliga problem. Ange alltid sökvägen till den mapp som lagrar sessionsinformationen. Till exempel:
+> När katalogunderparametern konfigureras, **inte** peka på rotmappen (`/directory "/"`) eftersom det kan orsaka allvarliga problem. Ange alltid sökvägen till den mapp som lagrar sessionsinformationen. Till exempel:
 
 ```xml
 /sessionmanagement
@@ -551,11 +551,11 @@ Den här egenskapen kan även användas om du stöter på problem med dynamisk I
 
 Använd `/filter` för att ange de HTTP-begäranden som Dispatcher accepterar. Alla andra begäranden skickas tillbaka till webbservern med felkoden 404 (sidan hittades inte). Om nej `/filter` finns, alla begäranden accepteras.
 
-**Obs!** Begäranden om [statfile](#naming-the-statfile) avvisas alltid.
+**Obs!** Begäranden [statfile](#naming-the-statfile) avvisas alltid.
 
 >[!CAUTION]
 >
->Se [Dispatcher Security Checklist](security-checklist.md) om du vill ha mer information när du begränsar åtkomsten med Dispatcher. Läs även [AEM](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/security-checklist.html?lang=en#security) om du vill ha mer säkerhetsinformation om din AEM installation.
+>Se [Dispatcher Security Checklist](security-checklist.md) om du vill ha mer information när du begränsar åtkomsten med Dispatcher. Läs även [AEM](https://experienceleague.adobe.com/docs/experience-manager-65/administering/security/security-checklist.html?lang=en#security) om du vill ha mer säkerhetsinformation om AEM.
 
 The `/filter` -avsnittet består av en serie regler som antingen nekar eller tillåter åtkomst till innehåll enligt mönster i begärandoradsdelen av HTTP-begäran. Använd en tillåtelselista-strategi för `/filter` avsnitt:
 
@@ -570,7 +570,7 @@ The `/filter` -avsnittet består av en serie regler som antingen nekar eller til
 
 Varje objekt i `/filter` -avsnittet innehåller en typ och ett mönster som matchas med ett visst element på begärandaden eller hela begärandraden. Varje filter kan innehålla följande objekt:
 
-* **Typ**: The `/type` anger om åtkomst ska beviljas eller nekas för begäranden som matchar mönstret. Värdet kan vara antingen `allow` eller `deny`.
+* **Typ**: `/type` anger om åtkomst ska beviljas eller nekas för begäranden som matchar mönstret. Värdet kan vara antingen `allow` eller `deny`.
 
 * **Element i Request Line:** Inkludera `/method`, `/url`, `/query`, eller `/protocol` och ett mönster för filtrering av förfrågningar enligt dessa specifika delar i begärandoradsdelen av HTTP-begäran. Filtrering för element på begärandraden (i stället för på hela begärandraden) är den föredragna filtermetoden.
 
@@ -580,7 +580,7 @@ Varje objekt i `/filter` -avsnittet innehåller en typ och ett mönster som matc
 >
 >Mer information om vilken del av förfrågningsraden som var och en av dessa element refererar till finns i [Sling URL-disposition](https://sling.apache.org/documentation/the-sling-engine/url-decomposition.html) wiki-sida.
 
-* **globegenskaper**: The `/glob` -egenskapen används för att matcha hela begäranderaden för HTTP-begäran.
+* **globegenskaper**: `/glob` -egenskapen används för att matcha hela begäranderaden för HTTP-begäran.
 
 >[!CAUTION]
 >
@@ -606,7 +606,7 @@ Dina mönster måste ta hänsyn till blankstegstecknen på förfrågningsraden o
 
 #### Dubbla citattecken jämfört med enkla citattecken {#double-quotes-vs-single-quotes}
 
-När du skapar filterregler ska du använda citattecken `"pattern"` för enkla mönster. Om du använder Dispatcher 4.2.0 eller senare och mönstret innehåller ett reguljärt uttryck, måste du omsluta regex-mönstret `'(pattern1|pattern2)'` inom enkla citattecken.
+Använd citattecken när du skapar filterregler `"pattern"` för enkla mönster. Om du använder Dispatcher 4.2.0 eller senare och mönstret innehåller ett reguljärt uttryck, måste du omsluta regex-mönstret `'(pattern1|pattern2)'` inom enkla citattecken.
 
 #### Reguljära uttryck {#regular-expressions}
 
@@ -647,7 +647,7 @@ Följande exempelfilter tillåter att formulärdata skickas med metoden POST:
 
 #### Exempelfilter: Tillåt åtkomst till arbetsflödeskonsolen {#example-filter-allow-access-to-the-workflow-console}
 
-I följande exempel visas ett filter som används för att neka extern åtkomst till arbetsflödeskonsolen:
+I följande exempel visas ett filter som används för att ge extern åtkomst till arbetsflödeskonsolen:
 
 ```xml
 /filter {
@@ -680,7 +680,7 @@ Det här filtret aktiverar tillägg i icke-offentliga innehållskataloger med hj
 /005  {  /type "allow" /extension '(css|gif|ico|js|png|swf|jpe?g)' }
 ```
 
-#### Exempelfilter: Filtrera ytterligare element för en begärande URL {#example-filter-filter-additional-elements-of-a-request-url}
+#### Exempelfilter: Filtrera ytterligare element för en URL för en begäran {#example-filter-filter-additional-elements-of-a-request-url}
 
 Nedan visas ett regelexempel som blockerar innehåll som hämtas från `/content` sökväg och dess underträd, med filter för sökväg, väljare och tillägg:
 
@@ -698,14 +698,14 @@ Nedan visas ett regelexempel som blockerar innehåll som hämtas från `/content
 När du konfigurerar Dispatcher bör du begränsa den externa åtkomsten så mycket som möjligt. Följande exempel ger minimal åtkomst för externa besökare:
 
 * `/content`
-* olika innehåll, t.ex. designer och klientbibliotek. Till exempel:
+* olika innehåll, t.ex. design och klientbibliotek. Till exempel:
 
    * `/etc/designs/default*`
    * `/etc/designs/mydesign*`
 
-När du har skapat filter [testsidåtkomst](#testing-dispatcher-security) för att säkerställa att AEM är säker.
+När du har skapat filter [testsidåtkomst](#testing-dispatcher-security) för att säkerställa att din AEM är säker.
 
-Följande `/filter` i `dispatcher.any` kan användas som bas i [Dispatcher-konfigurationsfil.](#dispatcher-configuration-files)
+Följande `/filter` i `dispatcher.any` -filen kan användas som bas i [Dispatcher-konfigurationsfil.](#dispatcher-configuration-files)
 
 Det här exemplet baseras på den standardkonfigurationsfil som medföljer Dispatcher och är avsedd som exempel för användning i en produktionsmiljö. Objekt med prefix `#` inaktiveras (kommenteras ut). Du bör vara försiktig om du bestämmer dig för att aktivera någon av dessa saker (genom att ta bort `#` på den raden). Om du gör det kan det påverka säkerheten.
 
@@ -785,7 +785,7 @@ Last Modified Date: 2015-06-26T04:32:37.986-0400
 
 Tänk på följande om du väljer att utöka åtkomsten:
 
-* Inaktivera extern åtkomst till `/admin` om du använder CQ version 5.4 eller en tidigare version.
+* Inaktivera extern åtkomst till `/admin` om du använder CQ version 5.4 eller tidigare.
 
 * Var försiktig när du tillåter åtkomst till filer i `/libs`. Åtkomst bör tillåtas på individuell basis.
 * Neka åtkomst till replikeringskonfigurationen så att den inte kan ses:
@@ -825,6 +825,7 @@ En enskild post kan ha antingen `glob` eller en kombination av `method`, `url`, 
 >Om en regel innehåller en `/query`matchar den bara begäranden som innehåller en frågesträng och som matchar det angivna frågemönstret.
 >
 >I exemplet ovan, om begär att `/etc` som inte har någon frågesträng bör också tillåtas, måste följande regler anges:
+>
 
 ```xml
 /filter {  
@@ -917,7 +918,7 @@ Konfigurera Dispatcher om du vill aktivera åtkomst till URL:er för AEM som är
 
 När åtkomst till tillfälliga URL:er är aktiverat anropar Dispatcher regelbundet en tjänst som körs på återgivningsinstansen för att få en lista över tillfälliga URL:er. Dispatcher lagrar den här listan i en lokal fil. När en begäran om en sida nekas på grund av ett filter i `/filter` -avsnittet söker Dispatcher igenom listan över användar-URL:er. Om den nekade URL:en finns med i listan tillåter Dispatcher åtkomst till den nekade URL:en.
 
-Om du vill aktivera åtkomst till mål-URL:er lägger du till en `/vanity_urls` till `/farms` -avsnittet, som i följande exempel:
+Om du vill aktivera åtkomst till tillfälliga URL:er lägger du till en `/vanity_urls` till `/farms` -avsnittet, som i följande exempel:
 
 ```xml
  /vanity_urls {
@@ -1063,7 +1064,7 @@ The `/rules` anger vilka dokument som cachelagras enligt dokumentets sökväg. O
 Varje objekt i `/rules` egenskapen innehåller [`glob`](#designing-patterns-for-glob-properties) mönster och en typ:
 
 * The `glob` mönster används för att matcha dokumentets sökväg.
-* Typen anger om de dokument som matchar `glob` mönster. Värdet kan vara `allow` (för att cachelagra dokumentet) eller `deny` (för att alltid återge dokumentet).
+* Typen anger om de dokument som matchar `glob` mönster. Värdet kan vara `allow` (för att cachelagra dokumentet) eller `deny` (återge alltid dokumentet).
 
 Om du inte har dynamiska sidor (utöver de sidor som redan har undantagits av ovanstående regler) kan du konfigurera Dispatcher så att allt cachelagras. Regelavsnittet ser ut så här:
 
@@ -1149,11 +1150,11 @@ Last Modified Date: 2017-11-13T09:23:24.326-0500
 Använd `/statfileslevel` egenskap som gör cachelagrade filer ogiltiga enligt deras sökväg:
 
 * Dispatcher skapar `.stat`filer i varje mapp från mappen docroot till den nivå du anger. Dokumentmappen är nivå 0.
-* Filerna blir ogiltiga genom att röra `.stat` -fil. The `.stat` filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument. Dokumentet hämtas igen om `.stat` filen är nyare.
+* Filerna blir ogiltiga genom att röra vid `.stat` -fil. The `.stat` filens senaste ändringsdatum jämförs med det senaste ändringsdatumet för ett cachelagrat dokument. Dokumentet hämtas igen om `.stat` filen är nyare.
 
 * När en fil på en viss nivå ogiltigförklaras, **alla** `.stat` filer från dokumentet **till** den ogiltiga filens nivå eller den konfigurerade `statsfilevel` (beroende på vilket som är minst) rörs.
 
-   * Till exempel: om du anger `statfileslevel` egenskapen till 6 och en fil ogiltigförklaras på nivå 5, därefter var `.stat` filen från docroot till 5 ändras. Om du fortsätter med det här exemplet och en fil blir ogiltig på nivå 7 är varje `stat` filen från docroot till sex ändras (eftersom `/statfileslevel = "6"`).
+   * Om du till exempel anger `statfileslevel` egenskapen till 6 och en fil ogiltigförklaras på nivå 5, därefter var `.stat` filen från docroot till 5 ändras. Om du fortsätter med det här exemplet och en fil blir ogiltig på nivå 7 är varje `stat` filen från docroot till sex ändras (eftersom `/statfileslevel = "6"`).
 
 Endast resurser **längs banan** till den ogiltiga filen påverkas. Titta på följande exempel: en webbplats använder strukturen `/content/myWebsite/xx/.` Om du anger `statfileslevel` as 3, a `.stat`filen skapas enligt följande:
 
@@ -1176,7 +1177,7 @@ När en fil `/content/myWebsite/xx` blir ogiltigt, sedan var `.stat` från dokum
 
 The `/invalidate` -egenskapen definierar de dokument som automatiskt görs ogiltiga när innehållet uppdateras.
 
-Med automatisk ogiltigförklaring tar inte Dispatcher bort cachelagrade filer efter en innehållsuppdatering, men kontrollerar deras giltighet när de efterfrågas nästa gång. Dokument i cacheminnet som inte ogiltigförklaras automatiskt finns kvar i cacheminnet tills en innehållsuppdatering tar bort dem explicit.
+Med automatisk ogiltigförklaring tar inte Dispatcher bort cachelagrade filer efter en innehållsuppdatering, men kontrollerar deras giltighet nästa gång de begärs. Dokument i cacheminnet som inte ogiltigförklaras automatiskt finns kvar i cacheminnet tills en innehållsuppdatering tar bort dem explicit.
 
 Automatisk ogiltigförklaring används vanligtvis för HTML-sidor. HTML sidor innehåller ofta länkar till andra sidor, vilket gör det svårt att avgöra om en innehållsuppdatering påverkar en sida. Om du vill vara säker på att alla relevanta sidor blir ogiltiga när innehållet uppdateras, gör du alla sidor i HTML automatiskt ogiltiga. Följande konfiguration gör alla HTML sidor ogiltiga:
 
@@ -1194,7 +1195,7 @@ Den här konfigurationen orsakar följande aktivitet när `/content/wknd/us/en` 
 
 * Alla filer med mönstret en.* tas bort från `/content/wknd/us` mapp.
 * The `/content/wknd/us/en./_jcr_content` mappen tas bort.
-* Alla andra filer som matchar `/invalidate` -konfigurationen tas inte bort omedelbart. Dessa filer tas bort när nästa begäran görs. I exemplet `/content/wknd.html` inte raderas, den tas bort när `/content/wknd.html` har begärts.
+* Alla andra filer som matchar `/invalidate` -konfigurationen tas inte bort omedelbart. Dessa filer tas bort när nästa begäran görs. I exemplet `/content/wknd.html` tas inte bort; den tas bort när `/content/wknd.html` har begärts.
 
 Om du erbjuder automatiskt genererade PDF- och ZIP-filer för nedladdning kan du behöva göra dessa filer ogiltiga automatiskt. Ett konfigurationsexempel ser ut så här:
 
@@ -1224,7 +1225,7 @@ Den anropas med följande argument:
 
 * Handtag - Innehållssökvägen som är ogiltig
 * Åtgärd - Replikeringsåtgärden (till exempel Aktivera, Inaktivera)
-* Åtgärdsomfång - Replikeringsåtgärdens omfång (tom, såvida inte en rubrik för `CQ-Action-Scope: ResourceOnly` skickas, se [Invaliderar cachelagrade sidor från AEM](page-invalidate.md) för information)
+* Åtgärdsomfång - Replikeringsåtgärdens omfång (tom, såvida inte en rubrik för `CQ-Action-Scope: ResourceOnly` skickas, se [Invaliderar cachelagrade sidor från AEM](page-invalidate.md) för mer information)
 
 Den här metoden kan användas för att täcka flera olika användningsfall. Om du till exempel gör andra programspecifika cacheminnen ogiltiga eller hanterar fall där den externa URL-adressen för en sida och dess plats i dokumentroten inte matchar innehållssökvägen.
 
@@ -1269,7 +1270,7 @@ Mer information om globegenskaper finns i [Designa mönster för globegenskaper]
 
 ### Ignorerar URL-parametrar {#ignoring-url-parameters}
 
-The `ignoreUrlParams` -avsnittet anger vilka URL-parametrar som ska ignoreras när du avgör om en sida cachelagras eller levereras från cache:
+The `ignoreUrlParams` -avsnittet anger vilka URL-parametrar som ska ignoreras när du avgör om en sida cachelagras eller levereras från cachen:
 
 * När en begärande URL innehåller parametrar som alla ignoreras, cachelagras sidan.
 * När en begärande URL innehåller en eller flera parametrar som inte ignoreras, cachelagras inte sidan.
@@ -1359,7 +1360,7 @@ Nedan visas ett exempel från standardkonfigurationen:
 
 ### Cachefilbehörigheter för utskickare {#dispatcher-cache-file-permissions}
 
-The `mode` anger vilken filbehörighet som ska tillämpas på nya kataloger och filer i cachen. Den här inställningen begränsas av `umask` för anropsprocessen. Det är ett oktalt tal konstruerat av summan av ett eller flera av följande värden:
+The `mode` anger vilken filbehörighet som ska tillämpas på nya kataloger och filer i cachen. Den här inställningen begränsas av `umask` för anropsprocessen. Det är ett oktalt tal som konstruerats av summan av ett eller flera av följande värden:
 
 * `0400` Tillåt läsning av ägare.
 * `0200` Tillåt skrivning efter ägare.
@@ -1375,9 +1376,9 @@ Standardvärdet är `0755` som gör det möjligt för ägaren att läsa, skriva 
 
 ### Begränsar .stat-filberöring {#throttling-stat-file-touching}
 
-Med standardinställningen `/invalidate` egenskapen, all aktivering gör alla `.html` filer (när deras sökväg matchar `/invalidate` ). På en webbplats med stor trafik ökar multipla aktiveringar processorbelastningen på backend-sidan. I ett sådant scenario är det önskvärt att&quot;strypa&quot; `.stat` filhantering för att hålla webbplatsen responsiv. Du kan utföra den här åtgärden med `/gracePeriod` -egenskap.
+Med standardinställningen `/invalidate` egenskapen, all aktivering gör alla `.html` filer (när deras sökväg matchar `/invalidate` ). På en webbplats med stor trafik ökar multipla aktiveringar processorbelastningen på backend-sidan. I sådana fall är det önskvärt att strypa `.stat` filhantering för att hålla webbplatsen responsiv. Du kan utföra den här åtgärden med `/gracePeriod` -egenskap.
 
-The `/gracePeriod` anger hur många sekunder en inaktuell, automatiskt ogiltigförklarad resurs fortfarande kan hanteras från cachen efter den senaste aktiveringen. Egenskapen kan användas i en inställning där en grupp av aktiveringar annars skulle göra hela cachen ogiltig upprepade gånger. Det rekommenderade värdet är 2 sekunder.
+The `/gracePeriod` anger hur många sekunder en inaktuell, automatiskt ogiltigförklarad resurs fortfarande kan betjänas från cachen efter den senaste aktiveringen. Egenskapen kan användas i en inställning där en grupp av aktiveringar annars skulle göra hela cachen ogiltig upprepade gånger. Det rekommenderade värdet är 2 sekunder.
 
 Mer information finns även i `/invalidate` och `/statfileslevel`avsnitt ovan.
 
@@ -1388,11 +1389,11 @@ Tidsbaserad cacheogiltigförklaring beror på `/enableTTL` och det finns regelbu
 Före Dispatcher 4.3.5 baserades logiken för TTL-ogiltigförklaring endast på det konfigurerade TTL-värdet. Med Dispatcher 4.3.5, båda de angivna TTL-värdena **och** Invalideringsreglerna för Dispatcher-cachen räknas med. För en cachelagrad fil:
 
 1. If `/enableTTL` anges till 1, filens förfallodatum kontrolleras. Om filen har gått ut enligt angiven TTL utförs inga andra kontroller och den cachelagrade filen efterfrågas igen från serverdelen.
-2. Om filen inte har gått ut, eller `/enableTTL` är inte konfigurerat, tillämpas standardreglerna för ogiltigförklaring av cache, till exempel de regler som anges av [/statfilerlevel](#invalidating-files-by-folder-level) och [/invalidate](#automatically-invalidating-cached-files). Det här flödet innebär att Dispatcher kan göra filer som TTL-värdet inte har gått ut för ogiltiga.
+2. Om filen inte har gått ut, eller `/enableTTL` är inte konfigurerat, tillämpas standardreglerna för ogiltigförklaring av cache, till exempel de regler som anges av [/statfileslevel](#invalidating-files-by-folder-level) och [/invalidate](#automatically-invalidating-cached-files). Det här flödet innebär att Dispatcher kan göra filer som TTL-värdet inte har gått ut för ogiltiga.
 
 Den nya implementeringen stöder användning där filerna har en längre TTL-värde (till exempel på CDN) men kan fortfarande ogiltigförklaras även om TTL-värdet inte har gått ut. Det prioriterar innehållets aktualitet framför cache-träffkvoten för Dispatcher.
 
-Omvänt, om du behöver **endast** förfallologiken som tillämpas på en fil och ange sedan `/enableTTL` till 1 och exkludera den filen från standardcacheminnets ogiltigförklaring. Du kan till exempel:
+Omvänt, om du behöver **endast** förfallologiken som tillämpas på en fil och ange sedan `/enableTTL` till 1 och exkludera den filen från standardcacheminnets invalideringsmekanism. Du kan till exempel:
 
 * Om du vill ignorera filen konfigurerar du [ogiltigförklara regler](#automatically-invalidating-cached-files) i cacheavsnittet. I kodutdraget nedan slutar alla filer i `.example.html` ignoreras och förfaller bara när den angivna TTL:en har passerats.
 
@@ -1407,7 +1408,7 @@ Omvänt, om du behöver **endast** förfallologiken som tillämpas på en fil oc
 
 * Utforma innehållsstrukturen på ett sådant sätt att du kan ställa in en hög [/statfilelevel](#invalidating-files-by-folder-level) så filen inte blir automatiskt ogiltig.
 
-Om du gör det ser du till att `.stat` filogiltigförklaring används inte och endast TTL-förfallodatum är aktivt för de angivna filerna.
+På så sätt säkerställer du att `.stat` filogiltigförklaring används inte och endast TTL-förfallodatum är aktivt för de angivna filerna.
 
 >[!NOTE]
 >
@@ -1448,7 +1449,7 @@ Poängen för en återgivnings kategori baseras på tidigare svarstider och tidi
 
 ### Definiera statistikkategorier {#defining-statistics-categories}
 
-Definiera en kategori för varje dokumenttyp som du vill behålla statistik för för återgivningsmarkering. The `/statistics` -avsnittet innehåller en `/categories` -avsnitt. Om du vill definiera en kategori lägger du till en rad under `/categories` -avsnitt som har följande format:
+Definiera en kategori för varje dokumenttyp som du vill behålla statistik för för återgivningsmarkering. The `/statistics` -avsnittet innehåller en `/categories` -avsnitt. Om du vill definiera en kategori lägger du till en rad under `/categories` som har följande format:
 
 `/name { /glob "pattern"}`
 
@@ -1489,7 +1490,7 @@ The `/unavailablePenalty` anger den tid (i tiondelar av en sekund) som används 
 
 Straffet tillämpas till exempel när TCP/IP-anslutningen till det angivna värdnamnet/porten inte kan upprättas, antingen på grund av att AEM inte körs (och inte lyssnar) eller på grund av ett nätverksrelaterat problem.
 
-The `/unavailablePenalty` egenskapen är direkt underordnad `/farm` (en jämställd `/statistics` ).
+The `/unavailablePenalty` egenskapen är direkt underordnad `/farm` -sektion (en jämställd `/statistics` ).
 
 Om nej `/unavailablePenalty` egenskapen finns, värdet är `"1"` används.
 
@@ -1521,17 +1522,17 @@ När en sida består av innehåll från flera innehållsnoder inkluderar du `/pa
 
 ### httpOnly {#httponly}
 
-När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `httponly` som bör läggas till för att öka säkerheten. Du lägger till `httponly` flagga genom att ange `httpOnly` -egenskapen i `/stickyConnections` nod i `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `HttpOnly` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet inte läggs till.
+När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `httponly` som bör läggas till för att öka säkerheten. Du lägger till `httponly` flagga genom att ange `httpOnly` -egenskapen i `/stickyConnections` nod i en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `HttpOnly` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet inte läggs till.
 
 Mer information om `httponly` flagga, läsa [den här sidan](https://www.owasp.org/index.php/HttpOnly).
 
 ### säker {#secure}
 
-När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `secure` som bör läggas till för att öka säkerheten. Du lägger till `secure` flagga som anger `secure` -egenskapen i `/stickyConnections` nod i `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `secure` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet läggs till **if** den inkommande begäran är säker. Om värdet är inställt på `1`, läggs flaggan secure till oavsett om den inkommande begäran är säker eller inte.
+När klisterlappande anslutningar är aktiverade ställer modulen Dispatcher in `renderid` cookie. Den här cookien har inte `secure` som bör läggas till för att öka säkerheten. Du lägger till `secure` flagga som anger `secure` -egenskapen i `/stickyConnections` nod i en `dispatcher.any` konfigurationsfil. Egenskapens värde (antingen `0` eller `1`) definierar om `renderid` cookie har `secure` attribut tillagt. Standardvärdet är `0`, vilket innebär att attributet läggs till **if** den inkommande begäran är säker. Om värdet är `1`, läggs flaggan secure till oavsett om den inkommande begäran är säker eller inte.
 
 ## Hantera återgivningsanslutningsfel {#handling-render-connection-errors}
 
-Konfigurera Dispatcher-beteendet när återgivningsservern returnerar felet 500 eller inte är tillgänglig.
+Konfigurera Dispatcher-beteendet när återgivningsservern returnerar ett 500-fel eller inte är tillgänglig.
 
 ### Ange en hälsokontrollsida {#specifying-a-health-check-page}
 
@@ -1561,7 +1562,7 @@ The `/numberOfRetries` egenskapen anger det maximala antalet anslutningsförsök
 
 För varje rund är det maximala antalet gånger Dispatcher försöker ansluta till en rendering antalet renderingar i servergruppen. Därför är det maximala antalet gånger Dispatcher försöker ansluta ( `/numberOfRetries`) x (antalet återgivningar).
 
-Om värdet inte är explicit definierat är standardvärdet `5`.
+Om värdet inte definieras explicit är standardvärdet `5`.
 
 ```xml
 /numberOfRetries "5"
@@ -1620,14 +1621,14 @@ Inställning `/ignoreEINTR` till `"1"` gör att Dispatcher fortsätter att förs
 
 Flera avsnitt i Dispatcher-konfigurationsfilen använder `glob` egenskaper som urvalskriterier för klientförfrågningar. Värdena för `glob` egenskaper är mönster som Dispatcher jämför med en aspekt av begäran, till exempel sökvägen till den begärda resursen eller klientens IP-adress. Objekten i `/filter` avsnittsanvändning `glob` mönster för att identifiera sökvägarna för de sidor som Dispatcher agerar på eller avvisar.
 
-The `glob` -värden kan innehålla jokertecken och alfanumeriska tecken som definierar mönstret.
+The `glob` -värden kan innehålla jokertecken och alfanumeriska tecken för att definiera mönstret.
 
 | Jokertecken | Beskrivning | Exempel |
 |--- |--- |--- |
 | `*` | Matchar noll eller flera intilliggande förekomster av ett tecken i strängen. Matchningens sista karaktär avgörs av någon av följande situationer: <br/>Ett tecken i strängen matchar nästa tecken i mönstret och mönstertecknet har följande egenskaper:<br/><ul><li>Inte en *</li><li>Inte en?</li><li>Ett literalt tecken (inklusive ett blanksteg) eller en teckenklass.</li><li>Slutet på mönstret nås.</li></ul>I en teckenklass tolkas tecknet bokstavligen. | `*/geo*` Matchar en sida under `/content/geometrixx` noden och `/content/geometrixx-outdoors` nod. Följande HTTP-begäranden matchar globmönstret: <br/><ul><li>`"GET /content/geometrixx/en.html"`</li><li>`"GET /content/geometrixx-outdoors/en.html"` </li></ul><br/> `*outdoors/*` <br/>Matchar en sida under `/content/geometrixx-outdoors` nod. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en.html"`</li></ul> |
-| `?` | Matchar ett enskilt tecken. Använd teckenklasser utanför. I en teckenklass tolkas det här tecknet bokstavligen. | `*outdoors/??/*`<br/> Matchar sidorna för alla språk på den externa geometrixplatsen. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Följande begäran matchar inte mönstret: <br/><ul><li>&quot;GET /content/geometrixx-outdoors/en.html&quot;</li></ul> |
+| `?` | Matchar ett enskilt tecken. Använd teckenklasser utanför. I en teckenklass tolkas det här tecknet bokstavligen. | `*outdoors/??/*`<br/> Matchar sidorna för alla språk på den externa geometrixplatsen. Följande HTTP-begäran matchar till exempel globmönstret: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Följande begäran matchar inte globmönstret: <br/><ul><li>&quot;GET /content/geometrixx-outdoors/en.html&quot;</li></ul> |
 | `[ and ]` | Avmarkerar början och slutet av en teckenklass. Teckenklasser kan innehålla ett eller flera teckenintervall och enskilda tecken.<br/>En matchning inträffar om måltecknet matchar något av tecknen i teckenklassen, eller inom ett definierat intervall.<br/>Om den avslutande klammerparentesen inte inkluderas skapas inga matchningar i mönstret. | `*[o]men.html*`<br/> Matchar följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>Matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/> `*[o/]men.html*` <br/>Matchar följande HTTP-begäranden: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
-| `-` | Anger ett teckenintervall. För användning i teckenklasser. Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[m-p]men.html*` Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul>Matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
+| `-` | Anger ett intervall med tecken. För användning i teckenklasser. Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[m-p]men.html*` Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul>Matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul> |
 | `!` | Negerar tecknet eller teckenklassen som följer. Använd bara för negerande tecken och teckenintervall inuti teckenklasser. Motsvarar `^ wildcard`. <br/>Utanför en teckenklass tolkas detta tecken bokstavligen. | `*[!o]men.html*`<br/> Matchar följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/men.html"`</li></ul><br/>Matchar inte följande HTTP-begäran: <br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"`</li></ul><br/>`*[!o!/]men.html*`<br/> Matchar inte följande HTTP-begäran:<br/><ul><li>`"GET /content/geometrixx-outdoors/en/women.html"` eller `"GET /content/geometrixx-outdoors/en/men. html"`</li></ul> |
 | `^` | Negerar tecknet eller teckenintervallet som följer. Används för att endast negera tecken och teckenintervall inuti teckenklasser. Motsvarar `!` jokertecken. <br/>Utanför en teckenklass tolkas detta tecken bokstavligen. | Exemplen för `!` jokertecken används, ersätta `!` tecken i exempelmönster med `^` tecken. |
 
@@ -1735,7 +1736,7 @@ Mer information finns i webbserverns dokumentation och i filen Viktigt för Disp
 
 **Apache-roterade/Pipe-loggar**
 
-Om du använder en **Apache** webbserver kan du använda standardfunktionerna för roterade loggar, pipade loggar eller båda. Använd till exempel pipade loggar:
+Om du använder **Apache** webbserver kan du använda standardfunktionerna för roterade loggar, pipade loggar eller båda. Använd till exempel pipade loggar:
 
 `DispatcherLog "| /usr/apache/bin/rotatelogs logs/dispatcher.log%Y%m%d 604800"`
 
@@ -1840,7 +1841,7 @@ Till exempel,
 }
 ```
 
-Dessutom `X-Dispatcher-Info` sidhuvudet behöver inget värde, men om du använder `curl` För testning måste du ange ett värde som ska skickas till sidhuvudet, till exempel:
+Dessutom finns `X-Dispatcher-Info` sidhuvudet behöver inget värde, men om du använder `curl` För testning måste du ange ett värde som ska skickas till sidhuvudet, till exempel:
 
 ```xml
 curl -v -H "X-Dispatcher-Info: true" https://localhost/content/wknd/us/en.html
@@ -1848,41 +1849,39 @@ curl -v -H "X-Dispatcher-Info: true" https://localhost/content/wknd/us/en.html
 
 Nedan finns en lista med de svarshuvuden som `X-Dispatcher-Info` returnerar:
 
-* **cachelagrad**\
-   Målfilen finns i cachen och Dispatcher har fastställt att den kan levereras.
+* **cache**\
+  Målfilen finns i cachen och Dispatcher har fastställt att den kan levereras.
 * **cachelagring**\
-   Målfilen finns inte i cacheminnet och Dispatcher har fastställt att det går att cachelagra utdata och leverera dem.
+  Målfilen finns inte i cacheminnet och Dispatcher har fastställt att det går att cachelagra utdata och leverera dem.
 * **cachelagring: statusfilen är nyare**
 Målfilen finns i cacheminnet, men den blir ogiltig av en senare lägesfil. Dispatcher tar bort målfilen, återskapar den från utdata och levererar den.
 * **inte tillgänglig: ingen dokumentrot**
-Servergruppens konfiguration innehåller inte någon dokumentrot (konfigurationselement) 
-`cache.docroot`).
+Servergruppens konfiguration innehåller inte någon dokumentrot (konfigurationselement) `cache.docroot`).
 * **inte tillgänglig: cachefilens sökväg är för lång**\
-   Målfilen - sammanfogningen av dokumentroten och URL-filen - överskrider det längsta möjliga filnamnet på systemet.
+  Målfilen - sammanfogningen av dokumentroten och URL-filen - överskrider det längsta möjliga filnamnet på systemet.
 * **inte tillgänglig: temporär filsökväg för lång**\
-   Mallen för tillfälligt filnamn överskrider det längsta möjliga filnamnet på systemet. Dispatcher skapar först en tillfällig fil innan den cachelagrade filen faktiskt skapas eller skrivs över. Det tillfälliga filnamnet är målfilens namn med tecknen `_YYYYXXXXXX` som läggs till i den, där `Y` och `X` ersätts för att skapa ett unikt namn.
+  Mallen för tillfälligt filnamn överskrider det längsta möjliga filnamnet på systemet. Dispatcher skapar först en tillfällig fil innan den cachelagrade filen faktiskt skapas eller skrivs över. Det tillfälliga filnamnet är målfilens namn med tecknen `_YYYYXXXXXX` som läggs till i den, där `Y` och `X` ersätts för att skapa ett unikt namn.
 * **inte tillgänglig: begäran-URL har inget tillägg**\
-   Begärans URL har inget tillägg, eller så finns det en sökväg som följer filtillägget, till exempel: `/test.html/a/path`.
-* **inte tillgänglig: begäran inte var en GET eller HEAD**
+  Begärans URL har inget tillägg, eller så finns det en sökväg som följer filtillägget, till exempel: `/test.html/a/path`.
+* **inte tillgänglig: begäran var inte en GET eller HEAD**
 HTTP-metoden är inte GET eller HEAD. Dispatcher förutsätter att utdata innehåller dynamiska data som inte ska cachas.
 * **inte tillgänglig: begäran innehöll en frågesträng**\
-   Begäran innehöll en frågesträng. Dispatcher antar att utdata är beroende av frågesträngen som har angetts och därför inte cachelagras.
+  Begäran innehöll en frågesträng. Dispatcher antar att utdata är beroende av frågesträngen som har angetts och därför inte cachelagras.
 * **inte tillgänglig: sessionshanteraren autentiserade inte**\
-   Servergruppens cache styrs av en sessionshanterare (konfigurationen innehåller en `sessionmanagement` nod) och begäran innehöll inte rätt autentiseringsinformation.
-* **inte tillgänglig: begäran innehåller behörighet**\
-   Servergruppen kan inte cachelagra utdata ( `allowAuthorized 0`) och begäran innehåller autentiseringsinformation.
-* **inte tillgänglig: mål är en katalog**\
-   Målfilen är en katalog. Platsen kan peka på ett konceptuellt fel, där både en URL och en delwebbadress innehåller cachelagrade utdata. Om en begäran till exempel `/test.html/a/file.ext` kommer först och innehåller cachelagrade utdata. Dispatcher kan inte cachelagra utdata från en efterföljande begäran till `/test.html`.
-* **inte tillgänglig: begäran-URL:en har ett avslutande snedstreck**\
-   Begärans URL har ett avslutande snedstreck.
-* **inte tillgänglig: begäran-URL:en finns inte i cachereglerna**\
-   Servergruppens cacheregler tillåter explicit cachelagring av utdata från en begäran-URL.
+  Servergruppens cache styrs av en sessionshanterare (konfigurationen innehåller en `sessionmanagement` nod) och begäran innehöll inte rätt autentiseringsinformation.
+* **inte tillgänglig: begäran innehåller tillstånd**\
+  Servergruppen kan inte cachelagra utdata ( `allowAuthorized 0`) och begäran innehåller autentiseringsinformation.
+* **inte tillgänglig: målet är en katalog**\
+  Målfilen är en katalog. Platsen kan peka på ett konceptuellt fel, där både en URL och en delwebbadress innehåller cachelagrade utdata. Om en begäran till exempel `/test.html/a/file.ext` kommer först och innehåller cachelagrade utdata. Dispatcher kan inte cachelagra utdata från en efterföljande begäran till `/test.html`.
+* **inte tillgänglig: begäran-URL har ett avslutande snedstreck**\
+  Begärans URL har ett avslutande snedstreck.
+* **inte tillgänglig: begäran-URL finns inte i cacheregler**\
+  Servergruppens cacheregler tillåter explicit cachelagring av utdata från en begäran-URL.
 * **inte tillgänglig: åtkomstkontroll nekad åtkomst**\
-   Gruppens behörighetskontroll nekade åtkomst till den cachelagrade filen.
+  Gruppens behörighetskontroll nekade åtkomst till den cachelagrade filen.
 * **inte tillgänglig: sessionen är inte giltig**
 Servergruppens cache styrs av en sessionshanterare (konfigurationen innehåller en `sessionmanagement` nod) och användarens session är inte eller inte längre giltig.
-* **inte tillgänglig: svaret innehåller`no_cache`**
-Fjärrservern returnerade en 
-`Dispatcher: no_cache` header, förbjuder Dispatcher att cachelagra utdata.
-* **inte tillgänglig: längd på svarsinnehåll är noll**
+* **ej tillgänglig: svaret innehåller`no_cache`**
+Fjärrservern returnerade en `Dispatcher: no_cache` header, förbjuder Dispatcher att cachelagra utdata.
+* **inte tillgänglig: längden på svarsinnehållet är noll**
 Svarets innehållslängd är noll. Dispatcher skapar inte en fil med längden noll.
