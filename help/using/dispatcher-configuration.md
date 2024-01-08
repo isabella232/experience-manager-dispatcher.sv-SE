@@ -2,9 +2,9 @@
 title: Konfigurera Dispatcher
 description: Lär dig konfigurera Dispatcher. Lär dig mer om stöd för IPv4 och IPv6, konfigurationsfiler, miljövariabler, namngivning av instansen, definition av servergrupper, identifiering av virtuella värdar med mera.
 exl-id: 91159de3-4ccb-43d3-899f-9806265ff132
-source-git-commit: 5fe3bb534b239d5aec892623cab65e84e04c7d10
+source-git-commit: 410346694a134c0f32a24de905623655f15269b4
 workflow-type: tm+mt
-source-wordcount: '8941'
+source-wordcount: '8857'
 ht-degree: 0%
 
 ---
@@ -1296,10 +1296,10 @@ I följande exempel ignoreras alla parametrar utom `nocache` parameter. Begär d
 ```xml
 /ignoreUrlParams
 {
+    # ignore-all-url-parameters-by-dispatcher-and-requests-are-cached
+    /0001 { /glob "*" /type "allow" }
     # allow-the-url-parameter-nocache-to-bypass-dispatcher-on-every-request
-    /0001 { /glob "nocache" /type "deny" }
-    # all-other-url-parameters-are-ignored-by-dispatcher-and-requests-are-cached
-    /0002 { /glob "*" /type "allow" }
+    /0002 { /glob "nocache" /type "deny" }
 }
 ```
 
@@ -1828,7 +1828,7 @@ Den här funktionen är inte aktiverad som standard, så för svarshuvudet `X-Ca
 /info "1"
 ```
 
-Till exempel,
+Exempel:
 
 ```xml
 /farm
