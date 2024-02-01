@@ -4,9 +4,10 @@ solution: Experience Manager
 type: Documentation
 git-repo: https://github.com/AdobeDocs/experience-manager-dispatcher.sv-SE
 index: y
-source-git-commit: da6af93fa3dec8e3b2f146e9c8c6183a3185199b
+recommendations: noDisplay
+source-git-commit: 70364ba7229e76ed8b30012029f9a5529b08312d
 workflow-type: tm+mt
-source-wordcount: '111'
+source-wordcount: '109'
 ht-degree: 0%
 
 ---
@@ -24,4 +25,4 @@ Filen metadata.md innehåller metadata på postnivå som skickas till TOC.md-fil
 | getting-started-url | Länk till hjälpsidan Komma igång |
 | tutorials-url | Länka till videosjälvstudiekurser - antingen hjälpstudiekurser eller självstudiekurser på engelska |
 | mini-toc-nivåer | Anger antalet rubriknivåer som visas i den högra listen. standard är 2 |
-| git-repo | Anger platsen för den överordnad rapporten för intern användning |
+| git-repo | Anger platsen för huvudrapporten för intern användning |
